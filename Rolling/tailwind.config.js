@@ -12,8 +12,10 @@ export default {
           xl: '1280px',
           xl2: '1360px',
       },
+      fontFamily: {
+        pre: ['Pretendard'],
+      },
       extend: {},
   },
-  plugins: [],
 }
 
