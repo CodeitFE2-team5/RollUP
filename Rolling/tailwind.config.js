@@ -13,6 +13,9 @@ export default {
       fontFamily: {
         pre: ['Pretendard'],
       },
+      backgroundColor: {
+        Surface: 'var(--Surface, #f6f8ff)',
+      },
     },
   },
   plugins: [],
