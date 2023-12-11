@@ -10,6 +10,12 @@ export default {
       xl2: '1360px',
     },
     extend: {
+      backgroundColor: {
+        blue: '#B1E4FF',
+        green: '#D0F5C3',
+        purple: '#ECD9FF',
+        beige: '#FFE2AD',
+      },
       fontFamily: {
         pre: ['Pretendard'],
       },
@@ -18,5 +24,6 @@ export default {
       },
     },
   },
+}
   plugins: [],
 };
