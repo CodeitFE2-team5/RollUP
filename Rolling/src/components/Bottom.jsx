@@ -1,4 +1,4 @@
-function Button() {
+function Bottom() {
   return (
     <>
       <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2">
@@ -13,4 +13,4 @@ function Button() {
   );
 }
 
-export default Button;
+export default Bottom;
