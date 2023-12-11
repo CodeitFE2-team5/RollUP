@@ -1,5 +1,5 @@
-function PostAddPage() {
+function RollingAddPage() {
   return;
 }
 
-export default PostAddPage;
+export default RollingAddPage;

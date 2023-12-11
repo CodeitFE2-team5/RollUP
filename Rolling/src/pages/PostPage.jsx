@@ -34,8 +34,7 @@ function PostPage() {
 
   return (
     <>
-      <div className={`bg-[${recipient.backgroundColor}]`}>
-        <button>+</button>
+      <div className={`w-full h-[1080px] bg-[${recipient?.backgroundColor}]`}>
         <PostCardList messages={messages} />
       </div>
     </>
