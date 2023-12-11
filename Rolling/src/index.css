@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './Colors.css';
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, Pretendard;
@@ -10,9 +11,6 @@
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
   background-color: #ffffff;
-  --Surface: #f6f8ff;
-  --purple-700: #861dee;
-  --gray-300: #ccc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
