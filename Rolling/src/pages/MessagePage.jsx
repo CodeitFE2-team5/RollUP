@@ -1,8 +1,8 @@
 import axios from 'axios';
-import PostCardList from '../components/PostCardList';
+import MessageCardContents from '../components/MessageCardContents';
 import { useState, useEffect } from 'react';
 
-function PostPage() {
+function MessagePage() {
   const [recipient, setRecipient] = useState();
   const [messages, setMessages] = useState();
 
@@ -34,9 +34,9 @@ function PostPage() {
 
   return (
     <>
-      <PostCardList recipient={recipient} messages={messages} />
+      <MessageCardContents recipient={recipient} messages={messages} />
     </>
   );
 }
 
-export default PostPage;
+export default MessagePage;

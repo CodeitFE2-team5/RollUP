@@ -2,7 +2,7 @@ import axios from 'axios';
 import PostCardList from '../components/PostCardList';
 import { useState, useEffect } from 'react';
 
-function PostPage() {
+function MessageEditPage() {
   const [messages, setMessages] = useState([]);
 
   const getRollingData = async () => {
@@ -31,4 +31,4 @@ function PostPage() {
   );
 }
 
-export default PostPage;
+export default MessageEditPage;
