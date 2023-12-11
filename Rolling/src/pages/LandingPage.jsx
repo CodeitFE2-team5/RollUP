@@ -2,7 +2,7 @@ import Article from '../components/Article';
 import Bottom from '../components/Bottom';
 import Header from '../components/Header';
 
-function Landing() {
+function LandingPage() {
   return (
     <>
       <Header />
@@ -12,4 +12,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default LandingPage;
