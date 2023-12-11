@@ -16,15 +16,30 @@ function MessageCard({ message, showTrashIcon }) {
           alt="프로필 이미지"
         />
         <div className="ms-5">
-          <p className={`font-[${message.font}]`}>
+          <p className={`mb-2 font-[${message.font}]`}>
             From. <b>{message.sender}</b>
           </p>
-          <p>{message.relationship}</p>
+          <span
+            className={`rounded px-2 py-[2px] text-sm
+            ${
+              message.relationship === '친구'
+                ? 'bg-blue-100 text-blue-500'
+                : message.relationship === '가족'
+                ? 'bg-green-100 text-green-500'
+                : message.relationship === '동료'
+                ? 'bg-purple-100 text-purple-500'
+                : message.relationship === '지인'
+                ? 'bg-orange-100 text-orange-500'
+                : null
+            }`}
+          >
+            {message.relationship}
+          </span>
         </div>
         {showTrashIcon && <img src="쓰레기통 이미지 url" />}
       </div>
-      <div>
-        <p className=" overflow-hidden text-[#4A4A4A] text-ellipsis whitespace-nowrap text-lg leading-7">
+      <div className="mt-3">
+        <p className="overflow-hidden text-[#4A4A4A] text-ellipsis whitespace-nowrap text-lg leading-7">
           {message.content}
         </p>
       </div>
