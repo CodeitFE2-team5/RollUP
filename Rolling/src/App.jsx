@@ -1,5 +1,3 @@
-import { ListPage } from './page/ListPage';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <>
