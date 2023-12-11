@@ -24,8 +24,8 @@ function MessageEditPage() {
     <>
       <div className="post-body">
         <button>삭제하기</button>
-        <PostCardList messages={messages} showTrashIcon={true} />
-        <PostCardModal />
+        <MessageCardContents messages={messages} showTrashIcon={true} />
+        <MessageCardModal />
       </div>
     </>
   );
