@@ -16,7 +16,11 @@ export default {
         purple: '#ECD9FF',
         beige: '#FFE2AD',
       },
-    },
+      fontFamily: {
+        pre: ['Pretendard'],
+      },
+      extend: {},
   },
+}
   plugins: [],
 };
