@@ -27,9 +27,14 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, pretendard, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
+
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -37,10 +42,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width: 100%;
+}
+
+
 body {
   margin: 0;
   display: flex;
+
   place-items: center;
+
   min-width: 320px;
   min-height: 100vh;
 }
@@ -48,3 +60,4 @@ body {
 .rounded-4xl {
   border-radius: 32px;
 }
+
