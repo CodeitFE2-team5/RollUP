@@ -1,8 +1,8 @@
-import Avatar from "./Avatar";
-import profile1 from '../assets/profileImage/profile1.png';
-import profile2 from '../assets/profileImage/profile2.jpg';
-import profile3 from '../assets/profileImage/profile3.png';
-import profile4 from '../assets/profileImage/profile4.png';
+import Avatar from "../Avatar";
+import profile1 from '../../assets/profileImage/profile1.png';
+import profile2 from '../../assets/profileImage/profile2.jpg';
+import profile3 from '../../assets/profileImage/profile3.png';
+import profile4 from '../../assets/profileImage/profile4.png';
 import ReactionContainer from "./ReactionContainer";
 import { IoShareOutline } from "react-icons/io5";
 import { useState } from "react";
