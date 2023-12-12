@@ -1,3 +1,5 @@
+import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants';
+
 function MessageCard({ message, showTrashIcon }) {
   function formatDate(value) {
     const date = new Date(value);
@@ -16,21 +18,12 @@ function MessageCard({ message, showTrashIcon }) {
           alt="프로필 이미지"
         />
         <div className="ms-5">
-          <p className={`mb-2 font-[${message.font}]`}>
+          <p className={`mb-2 font-[${MESSAGE_FONT[message.font]}]`}>
             From. <b>{message.sender}</b>
           </p>
           <span
-            className={`rounded px-2 py-[2px] text-sm
-            ${
-              message.relationship === '친구'
-                ? 'bg-blue-100 text-blue-500'
-                : message.relationship === '가족'
-                ? 'bg-green-100 text-green-500'
-                : message.relationship === '동료'
-                ? 'bg-purple-100 text-purple-500'
-                : message.relationship === '지인'
-                ? 'bg-orange-100 text-orange-500'
-                : null
+            className={`rounded px-2 py-[2px] text-sm ${
+              RELATIONSHIP_TAG_COLOR[message.relationship]
             }`}
           >
             {message.relationship}

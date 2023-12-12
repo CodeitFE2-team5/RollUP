@@ -4,3 +4,17 @@ export const BACKGROUND_COLOR = {
   purple: 'bg-[#ECD9FF]',
   beige: 'bg-[#FFE2AD]',
 };
+
+export const RELATIONSHIP_TAG_COLOR = {
+  친구: 'bg-blue-100 text-blue-500',
+  가족: 'bg-green-100 text-green-500',
+  동료: 'bg-purple-100 text-purple-500',
+  지인: 'bg-orange-100 text-orange-500',
+};
+
+export const MESSAGE_FONT = {
+  Pretendard: 'Pretendard',
+  NotoSans: 'NotoSans',
+  NanumMyeongjo: '나눔명조',
+  NanumPenScript: '나눔손글씨 손편지체',
+};
