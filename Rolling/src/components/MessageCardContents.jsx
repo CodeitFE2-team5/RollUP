@@ -1,10 +1,11 @@
 import MessageCard from './MessageCard';
 import plusBtnImage from '../assets/plus.png';
+import { BACKGROUND_COLOR } from '../constants/constants';
 
 function MessageCardContents({ recipient, messages, showTrashIcon }) {
   return (
     <>
-      <div className={`w-full bg-[${recipient?.backgroundColor}]`}>
+      <div className={`w-full ${BACKGROUND_COLOR[recipient?.backgroundColor]}`}>
         <div className="flex justify-center items-center h-full">
           <div className="grid grid-cols-3 gap-4">
             <div className="flex justify-center items-center w-[384px] h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
