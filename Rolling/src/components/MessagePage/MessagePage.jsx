@@ -33,6 +33,7 @@ function MessagePage() {
         setLoading(true);
         const response = await axios.get(
           `https://rolling-api.vercel.app/2-5/recipients/836/messages/?limit=${LIMIT}&offset=${offset}`
+          // `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
         );
         const { next, results } = await response.data;
 
@@ -95,7 +96,7 @@ function MessagePage() {
       <div id="observer-element" style={{ height: '1px' }}></div>
       {loading && (
         <div className="flex justify-center py-5">
-          <img src={loadingAnimation} className="w-[50px]" />
+          <img src={loadingAnimation} className="w-12" />
         </div>
       )}
     </>
