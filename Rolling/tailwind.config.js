@@ -9,6 +9,7 @@ export default {
       xl: '1280px',
       xl2: '1360px',
     },
+    
     extend: {
       backgroundColor: {
         blue: '#B1E4FF',
