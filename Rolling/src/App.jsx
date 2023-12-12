@@ -1,9 +1,11 @@
-import { ListPage } from './page/ListPage';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { PostPage } from './page/PostPage';
+import LandingPage from './pages/LandingPage';
+import PostPage from './page/PostPage';
+
 function App() {
   return (
     <>
+      {/* <LandingPage /> */}
+      <PostPage />
     </>
   );
 }
