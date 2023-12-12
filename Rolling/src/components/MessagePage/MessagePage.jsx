@@ -11,9 +11,9 @@ function MessagePage() {
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(null);
   const [loading, setLoading] = useState(false);
-  const observerRef = useRef(null);
-  const params = useParams();
-  const { id } = params;
+  const observerRef = useRef();
+  // const params = useParams();
+  // const { id } = params;
 
   const LIMIT = 10;
 
@@ -28,7 +28,7 @@ function MessagePage() {
   };
 
   useEffect(() => {
-    const getRollingData = async () => {
+    const getRollingMessages = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
@@ -50,10 +50,10 @@ function MessagePage() {
       }
     };
 
-    getRollingData();
+    getRollingMessages();
   }, [offset]);
 
-  const handleLoadMore = () => {
+  const loadMoreMessages = () => {
     setOffset((prevOffset) => prevOffset + LIMIT);
   };
 
@@ -71,20 +71,20 @@ function MessagePage() {
     const handleObserver = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && hasNext) {
-          handleLoadMore();
+          loadMoreMessages();
         }
       });
     };
 
-    observerRef.current = new IntersectionObserver(handleObserver, options);
+    const observer = new IntersectionObserver(handleObserver, options);
 
-    if (observerRef.current) {
-      observerRef.current.observe(document.getElementById('observer-element'));
+    if (observer) {
+      observer.observe(observerRef.current);
     }
 
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
+      if (observer) {
+        observer.disconnect();
       }
     };
   }, [hasNext]);
@@ -93,7 +93,7 @@ function MessagePage() {
     <>
       <RecipientMenu />
       <MessageCardContents recipient={recipient} messages={messages} loading={loading} />
-      <div id="observer-element" style={{ height: '1px' }}></div>
+      <div id="observer-element" ref={observerRef}></div>
       {loading && (
         <div className="flex justify-center py-5">
           <img src={loadingAnimation} className="w-12" />
