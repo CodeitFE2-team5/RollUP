@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ReactionBadge from '../ReactionBadge';
+import ReactionBadge from '../Common/ReactionBadge';
 
 const backgroundColor = {
   blue: 'bg-[#B1E4FF]',

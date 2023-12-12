@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import LandingPage from './pages/LandingPage';
+import Header from "./components/Common/Header";
+import LandingPage from './components/LandingPage/LandingPage';
 import RollingPaperListPage from './components/RollingPaperListPage/RollingPaperListPage';
-import MessagePage from './pages/MessagePage';
-import PostPage from './page/PostPage';
+import MessagePage from './components/MessagePage/MessagePage';
+import PostPage from './components/PostPage/PostPage';
 
 function App() {
   return (

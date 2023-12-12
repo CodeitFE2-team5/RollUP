@@ -1,4 +1,4 @@
-import ReactionBadge from "../ReactionBadge";
+import ReactionBadge from "../Common/ReactionBadge";
 
 const AdditionalReactionContainer = () => {
   return(

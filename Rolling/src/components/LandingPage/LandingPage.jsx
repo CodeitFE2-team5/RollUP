@@ -1,5 +1,5 @@
-import Article from '../components/Article';
-import Bottom from '../components/Bottom';
+import Article from './Article';
+import Bottom from '../Common/Bottom';
 
 function LandingPage() {
   return (

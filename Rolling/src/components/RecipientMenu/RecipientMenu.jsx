@@ -1,4 +1,4 @@
-import Avatar from "../Avatar";
+import Avatar from "../Common/Avatar";
 import profile1 from '../../assets/profileImage/profile1.png';
 import profile2 from '../../assets/profileImage/profile2.jpg';
 import profile3 from '../../assets/profileImage/profile3.png';
