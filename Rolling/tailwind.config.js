@@ -9,7 +9,22 @@ export default {
       xl: '1280px',
       xl2: '1360px',
     },
-    extend: {},
+    
+    extend: {
+      backgroundColor: {
+        blue: '#B1E4FF',
+        green: '#D0F5C3',
+        purple: '#ECD9FF',
+        beige: '#FFE2AD',
+      },
+      fontFamily: {
+        pre: ['Pretendard'],
+      },
+      backgroundColor: {
+        Surface: 'var(--Surface, #f6f8ff)',
+      },
+    },
   },
+}
   plugins: [],
 };
