@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import plus from '../assets/plus.svg';
+import plus from '../../assets/plus.svg';
 // ... (other imports and code)
 
 const ImageOptionsContainer = ({ images, selectOption, selectedImage, handleImgClick }) => {

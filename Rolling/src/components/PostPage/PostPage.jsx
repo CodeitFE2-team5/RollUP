@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import heart from '../assets/heart.jpg';
-import load from '../assets/load.jpg';
-import sea from '../assets/sea.jpg';
-import supermario from '../assets/supermario.jpg';
-import ColorOptionsContainer from '../component/ColorOptionsContainer';
-import ImageOptionsContainer from '../component/ImageOptionContainer';
+import heart from '../../assets/heart.jpg';
+import load from '../../assets/load.jpg';
+import sea from '../../assets/sea.jpg';
+import supermario from '../../assets/supermario.jpg';
+import ColorOptionsContainer from './ColorOptionsContainer';
+import ImageOptionsContainer from './ImageOptionContainer';
 
 export const PostPage = () => {
   const [selectOption, setSelectOption] = useState('color');

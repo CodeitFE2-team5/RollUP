@@ -1,4 +1,4 @@
-import ReactionBadge from "../ReactionBadge";
+import ReactionBadge from "../Common/ReactionBadge";
 import { LuSmilePlus } from "react-icons/lu";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
