@@ -2,6 +2,8 @@ import axios from 'axios';
 import MessageCardContents from '../components/MessageCardContents';
 import { useState, useEffect, useRef } from 'react';
 import loadingAnimation from '../assets/loading.gif';
+import RecipientMenu from '../components/RecipientMenu/RecipientMenu';
+import { useParams } from 'react-router';
 
 function MessagePage() {
   const [recipient, setRecipient] = useState();
@@ -9,8 +11,10 @@ function MessagePage() {
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const observerRef = useRef(null);
+  const params = useParams();
+  const { id } = params;
+  
   const LIMIT = 10;
 
   const getRollingRecipient = async () => {
@@ -86,6 +90,7 @@ function MessagePage() {
 
   return (
     <>
+      <RecipientMenu />
       <MessageCardContents recipient={recipient} messages={messages} loading={loading} />
       <div id="observer-element" style={{ height: '1px' }}></div>
       {loading && (
