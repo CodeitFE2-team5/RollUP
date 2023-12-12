@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import LandingPage from './pages/LandingPage';
 import RollingPaperListPage from './components/RollingPaperListPage/RollingPaperListPage';
 import MessagePage from './pages/MessagePage';
+import PostPage from './page/PostPage';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/list" element={<RollingPaperListPage />} />
+        <Route path="/post" element={<PostPage />} />
         <Route path='/post/:id' element={<MessagePage />} />
       </Routes>
     </BrowserRouter>
