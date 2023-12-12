@@ -23,6 +23,10 @@ function MessagePage() {
     }
   };
 
+  const handleLoadMore = () => {
+    setOffset((prevOffset) => prevOffset + LIMIT);
+  };
+
   useEffect(() => {
     const getRollingData = async () => {
       try {
@@ -48,10 +52,6 @@ function MessagePage() {
     getRollingData();
   }, [offset]);
 
-  const handleLoadMore = () => {
-    setOffset((prevOffset) => prevOffset + LIMIT);
-  };
-
   useEffect(() => {
     getRollingRecipient();
   }, []);
@@ -64,6 +64,7 @@ function MessagePage() {
     };
 
     const handleObserver = (entries) => {
+      console.log(entries);
       entries.forEach((entry) => {
         if (entry.isIntersecting && hasNext) {
           handleLoadMore();

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import PostCardList from '../components/PostCardList';
 import { useState, useEffect } from 'react';
 
 function MessageEditPage() {
