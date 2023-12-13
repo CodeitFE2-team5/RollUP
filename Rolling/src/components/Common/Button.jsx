@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function Button({ children, to }) {
   return (
@@ -11,5 +12,10 @@ function Button({ children, to }) {
     </div>
   );
 }
+
+Button.propTypes = {
+  children: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};
 
 export default Button;
