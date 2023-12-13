@@ -5,14 +5,16 @@ import sea from '../../assets/sea.jpg';
 import supermario from '../../assets/supermario.jpg';
 import ColorOptionsContainer from './ColorOptionsContainer';
 import ImageOptionsContainer from './ImageOptionContainer';
+import Subject from './Subject';
 
 const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
 const images = [heart, load, sea, supermario];
-const clickEffectCss = 'bg-white-500 border-2 border-blue-500 text-blue-500 ';
+const optionClickCss = 'bg-white-500 border-2 border-purple-500 text-purple-500 ';
+const subjectCss = 'font-Pretendard font-bold text-2xl leading-9 tracking-wide';
 
 const PostPage = () => {
   const [selectOption, setSelectOption] = useState('color');
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [receiveUserName, setReceiveUserName] = useState('');
 
@@ -36,41 +38,46 @@ const PostPage = () => {
     console.log('폼 제출됨:', formData);
   };
   return (
-    <form onSubmit={handleSubmit} className="w-[860px] mx-auto">
-      <div>
-        <p>To</p>
+    <form
+      onSubmit={handleSubmit}
+      className="w-[860px] mx-auto mt-[57px] flex flex-col gap-9 box-border"
+    >
+      <div className="flex flex-col  gap-3">
+        <Subject css={subjectCss} subject="To." />
         <input
           type="text"
           name="receiveUserName"
           value={receiveUserName}
           onChange={handleNameChange}
           placeholder="받는 사람 이름을 입력해 주세요"
+          className="p-4 border-2 border-solid border-gray-300 rounded-lg focus:border-2 focus:outline-none focus:border-purple-500 "
         />
       </div>
 
-      <div>
-        <p>배경화면을 선택해 주세요.</p>
+      <div className="flex flex-col gap-1 ">
+        <Subject css={subjectCss} subject="배경화면을 선택해 주세요." />
+
         <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다</p>
       </div>
 
-      <div className="w-[244px] flex ">
+      <div className="w-[250px] flex al bg-gray-200 text-center  text-lg font-Pretendard font-bold rounded-md  ">
         <div
           onClick={() => handleItemClick('color', null)}
-          className={`w-[50%] bg-gray-200 p-[7px] px-[16px] cursor-pointer ${
-            selectOption === 'color' ? clickEffectCss : ''
-          } `}
+          className={`w-[50%]  p-[7px] px-[16px]  border-2 border-gray-200 cursor-pointer rounded-md ${
+            selectOption === 'color' ? optionClickCss : ''
+          }`}
         >
-          컬러
+          <p className="transition-transform transform hover:scale-110">색상</p>
         </div>
 
         <div
           onClick={() => handleItemClick('image', null)}
-          className={`w-[50%] bg-gray-200 p-[7px] px-[16px] cursor-pointer${
-            selectOption === 'image' ? clickEffectCss : ''
+          className={`w-[50%]  py-2 px-[16px] border-2 border-gray-200 cursor-pointer  rounded-md ${
+            selectOption === 'image' ? optionClickCss : ''
           } 
           `}
         >
-          이미지
+          <p className="transition-transform transform hover:scale-110">이미지</p>
         </div>
       </div>
 
