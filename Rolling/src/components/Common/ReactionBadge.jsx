@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ReactionBadge = ({ reaction }) => {
   return(
     <div className="flex px-3 py-2 rounded-4xl gap-0.5 bg-black/[0.54]">
@@ -6,5 +8,12 @@ const ReactionBadge = ({ reaction }) => {
     </div>
   )
 };
+
+ReactionBadge.propTypes = {
+  reaction: PropTypes.shape({
+    emoji: PropTypes.string,
+    count: PropTypes.number
+  })
+}
 
 export default ReactionBadge;

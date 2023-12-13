@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ReactionBadge from '../Common/ReactionBadge';
 import Avatar from '../Common/Avatar';
 import profile1 from '../../assets/profileImage/profile1.png';
@@ -38,5 +39,29 @@ const RollingPaperCard = ({ rollingPaper }) => {
     </Link>
   )
 };
+
+RollingPaperCard.propTypes = {
+  rollingPaper: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      backgroundColor: PropTypes.string,
+      backgroundImageURL: PropTypes.string,
+      name: PropTypes.string,
+      messageCount: PropTypes.number,
+      recentMessages: PropTypes.array,
+      topReactions: PropTypes.array,
+    })
+  )
+}
+
+RollingPaperCard.propTypes.rollingPaper.topReactions.propTypes = {
+  topReactions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      emoji: PropTypes.string,
+      count: PropTypes.number
+    })
+  )
+}
 
 export default RollingPaperCard;
