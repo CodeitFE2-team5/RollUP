@@ -7,10 +7,11 @@ import ColorOptionsContainer from './ColorOptionsContainer';
 import ImageOptionsContainer from './ImageOptionContainer';
 import Subject from './Subject';
 import { CreateButton } from './CreateButton';
+import { UserNameInput } from './UserNameInput';
+import { ToggleButton } from './ToggleButton';
 
 const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
 const images = [heart, load, sea, supermario];
-const optionClickCss = 'bg-white-500 border-2 border-purple-500 text-purple-500 ';
 
 const PostPage = () => {
   const [selectOption, setSelectOption] = useState('color');
@@ -18,6 +19,7 @@ const PostPage = () => {
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [receiveUserName, setReceiveUserName] = useState('');
   const [nameInputEmpty, setNameInputEmpty] = useState(true);
+
   const handleItemClick = (option, value) => {
     setSelectOption(option);
     setSelectedColor(option === 'color' ? value : colors[0]);
@@ -48,19 +50,10 @@ const PostPage = () => {
     <form onSubmit={handleSubmit} className="w-[860px] mx-auto mt-[57px] flex flex-col box-border">
       <div className="flex flex-col  gap-3 mb-[50px]">
         <Subject>To. </Subject>
-        <input
-          type="text"
-          name="receiveUserName"
+        <UserNameInput
           value={receiveUserName}
           onChange={handleNameChange}
-          placeholder={
-            nameInputEmpty
-              ? '받는 사람 이름을 입력해 주세요'
-              : '필수입력 사항입니다 받는사람이름을 입력해주세요'
-          }
-          className={`p-4 border-2 border-solid  rounded-lg focus:border-2 focus:outline-none focus:border-purple-500 ${
-            nameInputEmpty ? 'border-gray-300' : 'border-red-500'
-          }`}
+          nameInputEmpty={nameInputEmpty}
         />
       </div>
 
@@ -71,7 +64,17 @@ const PostPage = () => {
       </div>
 
       <div className="w-[250px] flex al bg-gray-200 text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
-        <div
+        <ToggleButton
+          onClick={() => handleItemClick('color', selectedColor)}
+          isActive={selectOption === 'color'}
+          content="색상"
+        />
+        <ToggleButton
+          onClick={() => handleItemClick('image', selectedImage)}
+          isActive={selectOption === 'image'}
+          content="이미지"
+        />
+        {/* <div
           onClick={() => handleItemClick('color', selectedColor)}
           className={`w-[50%]  p-[7px] px-[16px]  border-2 border-gray-200 cursor-pointer rounded-md ${
             selectOption === 'color' ? optionClickCss : ''
@@ -81,14 +84,14 @@ const PostPage = () => {
         </div>
 
         <div
-          onClick={() => handleItemClick('image', selectedImage)}
+          
           className={`w-[50%]  py-2 px-[16px] border-2 border-gray-200 cursor-pointer  rounded-md ${
             selectOption === 'image' ? optionClickCss : ''
           } 
           `}
         >
           <p className="transition-transform transform hover:scale-110">이미지</p>
-        </div>
+        </div> */}
       </div>
 
       {selectOption === 'color' ? (
