@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import plus from '../../assets/plus.svg';
 import ImageOption from './ImageOption';
+import { IoCheckmarkCircle } from 'react-icons/io5';
 
 const propTypes = {
   images: PropTypes.array.isRequired,
@@ -14,6 +15,9 @@ const ImageOptionsContainer = ({ images, selectedImage, handleItemClick }) => {
   const inputRef = useRef();
 
   const plusButtonCss = preview === plus ? 'bg-gray-200 bg-cover bg-center' : 'bg-contain';
+
+  const imgSize =
+    preview === plus ? 'w-[20%] h-[20%] absolute top-[38%] left-[41%]' : 'w-full h-full';
 
   const handleChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -29,31 +33,33 @@ const ImageOptionsContainer = ({ images, selectedImage, handleItemClick }) => {
   };
 
   return (
-    <div className="flex gap-4">
-      {images.map((image, index) => (
-        <div key={index}>
-          <ImageOption
-            image={image}
-            isSelected={selectedImage === image}
-            handleItemClick={handleItemClick}
-          />
-        </div>
-      ))}
+    <div className="flex w-full justify-between ">
+      <div className="flex gap-4">
+        {images.map((image, index) => (
+          <div key={index}>
+            <ImageOption
+              image={image}
+              isSelected={selectedImage === image}
+              handleItemClick={handleItemClick}
+            />
+          </div>
+        ))}
+      </div>
 
       {preview && (
-        <div
-          className={`overflow-hidden ${
-            selectedImage === preview ? 'border-2 border-blue-500' : ''
-          }`}
-        >
+        <div className={`overflow-hidden rounded-2xl `}>
           <div
-            className={`w-[168px] h-[168px] bg-no-repeat transition-transform duration-500 hover:scale-150 cursor-pointer ${plusButtonCss} `}
-            style={{
-              backgroundImage: `url(${preview})`,
-              backgroundSize: preview === plus ? '20% 20%' : '100% 100%',
-            }}
+            className={`relative w-[150px] h-40 bg-no-repeat transition-transform duration-500 hover:scale-150 cursor-pointer ${plusButtonCss} `}
             onClick={handleFileSelectClick}
-          ></div>
+          >
+            <img src={preview} alt="defaultImage" className={` ${imgSize}`} />
+
+            {selectedImage === preview && (
+              <div className="absolute top-0 left-0 w-full h-full bg-gray-400 opacity-50 ">
+                <IoCheckmarkCircle className="absolute w-12 h-12 top-[34%] left-[36%] " />
+              </div>
+            )}
+          </div>
         </div>
       )}
 
