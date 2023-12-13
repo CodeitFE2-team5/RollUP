@@ -1,11 +1,7 @@
 import PropTypes from 'prop-types';
 import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants';
 import { LiaTrashAltSolid } from 'react-icons/lia';
-
-function formatDate(value) {
-  const date = new Date(value);
-  return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}`;
-}
+import { formatDate } from '../../utils/formatDate';
 
 MessageCard.propTypes = {
   message: PropTypes.object.isRequired,
@@ -26,7 +22,7 @@ function MessageCard({ message, showTrashIcon }) {
             alt="프로필 이미지"
           />
           <div className="ms-5">
-            <p className={`mb-2 font-[${MESSAGE_FONT[message.font]}]`}>
+            <p className={`mb-2 ${MESSAGE_FONT['message.font']}`}>
               From. <b>{message.sender}</b>
             </p>
             <span
@@ -45,7 +41,11 @@ function MessageCard({ message, showTrashIcon }) {
         )}
       </div>
       <div className="mt-3">
-        <p className="overflow-hidden text-[#4A4A4A] text-ellipsis whitespace-nowrap text-lg leading-7">
+        <p
+          className={`overflow-hidden text-[#4A4A4A] text-ellipsis whitespace-nowrap text-lg leading-7 ${
+            MESSAGE_FONT[message.font]
+          }`}
+        >
           {message.content}
         </p>
       </div>

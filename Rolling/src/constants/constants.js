@@ -13,8 +13,8 @@ export const RELATIONSHIP_TAG_COLOR = {
 };
 
 export const MESSAGE_FONT = {
-  Pretendard: 'Pretendard',
-  NotoSans: 'NotoSans',
-  NanumMyeongjo: 'NanumMyeongjo',
-  NanumHandWriting: 'NanumHandWriting',
+  Pretendard: 'font-Pretendard',
+  'Noto Sans': 'font-NotoSans',
+  나눔명조: 'font-NanumMyeongjo',
+  '나눔손글씨 손편지체': 'font-NanumHandWriting',
 };

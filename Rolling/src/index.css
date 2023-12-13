@@ -59,8 +59,8 @@
   font-family: NanumMyeongjo;
   font-weight: 400;
   font-display: swap;
-  src: local('NanumMyeongjo'), url('./assets/fonts/NotoSans/NanumMyeongjo.woff') format('woff'),
-    url('./assets/fonts/NotoSans/NanumMyeongjo.woff2') format('woff2');
+  src: local('NanumMyeongjo'), url('./assets/fonts/NanumMyeongjo/NanumMyeongjo.woff') format('woff'),
+    url('./assets/fonts/NanumMyeongjo/NanumMyeongjo.woff2') format('woff2');
 }
 
 @font-face {
@@ -68,8 +68,8 @@
   font-weight: 700;
   font-display: swap;
   src: local('NanumMyeongjoBold'),
-    url('./assets/fonts/NotoSans/NanumMyeongjoBold.woff') format('woff'),
-    url('./assets/fonts/NotoSans/NanumMyeongjoBold.woff2') format('woff2');
+    url('./assets/fonts/NanumMyeongjo/NanumMyeongjoBold.woff') format('woff'),
+    url('./assets/fonts/NanumMyeongjo/NanumMyeongjoBold.woff2') format('woff2');
 }
 
 @font-face {
@@ -77,8 +77,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('NanumHandWriting'),
-    url('./assets/fonts/NotoSans/NanumHandWriting.woff') format('woff'),
-    url('./assets/fonts/NotoSans/NanumHandWriting.woff2') format('woff2');
+    url('./assets/fonts/NanumHandWriting/NanumHandWriting.woff') format('woff'),
+    url('./assets/fonts/NanumHandWriting/NanumHandWriting.woff2') format('woff2');
 }
 
 :root {
