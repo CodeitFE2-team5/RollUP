@@ -3,7 +3,6 @@ import MessageCardContents from './MessageCardContents';
 import { useState, useEffect, useRef } from 'react';
 import loadingAnimation from '../../assets/loading.gif';
 import RecipientMenu from '../RecipientMenu/RecipientMenu';
-import { useParams } from 'react-router';
 
 function MessagePage() {
   const [recipient, setRecipient] = useState();
@@ -12,8 +11,6 @@ function MessagePage() {
   const [hasNext, setHasNext] = useState(null);
   const [loading, setLoading] = useState(false);
   const observerRef = useRef();
-  // const params = useParams();
-  // const { id } = params;
 
   const LIMIT = 10;
 
@@ -33,7 +30,6 @@ function MessagePage() {
         setLoading(true);
         const response = await axios.get(
           `https://rolling-api.vercel.app/2-5/recipients/836/messages/?limit=${LIMIT}&offset=${offset}`
-          // `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
         );
         const { next, results } = await response.data;
 
