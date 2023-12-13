@@ -3,7 +3,7 @@ import logo from '../assets/logo.svg';
 function Header() {
   return (
     <>
-      <div className="flex items-center justify-between flex-shrink-0 py-[12px] px-[222px] mx-auto border-b-[1px] border-zinc-100">
+      <div className="flex items-center justify-between flex-shrink-0 py-3 px-[222px] mx-auto border-b-[1px] border-zinc-100">
         <a className="" href="/">
           <img src={logo} />
         </a>

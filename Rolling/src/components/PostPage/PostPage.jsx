@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import heart from '../assets/heart.jpg';
-import load from '../assets/load.jpg';
-import sea from '../assets/sea.jpg';
-import supermario from '../assets/supermario.jpg';
-import ColorOptionsContainer from '../component/ColorOptionsContainer';
-import ImageOptionsContainer from '../component/ImageOptionContainer';
-import Header from '../components/Header';
+import heart from '../../assets/heart.jpg';
+import load from '../../assets/load.jpg';
+import sea from '../../assets/sea.jpg';
+import supermario from '../../assets/supermario.jpg';
+import ColorOptionsContainer from './ColorOptionsContainer';
+import ImageOptionsContainer from './ImageOptionContainer';
 
 export const PostPage = () => {
   const [selectOption, setSelectOption] = useState('color');
@@ -45,10 +44,9 @@ export const PostPage = () => {
 
   return (
     <>
-      <Header />
-      <div className="mt-[56px] mb-[56px]">
-        <form onSubmit={handleSubmit} className="w-[1060px] mx-auto ">
-          <div className="inline-flex flex-col items-start gap-[12px] mb-[30px]">
+      <div className="mt-14 mb-14">
+        <form onSubmit={handleSubmit} className="w-[1060px] mx-auto">
+          <div className="inline-flex flex-col items-start gap-3 mb-8">
             <p className="text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-10">
               To. 수신인
             </p>
@@ -62,7 +60,7 @@ export const PostPage = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-[4px] mb-[12px]">
+          <div className="flex flex-col gap-1 mb-5">
             <p className="text-gray-900 font-bold font-Pretendard text-[24px] leading-36 tracking-wide">
               배경화면을 선택해 주세요.
             </p>
@@ -71,14 +69,14 @@ export const PostPage = () => {
             </p>
           </div>
 
-          <div className="w-244 flex-shrink-0 mb-[30px]">
-            <div className="w-[244px] flex ">
+          <div className="flex-shrink-0 mb-8">
+            <div className="w-[244px] rounded-md flex items-center justify-center">
               <div
                 onClick={() => handleColorClick('color', null)}
-                className={`w-[50%] bg-white p-[7px] px-[16px] cursor-pointer ${
+                className={`w-[50%] rounded-md p-[7px] px-[16px] text-center cursor-pointer ${
                   selectOption === 'color'
-                    ? 'bg-white-500 border-2 border---purple-700 text-blue-500 '
-                    : ''
+                    ? 'rounded-md border-purple-600 border-2 text-purple-700 text-center font-bold font-pre text-base leading-6'
+                    : 'bg-gray-100 text-center font-pre text-base leading-6'
                 } `}
               >
                 컬러
@@ -86,10 +84,10 @@ export const PostPage = () => {
 
               <div
                 onClick={() => handleImgClick('image', null)}
-                className={`w-[50%] bg-gray-200 p-[7px] px-[16px] cursor-pointer ${
+                className={`w-[50%] rounded-md bg-white p-[7px] px-[16px] text-center cursor-pointer ${
                   selectOption === 'image'
-                    ? 'bg-white-500 border-2 border-blue-500 text-blue-500 '
-                    : ''
+                    ? 'rounded-md border-purple-600 border-2 text-purple-700 text-center font-bold font-pre text-base leading-6'
+                    : 'bg-gray-100 text-center font-pre text-base leading-6'
                 }`}
               >
                 이미지

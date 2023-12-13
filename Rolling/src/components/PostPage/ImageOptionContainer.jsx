@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import plus from '../assets/plus.svg';
+import plus from '../../assets/plus.svg';
 // ... (other imports and code)
 
 const ImageOptionsContainer = ({ images, selectOption, selectedImage, handleImgClick }) => {
@@ -21,7 +21,7 @@ const ImageOptionsContainer = ({ images, selectOption, selectedImage, handleImgC
   };
 
   return (
-    <div className="flex w-[840px]">
+    <div className="w-full max-w-120 space-x-4 grid grid-cols-4 gap-4">
       {images.map((image, index) => (
         <div
           className={`overflow-hidden ${
