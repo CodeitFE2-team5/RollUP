@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
 import ReactionBadge from '../Common/ReactionBadge';
+import Avatar from '../Common/Avatar';
+import profile1 from '../../assets/profileImage/profile1.png';
+import profile2 from '../../assets/profileImage/profile2.jpg';
+import profile3 from '../../assets/profileImage/profile3.png';
+import profile4 from '../../assets/profileImage/profile4.png';
 
 const backgroundColor = {
   blue: 'bg-[#B1E4FF]',
@@ -8,23 +13,27 @@ const backgroundColor = {
   beige: 'bg-[#FFE2AD]',
 };
 
+const profileData = [profile1, profile2, profile3, profile4];
+
 const RollingPaperCard = ({ rollingPaper }) => {
   return(
-    <Link to={`/post/${rollingPaper.id}`} className={`h-auto w-[275px] rounded-2xl border-solid border-2 py-7 px-6 shadow-md ${backgroundColor[rollingPaper.backgroundColor]}`}>
-      <div className="flex flex-col gap-5 mb-7">
-        <div className="font-bold text-pretendard text-2xl leading-10 tracking-tight">
-          To. {rollingPaper.name}
+    <Link to={`/post/${rollingPaper.id}`}>
+      <div  className={`w-[275px] h-[260px] rounded-2xl border-solid border-2 pt-[30px] pb-5 px-6 shadow-md ${backgroundColor[rollingPaper.backgroundColor]}`}>
+        <div className="flex flex-col gap-3 mb-7">
+          <div className="font-bold text-pretendard text-2xl leading-10 tracking-tight">
+            To. {rollingPaper.name}
+          </div>
+          <Avatar profiles={profileData}/>
+          <div className=" font-normal text-pretendard text-base leading-6 tracking-tight">
+            <span className="font-bold text-pretendard text-base leading-6 tracking-tight">
+              {rollingPaper.messageCount}
+            </span>
+            명이 작성했어요
+          </div>
         </div>
-        <span>그림들어갈자리</span>
-        <div className=" font-normal text-pretendard text-base leading-6 tracking-tight">
-          <span className="font-bold text-pretendard text-base leading-6 tracking-tight">
-            {rollingPaper.messageCount}
-          </span>
-          명이 작성했어요
+        <div className="flex items-center  border-t border-slate-400 gap-3 pt-4">
+          {rollingPaper.topReactions.map((reaction) => <ReactionBadge key={reaction.id} reaction={reaction}/>)}
         </div>
-      </div>
-      <div className="flex items-center  border-t border-slate-400 gap-3 pt-4">
-        {rollingPaper.topReactions.map((reaction) => <ReactionBadge key={reaction.id} reaction={reaction}/>)}
       </div>
     </Link>
   )

@@ -21,7 +21,7 @@ const Avatar = ({ profiles }) => {
         <>
           {profiles.slice(0, MAX_DISPLAY).map((profile, index) => (
             <div key={index} className={`avatar avatar-${index} w-7 rounded-full absolute ${leftValue[index]}`}>
-            <img src={profile} alt="프로필" className=" rounded-full border border-white"/>
+              <img src={profile} alt="프로필" className=" rounded-full border border-white"/>
             </div>
           ))}
           <div className={"avatar avatar-more w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-xs bg-white absolute left-12"}>{`+${overflowCount}`}</div>
@@ -50,6 +50,6 @@ const Avatar = ({ profiles }) => {
   //   }
   // };
 
-  return <div className="avatar-container flex relative w-20">{renderAvatars()}</div>;
+  return <div className="avatar-container flex relative w-20 h-7">{renderAvatars()}</div>;
 };
 export default Avatar;
