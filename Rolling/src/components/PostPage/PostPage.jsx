@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import heart from '../../assets/heart.jpg';
 import load from '../../assets/load.jpg';
 import sea from '../../assets/sea.jpg';
@@ -6,30 +6,26 @@ import supermario from '../../assets/supermario.jpg';
 import ColorOptionsContainer from './ColorOptionsContainer';
 import ImageOptionsContainer from './ImageOptionContainer';
 
-export const PostPage = () => {
+const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
+const images = [heart, load, sea, supermario];
+const clickEffectCss = 'bg-white-500 border-2 border-blue-500 text-blue-500 ';
+
+const PostPage = () => {
   const [selectOption, setSelectOption] = useState('color');
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [receiveUserName, setReceiveUserName] = useState('');
 
-  const handleColorClick = (option, color) => {
+  const handleItemClick = (option, value) => {
     setSelectOption(option);
-    setSelectedColor(color);
-    setSelectedImage(null);
+    setSelectedColor(option === 'color' ? value : null);
+    setSelectedImage(option === 'image' ? value : null);
   };
 
-  const handleImgClick = (option, image) => {
-    setSelectOption(option);
-    setSelectedImage(image);
-    setSelectedColor(null);
-  };
-  const images = [heart, load, sea, supermario];
-
-  /** purple: '#ECD9FF', green: '#D0F5C3', blue: '#B1E4FF', beige: '#FFE2AD', */
-  const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
   const handleNameChange = (e) => {
     setReceiveUserName(e.target.value);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
@@ -39,7 +35,6 @@ export const PostPage = () => {
     };
     console.log('폼 제출됨:', formData);
   };
-
   return (
     <form onSubmit={handleSubmit} className="w-[860px] mx-auto">
       <div>
@@ -60,19 +55,20 @@ export const PostPage = () => {
 
       <div className="w-[244px] flex ">
         <div
-          onClick={() => handleColorClick('color', null)}
+          onClick={() => handleItemClick('color', null)}
           className={`w-[50%] bg-gray-200 p-[7px] px-[16px] cursor-pointer ${
-            selectOption === 'color' ? 'bg-white-500 border-2 border-blue-500 text-blue-500 ' : ''
+            selectOption === 'color' ? clickEffectCss : ''
           } `}
         >
           컬러
         </div>
 
         <div
-          onClick={() => handleImgClick('image', null)}
-          className={`w-[50%] bg-gray-200 p-[7px] px-[16px] cursor-pointer ${
-            selectOption === 'image' ? 'bg-white-500 border-2 border-blue-500 text-blue-500 ' : ''
-          }`}
+          onClick={() => handleItemClick('image', null)}
+          className={`w-[50%] bg-gray-200 p-[7px] px-[16px] cursor-pointer${
+            selectOption === 'image' ? clickEffectCss : ''
+          } 
+          `}
         >
           이미지
         </div>
@@ -81,16 +77,14 @@ export const PostPage = () => {
       {selectOption === 'color' ? (
         <ColorOptionsContainer
           colors={colors}
-          selectOption={selectOption}
           selectedColor={selectedColor}
-          handleColorClick={handleColorClick}
+          handleItemClick={handleItemClick}
         />
       ) : (
         <ImageOptionsContainer
           images={images}
-          selectOption={selectOption}
           selectedImage={selectedImage}
-          handleImgClick={handleImgClick}
+          handleItemClick={handleItemClick}
         />
       )}
       <button type="submit" className="border-4 border-black">

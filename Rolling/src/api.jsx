@@ -4,7 +4,7 @@ export async function getLatestLists({ offset, limit }) {
   const URL = `https://rolling-api.vercel.app/2-5/recipients/?limit=${limit}&offset=${offset}/`;
   try {
     const response = await axios.get(URL);
-    console.log(URL);
+
     if (!response.data) {
       throw new Error('데이터를 불러오는데 실패했습니다.');
     }
@@ -20,7 +20,7 @@ export async function getPopularLists({ offset, limit }) {
   const URL = `https://rolling-api.vercel.app/2-5/recipients/?limit=${limit}&offset=${offset}&sort=like`;
   try {
     const response = await axios.get(URL);
-    console.log(URL);
+
     if (!response.data) {
       throw new Error('데이터를 불러오는데 실패했습니다.');
     }
