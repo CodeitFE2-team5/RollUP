@@ -15,6 +15,6 @@ export const RELATIONSHIP_TAG_COLOR = {
 export const MESSAGE_FONT = {
   Pretendard: 'Pretendard',
   NotoSans: 'NotoSans',
-  NanumMyeongjo: '나눔명조',
-  NanumPenScript: '나눔손글씨 손편지체',
+  NanumMyeongjo: 'NanumMyeongjo',
+  NanumHandWriting: 'NanumHandWriting',
 };
