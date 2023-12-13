@@ -3,8 +3,8 @@ import img02 from '../../assets/landing-img02.svg';
 
 function Article() {
   return (
-    <div className="mt-[56px] mb-[56px]">
-      <div className="flex justify-between gap-[30px] mx-auto mb-[30px] py-[60px] pl-[60px] w-[1070px] h-[324px] rounded-[16px] bg-Surface">
+    <div className="mt-16 mb-16 w-full">
+      <div className="flex justify-between gap-[30px] mx-auto mb-[30px] py-[60px] pl-[60px] w-[1070px] h-[324px] rounded-[16px] bg-slate-50">
         <div className="flex-col justify-start items-start gap-4 inline-flex ">
           <div className="px-3 py-1.5 bg-purple-600 rounded-3xl flex-col justify-center items-center gap-2.5 flex">
             <div className="text-white text-sm font-bold font-['Pretendard'] leading-tight">
@@ -24,7 +24,8 @@ function Article() {
         </div>
         <img src={img01} />
       </div>
-      <div className="flex items-center py-[60px] mx-auto w-[1070px] h-[324px] rounded-[16px] bg-Surface">
+
+      <div className="flex items-center py-15 mx-auto w-[1070px] h-[324px] rounded-4 bg-slate-50">
         <img src={img02} />
         <div className="left-[720px] flex-col justify-start items-start gap-4 inline-flex">
           <div className="px-3 py-1.5 bg-purple-600 rounded-3xl flex-col justify-center items-center gap-2.5 flex">

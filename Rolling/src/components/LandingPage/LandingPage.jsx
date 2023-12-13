@@ -1,11 +1,11 @@
 import Article from './Article';
-import Bottom from '../Common/Bottom';
+import Button from '../Common/Button';
 
 function LandingPage() {
   return (
     <>
       <Article />
-      <Bottom />
+      <Button to="/list">구경해보기</Button>
     </>
   );
 }
