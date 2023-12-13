@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  children: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};
+
 function Button({ children, to }) {
   return (
     <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2">
@@ -13,9 +18,6 @@ function Button({ children, to }) {
   );
 }
 
-Button.propTypes = {
-  children: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
-};
+Button.propTypes = propTypes;
 
 export default Button;
