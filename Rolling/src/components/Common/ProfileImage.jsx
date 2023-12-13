@@ -6,9 +6,15 @@ const leftValue = {
   2 : 'left-8'
 }
 
-const ProfileImage = ({ index, profileImage }) => {
+const sizeValue = {
+  28: 'w-7',
+  56: 'w-14',
+  80: 'w-20' 
+}
+
+const ProfileImage = ({ index, profileImage, size }) => {
   return(
-    <div key={index} className={`avatar avatar-${index} w-7 rounded-full absolute ${leftValue[index]} left`}>
+    <div key={index} className={`avatar avatar-${index} w-7 rounded-full absolute ${leftValue[index]} ${sizeValue[size]}`}>
       <img src={profileImage} alt="프로필" className=" rounded-full border"/>
     </div>
   )
@@ -16,7 +22,8 @@ const ProfileImage = ({ index, profileImage }) => {
 
 ProfileImage.propTypes = {
   index: PropTypes.number,
-  profileImage: PropTypes.string
+  profileImage: PropTypes.string,
+  size: PropTypes.number
 }
 
 export default ProfileImage;

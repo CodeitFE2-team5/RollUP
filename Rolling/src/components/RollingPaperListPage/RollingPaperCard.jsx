@@ -24,7 +24,7 @@ const RollingPaperCard = ({ rollingPaper }) => {
           <div className="font-bold text-pretendard text-2xl leading-10 tracking-tight">
             To. {rollingPaper.name}
           </div>
-          <Avatar profiles={profileData}/>
+          <Avatar profileImages={profileData}/>
           <div className=" font-normal text-pretendard text-base leading-6 tracking-tight">
             <span className="font-bold text-pretendard text-base leading-6 tracking-tight">
               {rollingPaper.messageCount}
@@ -41,27 +41,16 @@ const RollingPaperCard = ({ rollingPaper }) => {
 };
 
 RollingPaperCard.propTypes = {
-  rollingPaper: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      backgroundColor: PropTypes.string,
-      backgroundImageURL: PropTypes.string,
-      name: PropTypes.string,
-      messageCount: PropTypes.number,
-      recentMessages: PropTypes.array,
-      topReactions: PropTypes.array,
-    })
-  )
+  rollingPaper: PropTypes.shape({
+    id: PropTypes.number,
+    backgroundColor: PropTypes.string,
+    backgroundImageURL: PropTypes.string,
+    name: PropTypes.string,
+    messageCount: PropTypes.number,
+    recentMessages: PropTypes.array,
+    topReactions: PropTypes.array,
+  })
 }
 
-RollingPaperCard.propTypes.rollingPaper.topReactions.propTypes = {
-  topReactions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      emoji: PropTypes.string,
-      count: PropTypes.number
-    })
-  )
-}
 
 export default RollingPaperCard;
