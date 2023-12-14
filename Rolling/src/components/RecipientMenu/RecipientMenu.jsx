@@ -18,7 +18,7 @@ const RecipientMenu = () => {
   };
 
   return(
-    <nav className="w-screen relative py-[13px]">
+    <nav className="w-full relative py-[13px]">
       <div className="mx-auto flex gap-64 w-fit relative">
         <div className="recipent font-bold text-3xl font-pre">To. Ashely Kim</div>
         <div className="flex items-center gap-7 justify-center">
