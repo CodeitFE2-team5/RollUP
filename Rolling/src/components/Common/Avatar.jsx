@@ -1,55 +1,32 @@
+import PropTypes from 'prop-types';
+import ProfileImage from './ProfileImage';
+
 const MAX_DISPLAY = 3;
 
-const leftValue = {
-  0 : 'left-0',
-  1 : 'left-4',
-  2 : 'left-8'
-}
-
-const Avatar = ({ profiles }) => {
+const Avatar = ({ profileImages }) => {
 
   const renderAvatars = () => {
-    if (profiles.length <= MAX_DISPLAY) {
-      return profiles.map((profile, index) => (
-        <div key={index} className={`avatar avatar-${index} w-7 rounded-full absolute ${leftValue[index]} left`}>
-          <img src={profile} alt="프로필" className=" rounded-full border"/>
-        </div>
+    if (profileImages?.length <= MAX_DISPLAY) {
+      return profileImages.map((profile, index) => (
+        <ProfileImage key={index} index={index} profileImage={profile}/>
       ));
     } else {
-      const overflowCount = profiles.length - MAX_DISPLAY;
+      const overflowCount = profileImages?.length - MAX_DISPLAY;
       return (
         <>
-          {profiles.slice(0, MAX_DISPLAY).map((profile, index) => (
-            <div key={index} className={`avatar avatar-${index} w-7 rounded-full absolute ${leftValue[index]}`}>
-            <img src={profile} alt="프로필" className=" rounded-full border border-white"/>
-            </div>
+          {profileImages?.slice(0, MAX_DISPLAY).map((profile, index) => (
+            <ProfileImage key={index} index={index} profileImage={profile} size={28}/>
           ))}
           <div className={"avatar avatar-more w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-xs bg-white absolute left-12"}>{`+${overflowCount}`}</div>
         </>
       );
     }
   };
-  //   if (profiles.length <= MAX_DISPLAY) {
-  //     return profiles.map((profile, index) => (
-  //       <div key={index} className={`avatar avatar-${index} w-7 rounded-full absolute ${leftValue[index]}`}>
-  //         <img src={profile} alt="프로필" className=" rounded-full border"/>
-  //       </div>
-  //     ));
-  //   } else {
-  //     const overflowCount = profiles.length - MAX_DISPLAY;
-  //     return (
-  //       <>
-  //         {profiles.slice(0, MAX_DISPLAY).map((profile, index) => (
-  //           <div key={index} className={`avatar avatar-${index} w-7 rounded-full absolute ${leftValue[index]}`}>
-  //           <img src={profile} alt="프로필" className=" rounded-full border border-white"/>
-  //           </div>
-  //         ))}
-  //         <div className={"avatar avatar-more w-7 rounded-full border border-gray-200 flex items-center justify-center text-xs absolute h-7 left-12 z-40 bg-white"}>{`+${overflowCount}`}</div>
-  //       </>
-  //     );
-  //   }
-  // };
-
-  return <div className="avatar-container flex relative w-20">{renderAvatars()}</div>;
+  return <div className="avatar-container flex relative w-20 h-7">{renderAvatars()}</div>;
 };
+
+Avatar.propTypes = {
+  profileImages: PropTypes.array
+}
+
 export default Avatar;

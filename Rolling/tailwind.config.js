@@ -12,7 +12,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        pre: ['Pretendard'],
+        Pretendard: ['Pretendard'],
+        NotoSans: ['NotoSans'],
+        NanumMyeongjo: ['NanumMyeongjo'],
+        NanumHandWriting: ['NanumHandWriting'],
       },
       extend: {},
     },

@@ -20,7 +20,7 @@ function SenderName() {
       <input
         className={`w-full px-4 py-3 bg-white rounded-lg border ${
           error ? 'border-red-500' : 'border-stone-300'
-        } justify-start items-center gap-2.5 inline-flex focus:outline-none focus:border-gray-700 focus:border-[1px]`}
+        } justify-start items-center gap-2.5 inline-flex text-lg focus:outline-none focus:border-gray-700 focus:border-[1px]`}
         placeholder="이름을 입력해 주세요."
         value={name}
         onChange={(e) => setName(e.target.value)}
