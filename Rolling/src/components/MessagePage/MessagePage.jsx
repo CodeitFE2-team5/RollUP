@@ -79,7 +79,6 @@ function MessagePage() {
     return () => {
       if (observer) {
         observer.disconnect();
-
       }
     };
   }, [hasNext]);
@@ -87,7 +86,7 @@ function MessagePage() {
   return (
     <>
       <RecipientMenu />
-      <MessageCardContents recipient={recipient} messages={messages} loading={loading} />
+      <MessageCardContents recipient={recipient} messages={messages} />
       <div id="observer-element" ref={observerRef}></div>
       {loading && (
         <div className="flex justify-center py-5">
