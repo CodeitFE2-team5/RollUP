@@ -5,6 +5,7 @@ const ColorOption = ({ color, isSelected, handleColorClick }) => {
   return (
     <div
       onClick={() => handleColorClick('color', color)}
+
       className={`relative w-full h-[238px] cursor-pointer rounded-lg border border-solid ${color} ${
         isSelected ? 'border-transparent' : ''
       }`}
