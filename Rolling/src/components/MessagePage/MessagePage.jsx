@@ -3,7 +3,6 @@ import MessageCardContents from './MessageCardContents';
 import { useState, useEffect, useRef } from 'react';
 import loadingAnimation from '../../assets/loading.gif';
 import RecipientMenu from '../RecipientMenu/RecipientMenu';
-import { useParams } from 'react-router';
 
 function MessagePage() {
   const [recipient, setRecipient] = useState();
@@ -12,9 +11,6 @@ function MessagePage() {
   const [hasNext, setHasNext] = useState(null);
   const [loading, setLoading] = useState(false);
   const observerRef = useRef(null);
-  const params = useParams();
-  const { id } = params;
-
   const LIMIT = 10;
 
   const getRollingRecipient = async () => {
@@ -28,7 +24,7 @@ function MessagePage() {
   };
 
   useEffect(() => {
-    const getRollingData = async () => {
+    const getRollingMessages = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
@@ -48,11 +44,10 @@ function MessagePage() {
         setLoading(false);
       }
     };
-
-    getRollingData();
+    getRollingMessages();
   }, [offset]);
 
-  const handleLoadMore = () => {
+  const loadMoreMessages = () => {
     setOffset((prevOffset) => prevOffset + LIMIT);
   };
 
@@ -70,20 +65,21 @@ function MessagePage() {
     const handleObserver = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && hasNext) {
-          handleLoadMore();
+          loadMoreMessages();
         }
       });
     };
 
-    observerRef.current = new IntersectionObserver(handleObserver, options);
+    const observer = new IntersectionObserver(handleObserver, options);
 
-    if (observerRef.current) {
-      observerRef.current.observe(document.getElementById('observer-element'));
+    if (observer) {
+      observer.observe(observerRef.current);
     }
 
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
+      if (observer) {
+        observer.disconnect();
+
       }
     };
   }, [hasNext]);
@@ -92,10 +88,10 @@ function MessagePage() {
     <>
       <RecipientMenu />
       <MessageCardContents recipient={recipient} messages={messages} loading={loading} />
-      <div id="observer-element" style={{ height: '1px' }}></div>
+      <div id="observer-element" ref={observerRef}></div>
       {loading && (
         <div className="flex justify-center py-5">
-          <img src={loadingAnimation} className="w-[50px]" />
+          <img src={loadingAnimation} className="w-12" />
         </div>
       )}
     </>

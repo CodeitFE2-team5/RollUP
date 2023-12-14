@@ -20,6 +20,7 @@ const ColorOption = ({ color, isSelected, handleItemClick }) => {
           </div>
         )}
       </div>
+
     </div>
   );
 };

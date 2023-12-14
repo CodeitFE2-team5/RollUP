@@ -5,7 +5,8 @@
 @font-face {
   font-family: Pretendard;
   font-weight: 400;
-  src: local('Pretendard Regular'),
+  font-display: swap;
+  src: local('Pretendard-Regular'),
     url('./assets/fonts/Pretendard/Pretendard-Regular.woff') format('woff'),
     url('./assets/fonts/Pretendard/Pretendard-Regular.woff2') format('woff2');
 }
@@ -13,7 +14,8 @@
 @font-face {
   font-family: Pretendard;
   font-weight: 500;
-  src: local('Pretendard Medium'),
+  font-display: swap;
+  src: local('Pretendard-Medium'),
     url('./assets/fonts/Pretendard/Pretendard-Medium.woff') format('woff'),
     url('./assets/fonts/Pretendard/Pretendard-Medium.woff2') format('woff2');
 }
@@ -21,9 +23,62 @@
 @font-face {
   font-family: Pretendard;
   font-weight: 700;
-  src: local('Pretendard Bold'),
+  font-display: swap;
+  src: local('Pretendard-Bold'),
     url('./assets/fonts/Pretendard/Pretendard-Bold.woff') format('woff'),
     url('./assets/fonts/Pretendard/Pretendard-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: NotoSans;
+  font-weight: 400;
+  font-display: swap;
+  src: local('NotoSansKR-Regular'),
+    url('./assets/fonts/NotoSans/NotoSansKR-Regular.woff') format('woff'),
+    url('./assets/fonts/NotoSans/NotoSansKR-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: NotoSans;
+  font-weight: 500;
+  font-display: swap;
+  src: local('NotoSansKR-Medium'),
+    url('./assets/fonts/NotoSans/NotoSansKR-Medium.woff') format('woff'),
+    url('./assets/fonts/NotoSans/NotoSansKR-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: NotoSans;
+  font-weight: 700;
+  font-display: swap;
+  src: local('NotoSansKR-Bold'), url('./assets/fonts/NotoSans/NotoSansKR-Bold.woff') format('woff'),
+    url('./assets/fonts/NotoSans/NotoSansKR-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: NanumMyeongjo;
+  font-weight: 400;
+  font-display: swap;
+  src: local('NanumMyeongjo'), url('./assets/fonts/NanumMyeongjo/NanumMyeongjo.woff') format('woff'),
+    url('./assets/fonts/NanumMyeongjo/NanumMyeongjo.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: NanumMyeongjo;
+  font-weight: 700;
+  font-display: swap;
+  src: local('NanumMyeongjoBold'),
+    url('./assets/fonts/NanumMyeongjo/NanumMyeongjoBold.woff') format('woff'),
+    url('./assets/fonts/NanumMyeongjo/NanumMyeongjoBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: NanumHandWriting;
+  font-weight: 400;
+  font-display: swap;
+  src: local('NanumHandWriting'),
+    url('./assets/fonts/NanumHandWriting/NanumHandWriting.woff') format('woff'),
+    url('./assets/fonts/NanumHandWriting/NanumHandWriting.woff2') format('woff2');
 }
 
 :root {

@@ -76,6 +76,7 @@ const PostPage = () => {
   }, []);
 
   return (
+
     <form onSubmit={handleSubmit} className="w-[720px] mx-auto mt-[57px] flex flex-col box-border">
       <div className="flex flex-col  gap-3 mb-[50px]">
         <Subject>To. </Subject>
@@ -122,6 +123,7 @@ const PostPage = () => {
         생성하기
       </CreateButton>
     </form>
+
   );
 };
 
