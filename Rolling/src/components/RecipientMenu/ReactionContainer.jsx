@@ -5,7 +5,7 @@ import { useState } from "react";
 import EmojiPicker from 'emoji-picker-react';
 import AdditionalReactionContainer from "./AdditionalReactionContainer";
 
-const ReactionContainer = () => {
+const ReactionContainer = ({ topReactions }) => {
   const [additionalReactionOpen, setAdditionalReactionOpen] = useState(false);
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
 
@@ -16,13 +16,12 @@ const ReactionContainer = () => {
   const handleClickAddButton = () => {
     setEmojiPickerOpen(!emojiPickerOpen);
   };
+
   return(
     <div className="flex gap-2 relative">
       <div className="flex">
         <div className="flex items-center justify-center gap-2">
-          <ReactionBadge />
-          <ReactionBadge />
-          <ReactionBadge />
+          {topReactions?.map((reaction) => <ReactionBadge key={reaction.id} reaction={reaction} />)}
         </div>
         <button className="py-1.5 px-1.5" onClick={handleClickAdditionalReaction}><IoIosArrowDown className="w-6 h-6"/></button>
       </div>
