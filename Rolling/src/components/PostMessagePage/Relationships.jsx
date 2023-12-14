@@ -7,7 +7,6 @@ const customStyles = {
     width: '320px',
     padding: '12px 16px',
     alignItems: 'center',
-    gap: '189px',
     borderRadius: '8px',
     border: state.isFocused ? '2px solid #555' : '1px solid #CCC',
     boxShadow: state.isFocused ? 'none' : 'none',
@@ -39,7 +38,6 @@ const customStyles = {
     fontFamily: 'Pretendard',
     fontSize: '17px',
     fontStyle: 'normal',
-    fontWeight: '400',
     lineHeight: '26px',
     letterSpacing: '-0.16px',
   }),
@@ -59,7 +57,7 @@ function Relationships() {
         <div className="text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9">
           상대와의 관계
         </div>
-        <div className="flex w-[320px]">
+        <div className="w-full sm:w-[320px]">
           <Select options={options} placeholder="지인" styles={customStyles} isSearchable={false} />
         </div>
       </div>

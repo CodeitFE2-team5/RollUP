@@ -2,6 +2,7 @@ import SenderName from './SenderName';
 import MessageProfileImage from './MessageProfileImage';
 import Relationships from './Relationships';
 import EnterContent from './EnterContent';
+import FontChange from './FontChange';
 
 function PostMessagePage() {
   return (
@@ -11,6 +12,7 @@ function PostMessagePage() {
         <MessageProfileImage></MessageProfileImage>
         <Relationships></Relationships>
         <EnterContent></EnterContent>
+        <FontChange></FontChange>
       </form>
     </div>
   );

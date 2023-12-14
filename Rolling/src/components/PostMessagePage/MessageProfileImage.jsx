@@ -1,3 +1,5 @@
+import ProfileImage from '../Common/ProfileImage';
+
 function MessageProfileImage() {
   return (
     <div className="flex flex-col items-start gap-3 mt-[50px]">
@@ -10,7 +12,9 @@ function MessageProfileImage() {
           <div className="text-neutral-600 text-base font-normal font-['Pretendard'] leading-relaxed">
             프로필 이미지를 선택해주세요!
           </div>
-          <div className="w-[605px] h-14"></div>
+          <div className="w-[605px] h-14">
+            {/* <ProfileImage leftValue={2} size={80}></ProfileImage> */}
+          </div>
         </div>
       </div>
     </div>
