@@ -31,7 +31,7 @@ const ReactionContainer = () => {
         <p className="text-base">추가</p>
       </button>
       {additionalReactionOpen && <AdditionalReactionContainer />}
-      {emojiPickerOpen && <div className="absolute top-11 left-4"><EmojiPicker width={307} height={393}/></div>}
+      {emojiPickerOpen && <div className="absolute top-11 left-4 z-10"><EmojiPicker width={307} height={393}/></div>}
     </div>
   )
 };
