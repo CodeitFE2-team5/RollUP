@@ -43,7 +43,6 @@ export const PostPage = () => {
   };
 
   return (
-    <>
       <div className="mt-14 mb-14">
         <form onSubmit={handleSubmit} className="w-[1060px] mx-auto">
           <div className="inline-flex flex-col items-start gap-3 mb-8">
@@ -118,7 +117,6 @@ export const PostPage = () => {
           <div className="mt-4">선택된 이미지: {selectedImage || selectedColor}</div>
         </form>
       </div>
-    </>
   );
 };
 

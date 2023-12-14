@@ -1,8 +1,8 @@
-// import { useEffect, useState } from 'react';
 import Select from 'react-select';
 
 const customStyles = {
-  control: (state) => ({
+  control: (provided, state) => ({
+    ...provided,
     display: 'flex',
     width: '320px',
     padding: '12px 16px',
@@ -12,6 +12,9 @@ const customStyles = {
     border: state.isFocused ? '2px solid #555' : '1px solid #CCC',
     boxShadow: state.isFocused ? 'none' : 'none',
     fontSize: '17px',
+    '&:focus-within': {
+      border: '1px solid #555',
+    },
   }),
 
   option: (provided, state) => ({
@@ -27,7 +30,7 @@ const customStyles = {
     fontSize: '17px',
     outline: 'none',
     '&:active': {
-      backgroundColor: '#F6F6F6', // 클릭 시 배경색
+      backgroundColor: '#F6F6F6',
     },
   }),
 

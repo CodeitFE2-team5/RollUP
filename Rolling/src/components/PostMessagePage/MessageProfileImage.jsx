@@ -1,4 +1,4 @@
-function ProfileImage() {
+function MessageProfileImage() {
   return (
     <div className="flex flex-col items-start gap-3 mt-[50px]">
       <div className="flex text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9">
@@ -17,4 +17,4 @@ function ProfileImage() {
   );
 }
 
-export default ProfileImage;
+export default MessageProfileImage;
