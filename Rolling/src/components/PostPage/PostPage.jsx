@@ -1,18 +1,14 @@
-import { useState } from 'react';
-import heart from '../../assets/heart.jpg';
-import load from '../../assets/load.jpg';
-import sea from '../../assets/sea.jpg';
-import supermario from '../../assets/supermario.jpg';
+import { useEffect, useState } from 'react';
+
 import ColorOptionsContainer from './ColorOptionsContainer';
 import ImageOptionsContainer from './ImageOptionContainer';
 import Subject from './Subject';
 import { CreateButton } from './CreateButton';
 import { UserNameInput } from './UserNameInput';
 import { ToggleButton } from './ToggleButton';
-import { createRecipient } from '../../api';
+import { createRecipient, getBackgroundList } from '../../api';
 
 const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
-const images = [heart, load, sea, supermario];
 const colorMap = {
   'bg-[#ECD9FF]': 'purple',
   'bg-[#D0F5C3]': 'green',
@@ -23,15 +19,33 @@ const colorMap = {
 const PostPage = () => {
   const [selectOption, setSelectOption] = useState('color');
   const [selectedColor, setSelectedColor] = useState(colors[0]);
-  const [selectedImage, setSelectedImage] = useState(images[0]);
+  const [selectedImage, setSelectedImage] = useState('');
+
+  const [images, setImages] = useState([]);
 
   const [receiveUserName, setReceiveUserName] = useState('');
   const [nameInputEmpty, setNameInputEmpty] = useState(true);
+  const fetchData = async () => {
+    try {
+      const { imageUrls } = await getBackgroundList();
+
+      setImages(imageUrls);
+      if (imageUrls.length > 0) {
+        setSelectedImage(imageUrls[0]);
+      }
+    } catch (error) {
+      console.error('Error fetching background list:', error);
+    }
+  };
 
   const handleItemClick = (option, value) => {
     setSelectOption(option);
-    setSelectedColor(option === 'color' ? value : colors[0]);
-    setSelectedImage(option === 'image' ? value : images[0]);
+    if (option === 'color') {
+      setSelectedColor(value);
+    }
+    if (option === 'image') {
+      setSelectedImage(value);
+    }
   };
 
   const handleNameChange = (e) => {
@@ -42,24 +56,25 @@ const PostPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append('team', '2-5');
     formData.append('name', receiveUserName);
-    if (selectOption === 'color') {
-      formData.append('backgroundColor', colorMap[selectedColor]);
-      formData.append('backgroundImage', null);
-    } else if (selectOption === 'image') {
-      formData.append('backgroundColor', null);
-      formData.append('backgroundImage', selectedImage);
-    }
-    for (const pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
+    formData.append('backgroundColor', colorMap[selectedColor]);
+    formData.append('backgroundImageURL', selectedImage);
+    const responseData = createRecipient(formData);
 
-    createRecipient(formData);
+    if (responseData) {
+      alert('롤링페이퍼를 생성했습니다');
+      window.location.href = `/post/${responseData.id}`;
+    }
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <form onSubmit={handleSubmit} className="w-[860px] mx-auto mt-[57px] flex flex-col box-border">
+    <form onSubmit={handleSubmit} className="w-[720px] mx-auto mt-[57px] flex flex-col box-border">
       <div className="flex flex-col  gap-3 mb-[50px]">
         <Subject>To. </Subject>
         <UserNameInput
@@ -104,11 +119,6 @@ const PostPage = () => {
       <CreateButton onSubmit={handleSubmit} disabled={!receiveUserName}>
         생성하기
       </CreateButton>
-      <div className="mt-4">받는사람 이름: {receiveUserName}</div>
-      <div className="mt-4">선택된 옵션: {selectOption}</div>
-      <div className="mt-4">
-        선택된 이미지: {selectOption === 'color' ? selectedColor : selectedImage}
-      </div>
     </form>
   );
 };

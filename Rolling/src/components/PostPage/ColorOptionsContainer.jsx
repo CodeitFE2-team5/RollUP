@@ -8,7 +8,7 @@ const propTypes = {
 };
 const ColorOptionsContainer = ({ colors, selectedColor, handleItemClick }) => {
   return (
-    <div className="flex gap-4 ">
+    <div className="flex gap-3">
       {colors.map((color, index) => (
         <div key={index}>
           <ColorOption

@@ -11,7 +11,7 @@ const propTypes = {
 const ImageOptionsContainer = ({ images, selectedImage, handleItemClick }) => {
   return (
     <div className="flex w-full justify-between ">
-      <div className="flex gap-4">
+      <div className="flex gap-3">
         {images.map((image, index) => (
           <div key={index}>
             <ImageOption

@@ -12,7 +12,7 @@ const ColorOption = ({ color, isSelected, handleItemClick }) => {
     <div className={`overflow-hidden rounded-2xl  `}>
       <div
         onClick={() => handleItemClick('color', color)}
-        className={`relative w-40 h-40 rounded-2xl cursor-pointer ${color} `}
+        className={`relative w-[168px] h-40 rounded-2xl cursor-pointer ${color} `}
       >
         {isSelected && (
           <div className="absolute w-full h-full bg-gray-400 opacity-50 rounded-2xl">
