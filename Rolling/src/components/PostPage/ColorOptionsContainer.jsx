@@ -3,7 +3,7 @@ import ColorOption from './ColorOption';
 
 const ColorOptionsContainer = ({ colors, selectOption, selectedColor, handleColorClick }) => {
   return (
-    <div className="flex w-[720px]">
+    <div className="flex w-full gap-4">
       {colors.map((color, index) => (
         <ColorOption
           key={index}

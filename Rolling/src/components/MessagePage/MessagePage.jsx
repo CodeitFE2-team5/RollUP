@@ -10,8 +10,7 @@ function MessagePage() {
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(null);
   const [loading, setLoading] = useState(false);
-  const observerRef = useRef();
-
+  const observerRef = useRef(null);
   const LIMIT = 10;
 
   const getRollingRecipient = async () => {
@@ -45,7 +44,6 @@ function MessagePage() {
         setLoading(false);
       }
     };
-
     getRollingMessages();
   }, [offset]);
 
@@ -81,6 +79,7 @@ function MessagePage() {
     return () => {
       if (observer) {
         observer.disconnect();
+
       }
     };
   }, [hasNext]);

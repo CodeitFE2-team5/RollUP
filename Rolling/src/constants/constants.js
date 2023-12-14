@@ -18,3 +18,4 @@ export const MESSAGE_FONT = {
   나눔명조: 'font-NanumMyeongjo',
   '나눔손글씨 손편지체': 'font-NanumHandWriting',
 };
+

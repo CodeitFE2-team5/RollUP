@@ -1,14 +1,20 @@
 import React from 'react';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 
 const ColorOption = ({ color, isSelected, handleColorClick }) => {
   return (
     <div
       onClick={() => handleColorClick('color', color)}
-      className={`w-[168px] h-[168px]  cursor-pointer ${color} ${
-        isSelected ? 'border-2 border-blue-500' : ''
+
+      className={`relative w-full h-[238px] cursor-pointer rounded-lg border border-solid ${color} ${
+        isSelected ? 'border-transparent' : ''
       }`}
     >
-      서브 디브
+      {isSelected && (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <BsFillPlusCircleFill className="w-14 h-14 text-gray-500" />
+        </div>
+      )}
     </div>
   );
 };
