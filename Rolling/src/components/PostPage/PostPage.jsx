@@ -65,7 +65,9 @@ const PostPage = () => {
     const responseData = createRecipient(formData);
 
     if (responseData) {
+      console.log(responseData);
       alert('롤링페이퍼를 생성했습니다');
+
       window.location.href = `/post/${responseData.id}`;
     }
   };
