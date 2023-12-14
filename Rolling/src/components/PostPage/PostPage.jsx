@@ -38,6 +38,7 @@ const PostPage = () => {
     console.log('폼 제출됨:', formData);
   };
   return (
+
     <form
       onSubmit={handleSubmit}
       className="w-[860px] mx-auto mt-[57px] flex flex-col gap-9 box-border"
@@ -101,6 +102,7 @@ const PostPage = () => {
       <div className="mt-4">선택된 옵션: {selectOption}</div>
       <div className="mt-4">선택된 이미지: {selectedImage || selectedColor}</div>
     </form>
+
   );
 };
 

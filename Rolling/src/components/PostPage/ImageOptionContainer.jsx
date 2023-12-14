@@ -29,7 +29,9 @@ const ImageOptionsContainer = ({ images, selectedImage, handleItemClick }) => {
   };
 
   return (
+
     <div className="flex gap-4">
+
       {images.map((image, index) => (
         <div key={index}>
           <ImageOption
