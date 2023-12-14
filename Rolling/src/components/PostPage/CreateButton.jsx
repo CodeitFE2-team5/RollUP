@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 const propTypes = {
   children: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
-export const CreateButton = ({ children }) => {
+export const CreateButton = ({ children, onSubmit, disabled }) => {
   return (
     <button
       type="submit"
-      className="w-[100%] ga- px-[24px] py-[14px] my-[69px] bg-purple-500 text-center font-Pretendard font-bold text-white text-18 rounded-xl tracking-tighter"
+      onClick={onSubmit}
+      disabled={disabled}
+      className={`w-[100%] ga- px-[24px] py-[14px] my-[69px] text-center font-Pretendard font-bold text-white text-18 rounded-xl tracking-tighter
+      ${disabled ? 'bg-gray-500' : 'bg-purple-500'}`}
     >
       {children}
     </button>

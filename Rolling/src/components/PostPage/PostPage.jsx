@@ -9,14 +9,22 @@ import Subject from './Subject';
 import { CreateButton } from './CreateButton';
 import { UserNameInput } from './UserNameInput';
 import { ToggleButton } from './ToggleButton';
+import { createRecipient } from '../../api';
 
 const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
 const images = [heart, load, sea, supermario];
+const colorMap = {
+  'bg-[#ECD9FF]': 'purple',
+  'bg-[#D0F5C3]': 'green',
+  'bg-[#B1E4FF]': 'blue',
+  'bg-[#FFE2AD]': 'beige',
+};
 
 const PostPage = () => {
   const [selectOption, setSelectOption] = useState('color');
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedImage, setSelectedImage] = useState(images[0]);
+
   const [receiveUserName, setReceiveUserName] = useState('');
   const [nameInputEmpty, setNameInputEmpty] = useState(true);
 
@@ -29,22 +37,26 @@ const PostPage = () => {
   const handleNameChange = (e) => {
     const inputValue = e.target.value;
     setReceiveUserName(inputValue);
-    setNameInputEmpty(inputValue !== '');
+    inputValue !== '' ? setNameInputEmpty(true) : setNameInputEmpty(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!receiveUserName) {
-      setNameInputEmpty(false);
-      return;
+    const formData = new FormData();
+    formData.append('team', '2-5');
+    formData.append('name', receiveUserName);
+    if (selectOption === 'color') {
+      formData.append('backgroundColor', colorMap[selectedColor]);
+      formData.append('backgroundImage', null);
+    } else if (selectOption === 'image') {
+      formData.append('backgroundColor', null);
+      formData.append('backgroundImage', selectedImage);
+    }
+    for (const pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
     }
 
-    const formData = {
-      receiveUserName: receiveUserName,
-      selectedOption: selectOption,
-      selectedImage,
-    };
-    console.log('폼 제출됨:', formData);
+    createRecipient(formData);
   };
   return (
     <form onSubmit={handleSubmit} className="w-[860px] mx-auto mt-[57px] flex flex-col box-border">
@@ -74,24 +86,6 @@ const PostPage = () => {
           isActive={selectOption === 'image'}
           content="이미지"
         />
-        {/* <div
-          onClick={() => handleItemClick('color', selectedColor)}
-          className={`w-[50%]  p-[7px] px-[16px]  border-2 border-gray-200 cursor-pointer rounded-md ${
-            selectOption === 'color' ? optionClickCss : ''
-          }`}
-        >
-          <p className="transition-transform transform hover:scale-110">색상</p>
-        </div>
-
-        <div
-          
-          className={`w-[50%]  py-2 px-[16px] border-2 border-gray-200 cursor-pointer  rounded-md ${
-            selectOption === 'image' ? optionClickCss : ''
-          } 
-          `}
-        >
-          <p className="transition-transform transform hover:scale-110">이미지</p>
-        </div> */}
       </div>
 
       {selectOption === 'color' ? (
@@ -107,7 +101,9 @@ const PostPage = () => {
           handleItemClick={handleItemClick}
         />
       )}
-      <CreateButton>생성하기</CreateButton>
+      <CreateButton onSubmit={handleSubmit} disabled={!receiveUserName}>
+        생성하기
+      </CreateButton>
       <div className="mt-4">받는사람 이름: {receiveUserName}</div>
       <div className="mt-4">선택된 옵션: {selectOption}</div>
       <div className="mt-4">

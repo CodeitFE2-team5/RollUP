@@ -1,5 +1,23 @@
 import axios from 'axios';
 
+export async function createRecipient(formData) {
+  const url = 'https://rolling-api.vercel.app/2-5/recipients/';
+
+  try {
+    const response = await axios.post(url, formData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseData = response.data;
+    console.log('응답 데이터:', responseData);
+  } catch (error) {
+    console.error('Error while fetching data:', error);
+    throw error;
+  }
+}
+
 export async function getLatestLists({ offset, limit }) {
   const URL = `https://rolling-api.vercel.app/2-5/recipients/?limit=${limit}&offset=${offset}/`;
   try {
