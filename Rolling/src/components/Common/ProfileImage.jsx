@@ -14,7 +14,7 @@ const sizeValue = {
 
 const ProfileImage = ({ index, profileImage, size }) => {
   return(
-    <div key={index} className={`avatar avatar-${index} w-7 rounded-full absolute ${leftValue[index]} ${sizeValue[size]}`}>
+    <div key={index} className={`avatar avatar-${index} rounded-full absolute ${leftValue[index]} ${sizeValue[size]}`}>
       <img src={profileImage} alt="프로필" className=" rounded-full border"/>
     </div>
   )
