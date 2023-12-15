@@ -67,7 +67,6 @@ const PostPage = () => {
       const responseData = await createRecipient(formData);
 
       if (responseData.id) {
-        alert('롤링페이퍼를 생성했습니다');
         navigate(`/post/${responseData.id}`);
       } else {
         console.error('Invalid id in responseData:', responseData);
