@@ -37,8 +37,17 @@ function MessageCardContents({ recipient, messages }) {
 
           {openModal && (
             <>
-              <MessageCardModal message={clickedMessage} setOpenModal={setOpenModal} />
-              <div className="fixed bg-[black] opacity-[60%] inset-0"></div>
+              <MessageCardModal
+                message={clickedMessage}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+              />
+              <div
+                onClick={() => {
+                  setOpenModal(false);
+                }}
+                className="fixed bg-[black] opacity-[60%] inset-0"
+              ></div>
             </>
           )}
         </div>

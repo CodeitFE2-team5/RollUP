@@ -41,13 +41,10 @@ function MessageCard({ message, onClickMessage, showTrashIcon }) {
       </div>
       <div className="h-28 line-clamp-4 cursor-pointer" onClick={handleClick}>
         <p className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}>
-          {message.content.length < 80
-            ? message.content
-            : `${message.content.substring(0, 100)}...`}
+          {message.content}
         </p>
-        {message.content.length > 100 && <span>더보기</span>}
       </div>
-      <p className="text-[#999] text-xs">{formatDate(message.createdAt)}</p>
+      <p className="bottom-[30px] text-[#999] text-xs">{formatDate(message.createdAt)}</p>
     </div>
   );
 }

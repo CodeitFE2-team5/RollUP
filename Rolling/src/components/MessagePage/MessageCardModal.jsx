@@ -9,8 +9,8 @@ function MessageCardModal({ message, setOpenModal }) {
   };
 
   return (
-    <div className="fixed -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4 z-[9999] w-[600px] h-[476px] px-10 rounded-2xl bg-white">
-      <div className="flex justify-between items-center h-[116px] pb-4 border-b border-b-[#eee]">
+    <div className="flex flex-col gap-4 fixed -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4 z-[9999] w-[600px] h-[476px] p-10 rounded-2xl bg-white">
+      <div className="flex justify-between items-center h-14 border-b border-b-[#eee] h-">
         <div className="flex">
           <img
             className="w-14 h-14 rounded-[100px] border border-[#eee]"
@@ -37,7 +37,7 @@ function MessageCardModal({ message, setOpenModal }) {
         <span className="text-lg text-[#5A5A5A]">{message.content}</span>
       </div>
 
-      <div className="absolute -translate-x-2/4 left-2/4 bottom-10">
+      <div className="mt-5 text-center">
         <button
           onClick={closeModal}
           className="w-[120px] px-4 py-[7px] rounded-md bg-[#9935ff] text-white"
