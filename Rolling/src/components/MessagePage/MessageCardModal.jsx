@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants';
-import formatDate from '../../utils/formatDate';
+import { formatDate } from '../../utils/formatDate';
 
 function MessageCardModal({ message, handleCloseModal }) {
   return (
