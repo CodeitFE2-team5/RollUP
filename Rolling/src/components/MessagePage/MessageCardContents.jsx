@@ -26,34 +26,36 @@ function MessageCardContents({ recipient, messages }) {
   };
 
   return (
-    <div className={`w-screen ${BACKGROUND_COLOR[recipient?.backgroundColor]} pt-28 pb-60 px-7`}>
-      <div className="relative w-[75rem] mx-auto my-0 h-full">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="flex justify-center items-center max-w-sm h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
-            <button className="flex items-start gap-2.5 p-4">
-              <BsFillPlusCircleFill className="w-14 h-14 fill-gray-500" />
-            </button>
-          </div>
-
-          {messages?.map((message) => (
-            <MessageCard
-              key={message.id}
-              message={message}
-              onClickMessage={onClickMessage}
-              showTrashIcon={false}
-            />
-          )) ?? null}
-
-          {openModal && (
-            <>
-              <MessageCardModal message={clickedMessage} handleCloseModal={handleCloseModal} />
-              <div
-                onClick={handleCloseModal}
-                className="fixed bg-[black] opacity-[60%] inset-0"
-              ></div>
-            </>
-          )}
+    <div
+      className={`w-screen min-h-screen ${
+        BACKGROUND_COLOR[recipient?.backgroundColor]
+      } pt-28 pb-60 pl-6 pr-[34px]`}
+    >
+      <div className="lg:grid lg:grid-cols-[repeat(3,minmax(0,24rem))] md:grid md:grid-cols-[repeat(2,minmax(0,24rem))] grid grid-cols-[repeat(1,minmax(0,24rem))] justify-center gap-4">
+        <div className="flex justify-center items-center max-w-sm h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
+          <button className="flex items-start gap-2.5 p-4">
+            <BsFillPlusCircleFill className="w-14 h-14 fill-gray-500 grid-cols" />
+          </button>
         </div>
+
+        {messages?.map((message) => (
+          <MessageCard
+            key={message.id}
+            message={message}
+            onClickMessage={onClickMessage}
+            showTrashIcon={false}
+          />
+        )) ?? null}
+
+        {openModal && (
+          <>
+            <MessageCardModal message={clickedMessage} handleCloseModal={handleCloseModal} />
+            <div
+              onClick={handleCloseModal}
+              className="fixed bg-[black] opacity-[60%] inset-0"
+            ></div>
+          </>
+        )}
       </div>
     </div>
   );

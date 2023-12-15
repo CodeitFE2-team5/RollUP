@@ -10,7 +10,7 @@ function MessageCard({ message, onClickMessage, showTrashIcon }) {
 
   return (
     <div
-      className="flex flex-col gap-5 h-[280px] px-6 py-7 shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white"
+      className="flex flex-col gap-5 max-w-sm h-[280px] px-6 py-7 shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white"
       key={message.id}
     >
       <div className="flex justify-between items-center border-b border-b-[#eee]">
