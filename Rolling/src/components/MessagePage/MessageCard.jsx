@@ -10,10 +10,10 @@ function MessageCard({ message, onClickMessage, showTrashIcon }) {
 
   return (
     <div
-      className="relative max-w-sm min-w-[384px] h-[280px] px-6 py-7 shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white"
+      className="flex flex-col gap-5 h-[280px] px-6 py-7 shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white"
       key={message.id}
     >
-      <div className="flex justify-between items-center pb-4 border-b border-b-[#eee]">
+      <div className="flex justify-between items-center border-b border-b-[#eee]">
         <div className="flex">
           <img
             className="w-14 h-14 rounded-[100px] border border-[#eee]"
@@ -21,7 +21,7 @@ function MessageCard({ message, onClickMessage, showTrashIcon }) {
             alt="프로필 이미지"
           />
           <div className="ms-5">
-            <p className={`mb-2 ${MESSAGE_FONT['message.font']}`}>
+            <p className={`${MESSAGE_FONT['message.font']}`}>
               From. <b>{message.sender}</b>
             </p>
             <span
@@ -39,12 +39,15 @@ function MessageCard({ message, onClickMessage, showTrashIcon }) {
           </button>
         )}
       </div>
-      <div className="mt-3 h-28 line-clamp-4" onClick={handleClick}>
+      <div className="h-28 line-clamp-4 cursor-pointer" onClick={handleClick}>
         <p className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}>
-          {message.content}
+          {message.content.length < 80
+            ? message.content
+            : `${message.content.substring(0, 100)}...`}
         </p>
+        {message.content.length > 100 && <span>더보기</span>}
       </div>
-      <p className="absolute bottom-[30px] text-[#999] text-xs">{formatDate(message.createdAt)}</p>
+      <p className="text-[#999] text-xs">{formatDate(message.createdAt)}</p>
     </div>
   );
 }

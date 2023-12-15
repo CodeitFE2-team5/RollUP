@@ -13,15 +13,14 @@ function MessageCardContents({ recipient, messages }) {
     const message = messages.find((message) => message.id === id);
     setClickedMessage(message);
     setOpenModal(true);
+    document.body.style.overflow = 'hidden';
   };
 
   return (
-    <div
-      className={`w-full ${BACKGROUND_COLOR[recipient?.backgroundColor]} pt-28 pb-60  pt-28 px-7`}
-    >
-      <div className="relative flex justify-center items-center h-full">
+    <div className={`w-screen ${BACKGROUND_COLOR[recipient?.backgroundColor]} pt-28 pb-60 px-7`}>
+      <div className="relative w-[75rem] mx-auto my-0 h-full">
         <div className="grid grid-cols-3 gap-4">
-          <div className="flex justify-center items-center max-w-sm min-w-[384px] h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
+          <div className="flex justify-center items-center max-w-sm h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
             <button className="flex items-start gap-2.5 p-4">
               <BsFillPlusCircleFill className="w-14 h-14 fill-gray-500" />
             </button>
@@ -36,8 +35,12 @@ function MessageCardContents({ recipient, messages }) {
             />
           )) ?? null}
 
-          {openModal && <MessageCardModal message={clickedMessage} setOpenModal={setOpenModal} />}
-          {openModal && <div className="fixed bg-[black] opacity-[60%] inset-0"></div>}
+          {openModal && (
+            <>
+              <MessageCardModal message={clickedMessage} setOpenModal={setOpenModal} />
+              <div className="fixed bg-[black] opacity-[60%] inset-0"></div>
+            </>
+          )}
         </div>
       </div>
     </div>
