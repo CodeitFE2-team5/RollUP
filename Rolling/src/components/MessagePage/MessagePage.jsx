@@ -85,8 +85,8 @@ function MessagePage() {
 
   return (
     <>
-      <RecipientMenu />
-      <MessageCardContents recipient={recipient} messages={messages} />
+      <RecipientMenu recipient={recipient}/>
+      <MessageCardContents recipient={recipient} messages={messages}/>
       <div id="observer-element" ref={observerRef}></div>
       {loading && (
         <div className="flex justify-center py-5">
