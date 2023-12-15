@@ -10,7 +10,7 @@ const propTypes = {
 };
 const OptionSelectContainer = ({ optionArray, selectedIndex, selectOption, handleItemClick }) => {
   return (
-    <div className="min-x-[320px] h-auto grid grid-cols-2 gap-3 md:grid-cols-4 mx-auto">
+    <div className="min-x-[100%] h-auto grid grid-cols-2 gap-3 mx-auto sm:grid-cols-4  sm:max-x-[720px]">
       {optionArray.map((option, index) => (
         <div key={index}>
           {selectOption === 'color' ? (

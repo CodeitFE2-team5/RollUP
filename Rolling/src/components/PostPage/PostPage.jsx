@@ -1,3 +1,5 @@
+// -769px이상 / 태블릿은 768px-361px / 모바일은 360px-
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Subject from './Subject';
@@ -83,7 +85,7 @@ const PostPage = () => {
     <div className="m-full px-5 ">
       <form
         onSubmit={handleSubmit}
-        className="max-w-[320px] mx-auto mt-[57px] flex flex-col box-border md:max-w-[720px] "
+        className="min-w-[320px] mx-auto mt-[57px] flex flex-col box-border sm:max-w-[720px] "
       >
         <div className="flex flex-col  gap-3 mb-[50px] ">
           <Subject subject="To." description="" />
