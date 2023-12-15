@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import ColorOptionsContainer from './ColorOptionsContainer';
 import ImageOptionsContainer from './ImageOptionContainer';
 import Subject from './Subject';
@@ -17,6 +17,8 @@ const colorMap = {
 };
 
 const PostPage = () => {
+  const navigate = useNavigate();
+
   const [selectOption, setSelectOption] = useState('color');
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedImage, setSelectedImage] = useState('');
@@ -37,7 +39,9 @@ const PostPage = () => {
       console.error('Error fetching background list:', error);
     }
   };
-
+  const handleImages = (image) => {
+    setSelectedImage(image);
+  };
   const handleItemClick = (option, value) => {
     setSelectOption(option);
     if (option === 'color') {
@@ -65,10 +69,9 @@ const PostPage = () => {
     const responseData = createRecipient(formData);
 
     if (responseData) {
-      console.log(responseData);
       alert('롤링페이퍼를 생성했습니다');
-
-      window.location.href = `/post/${responseData.id}`;
+      // window.location.href = `/post/${responseData.id}`;
+      navigate(`/post/${responseData.id}`);
     }
   };
   useEffect(() => {
@@ -76,52 +79,56 @@ const PostPage = () => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="w-[720px] mx-auto mt-[57px] flex flex-col box-border">
-      <div className="flex flex-col  gap-3 mb-[50px]">
-        <Subject>To. </Subject>
-        <UserNameInput
-          value={receiveUserName}
-          onChange={handleNameChange}
-          nameInputEmpty={nameInputEmpty}
-        />
-      </div>
+    <div className="m-full px-5 ">
+      <form
+        onSubmit={handleSubmit}
+        className="min-w-[320px] mx-auto mt-[57px] flex flex-col box-border md:max-w-[720px] "
+      >
+        <div className="min-w-[320px] flex flex-col  gap-3 mb-[50px] ">
+          <Subject>To. </Subject>
+          <UserNameInput
+            value={receiveUserName}
+            onChange={handleNameChange}
+            nameInputEmpty={nameInputEmpty}
+          />
+        </div>
+        <div className="flex flex-col gap-1 mb-6">
+          <Subject>배경화면을 선택해 주세요.</Subject>
 
-      <div className="flex flex-col gap-1 mb-6">
-        <Subject>배경화면을 선택해 주세요.</Subject>
+          <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다</p>
+        </div>
+        <div className="w-[250px] flex al bg-gray-200 text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
+          <ToggleButton
+            onClick={() => handleItemClick('color', selectedColor)}
+            isActive={selectOption === 'color'}
+            content="색상"
+          />
 
-        <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다</p>
-      </div>
-
-      <div className="w-[250px] flex al bg-gray-200 text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
-        <ToggleButton
-          onClick={() => handleItemClick('color', selectedColor)}
-          isActive={selectOption === 'color'}
-          content="색상"
-        />
-        <ToggleButton
-          onClick={() => handleItemClick('image', selectedImage)}
-          isActive={selectOption === 'image'}
-          content="이미지"
-        />
-      </div>
-
-      {selectOption === 'color' ? (
-        <ColorOptionsContainer
-          colors={colors}
-          selectedColor={selectedColor}
-          handleItemClick={handleItemClick}
-        />
-      ) : (
-        <ImageOptionsContainer
-          images={images}
-          selectedImage={selectedImage}
-          handleItemClick={handleItemClick}
-        />
-      )}
-      <CreateButton onSubmit={handleSubmit} disabled={!receiveUserName}>
-        생성하기
-      </CreateButton>
-    </form>
+          <ToggleButton
+            onClick={() => handleItemClick('image', selectedImage)}
+            isActive={selectOption === 'image'}
+            content="이미지"
+          />
+        </div>
+        {selectOption === 'color' ? (
+          <ColorOptionsContainer
+            colors={colors}
+            selectedColor={selectedColor}
+            handleItemClick={handleItemClick}
+          />
+        ) : (
+          <ImageOptionsContainer
+            images={images}
+            selectedImage={selectedImage}
+            handleImages={handleImages}
+            handleItemClick={handleItemClick}
+          />
+        )}
+        <CreateButton onSubmit={handleSubmit} disabled={!receiveUserName}>
+          생성하기
+        </CreateButton>
+      </form>
+    </div>
   );
 };
 

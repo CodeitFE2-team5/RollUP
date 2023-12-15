@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import ImageOption from './ImageOption';
 
 const propTypes = {
@@ -20,7 +19,7 @@ const ImageOptionsContainer = ({ images, selectedImage, handleItemClick }) => {
               handleItemClick={handleItemClick}
             />
           </div>
-        ))}
+        ))}{' '}
       </div>
     </div>
   );
