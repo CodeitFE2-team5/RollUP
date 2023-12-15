@@ -12,8 +12,17 @@ function MessageCardContents({ recipient, messages }) {
   const onClickMessage = (id) => {
     const message = messages.find((message) => message.id === id);
     setClickedMessage(message);
+    handleOpenModal();
+  };
+
+  const handleOpenModal = () => {
     setOpenModal(true);
     document.body.style.overflow = 'hidden';
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    document.body.style = '';
   };
 
   return (
@@ -37,15 +46,9 @@ function MessageCardContents({ recipient, messages }) {
 
           {openModal && (
             <>
-              <MessageCardModal
-                message={clickedMessage}
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-              />
+              <MessageCardModal message={clickedMessage} handleCloseModal={handleCloseModal} />
               <div
-                onClick={() => {
-                  setOpenModal(false);
-                }}
+                onClick={handleCloseModal}
                 className="fixed bg-[black] opacity-[60%] inset-0"
               ></div>
             </>

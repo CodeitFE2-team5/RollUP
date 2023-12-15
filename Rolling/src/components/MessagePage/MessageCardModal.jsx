@@ -2,12 +2,7 @@ import PropTypes from 'prop-types';
 import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants';
 import formatDate from '../../utils/formatDate';
 
-function MessageCardModal({ message, setOpenModal }) {
-  const closeModal = () => {
-    setOpenModal(false);
-    document.body.style = '';
-  };
-
+function MessageCardModal({ message, handleCloseModal }) {
   return (
     <div className="flex flex-col gap-4 fixed -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4 z-[9999] w-[600px] h-[476px] p-10 rounded-2xl bg-white">
       <div className="flex justify-between items-center h-14 border-b border-b-[#eee] h-">
@@ -39,7 +34,7 @@ function MessageCardModal({ message, setOpenModal }) {
 
       <div className="mt-5 text-center">
         <button
-          onClick={closeModal}
+          onClick={handleCloseModal}
           className="w-[120px] px-4 py-[7px] rounded-md bg-[#9935ff] text-white"
         >
           확인
@@ -51,7 +46,7 @@ function MessageCardModal({ message, setOpenModal }) {
 
 MessageCardModal.propTypes = {
   message: PropTypes.object.isRequired,
-  setOpenModal: PropTypes.func,
+  handleCloseModal: PropTypes.func,
 };
 
 export default MessageCardModal;
