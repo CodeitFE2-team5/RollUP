@@ -12,15 +12,14 @@ const ColorOption = ({ color, isSelected, handleItemClick }) => {
     <div className={`overflow-hidden rounded-2xl  `}>
       <div
         onClick={() => handleItemClick('color', color)}
-        className={`relative w-[168px] h-[168px] rounded-2xl cursor-pointer ${color} `}
+        className={`relative min-w-[154px] h-[154px] rounded-2xl cursor-pointer ${color} md:w-[168px] md:h-[168px] `}
       >
         {isSelected && (
-          <div className="absolute w-[168px] h-full bg-gray-400 opacity-50 rounded-2xl">
+          <div className="absolute top-0 left-0 min-w-full h-full bg-gray-400 opacity-50 rounded-2xl">
             <IoCheckmarkCircle className="absolute w-12 h-12 top-[34%] left-[36%] " />
           </div>
         )}
       </div>
-
     </div>
   );
 };

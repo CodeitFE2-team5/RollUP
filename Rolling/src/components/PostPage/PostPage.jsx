@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ColorOptionsContainer from './ColorOptionsContainer';
-import ImageOptionsContainer from './ImageOptionContainer';
 import Subject from './Subject';
 import { CreateButton } from './CreateButton';
 import { UserNameInput } from './UserNameInput';
 import { ToggleButton } from './ToggleButton';
 import { createRecipient, getBackgroundList } from '../../api';
+import OptionSelectContainer from './OptionSelectContainer';
 
 const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
 const colorMap = {
@@ -39,9 +38,6 @@ const PostPage = () => {
       console.error('Error fetching background list:', error);
     }
   };
-  const handleImages = (image) => {
-    setSelectedImage(image);
-  };
   const handleItemClick = (option, value) => {
     setSelectOption(option);
     if (option === 'color') {
@@ -58,7 +54,7 @@ const PostPage = () => {
     inputValue !== '' ? setNameInputEmpty(true) : setNameInputEmpty(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -66,12 +62,18 @@ const PostPage = () => {
     formData.append('name', receiveUserName);
     formData.append('backgroundColor', colorMap[selectedColor]);
     formData.append('backgroundImageURL', selectedImage);
-    const responseData = createRecipient(formData);
 
-    if (responseData) {
-      alert('롤링페이퍼를 생성했습니다');
-      // window.location.href = `/post/${responseData.id}`;
-      navigate(`/post/${responseData.id}`);
+    try {
+      const responseData = await createRecipient(formData);
+
+      if (responseData.id) {
+        alert('롤링페이퍼를 생성했습니다');
+        navigate(`/post/${responseData.id}`);
+      } else {
+        console.error('Invalid id in responseData:', responseData);
+      }
+    } catch (error) {
+      console.error('Error creating recipient:', error);
     }
   };
   useEffect(() => {
@@ -82,21 +84,22 @@ const PostPage = () => {
     <div className="m-full px-5 ">
       <form
         onSubmit={handleSubmit}
-        className="min-w-[320px] mx-auto mt-[57px] flex flex-col box-border md:max-w-[720px] "
+        className="max-w-[320px] mx-auto mt-[57px] flex flex-col box-border md:max-w-[720px] "
       >
-        <div className="min-w-[320px] flex flex-col  gap-3 mb-[50px] ">
-          <Subject>To. </Subject>
+        <div className="flex flex-col  gap-3 mb-[50px] ">
+          <Subject subject="To." description="" />
           <UserNameInput
             value={receiveUserName}
             onChange={handleNameChange}
             nameInputEmpty={nameInputEmpty}
           />
         </div>
-        <div className="flex flex-col gap-1 mb-6">
-          <Subject>배경화면을 선택해 주세요.</Subject>
 
-          <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다</p>
-        </div>
+        <Subject
+          subject="배경화면을 선택해 주세요."
+          description="컬러를 선택하거나, 이미지를 선택할 수 있습니다"
+        />
+
         <div className="w-[250px] flex al bg-gray-200 text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
           <ToggleButton
             onClick={() => handleItemClick('color', selectedColor)}
@@ -111,16 +114,17 @@ const PostPage = () => {
           />
         </div>
         {selectOption === 'color' ? (
-          <ColorOptionsContainer
-            colors={colors}
-            selectedColor={selectedColor}
+          <OptionSelectContainer
+            optionArray={colors}
+            selectedIndex={selectedColor}
+            selectOption={selectOption}
             handleItemClick={handleItemClick}
           />
         ) : (
-          <ImageOptionsContainer
-            images={images}
-            selectedImage={selectedImage}
-            handleImages={handleImages}
+          <OptionSelectContainer
+            optionArray={images}
+            selectedIndex={selectedImage}
+            selectOption={selectOption}
             handleItemClick={handleItemClick}
           />
         )}

@@ -25,9 +25,8 @@ export async function createRecipient(formData) {
         'Content-Type': 'application/json',
       },
     });
-
-    const responseData = response.data;
-    return responseData;
+    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error('Error while fetching data:', error);
     throw error;
