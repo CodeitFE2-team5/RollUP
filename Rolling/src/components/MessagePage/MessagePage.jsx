@@ -86,7 +86,7 @@ function MessagePage() {
 
   return (
     <>
-      <RecipientMenu />
+      <RecipientMenu recipient={recipient}/>
       <MessageCardContents recipient={recipient} messages={messages} loading={loading} />
       <div id="observer-element" ref={observerRef}></div>
       {loading && (
