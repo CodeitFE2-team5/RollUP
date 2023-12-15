@@ -1,15 +1,9 @@
 import Avatar from "../Common/Avatar";
-import profile1 from '../../assets/profileImage/profile1.png';
-import profile2 from '../../assets/profileImage/profile2.jpg';
-import profile3 from '../../assets/profileImage/profile3.png';
-import profile4 from '../../assets/profileImage/profile4.png';
 import ReactionContainer from "./ReactionContainer";
 import { IoShareOutline } from "react-icons/io5";
 import { useState } from "react";
 import ShareMenu from "./ShareMenu";
 import PropTypes from 'prop-types';
-
-const profileData = [profile1, profile2, profile3, profile4];
 
 const RecipientMenu = ({ recipient }) => {
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
@@ -24,7 +18,7 @@ const RecipientMenu = ({ recipient }) => {
         <div className="recipent font-bold text-3xl font-pre">{`To. ${recipient?.name}`}</div>
         <div className="flex items-center gap-7 justify-center">
           <div className="flex gap-2.5">
-            <Avatar profileImages={profileData}/>
+            <Avatar recentMessages={recipient?.recentMessages} messageCount={recipient?.messageCount}/>
             <div className="text-lg text-gray-900 font-pre">{`${recipient?.messageCount}명이 작성했어요!`}</div>
           </div>
           <div className="w-px h-7 bg-gray-200" />
@@ -43,7 +37,8 @@ RecipientMenu.propTypes = {
     name: PropTypes.string,
     messageCount: PropTypes.number,
     topReactions: PropTypes.array,
-    id: PropTypes.number
+    id: PropTypes.number,
+    recentMessages: PropTypes.array
   })
 }
 
