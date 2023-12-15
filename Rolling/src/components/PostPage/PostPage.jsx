@@ -23,11 +23,10 @@ const PostPage = () => {
   const [selectOption, setSelectOption] = useState('color');
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedImage, setSelectedImage] = useState('');
-
   const [images, setImages] = useState([]);
-
   const [receiveUserName, setReceiveUserName] = useState('');
   const [nameInputEmpty, setNameInputEmpty] = useState(true);
+
   const fetchData = async () => {
     try {
       const { imageUrls } = await getBackgroundList();
@@ -40,6 +39,7 @@ const PostPage = () => {
       console.error('Error fetching background list:', error);
     }
   };
+
   const handleItemClick = (option, value) => {
     setSelectOption(option);
     if (option === 'color') {
@@ -49,7 +49,10 @@ const PostPage = () => {
       setSelectedImage(value);
     }
   };
-
+  const handleSetImageArray = (value) => {
+    setImages((prev) => [...prev, value]);
+    console.log;
+  };
   const handleNameChange = (e) => {
     const inputValue = e.target.value;
     setReceiveUserName(inputValue);
@@ -64,7 +67,7 @@ const PostPage = () => {
     formData.append('name', receiveUserName);
     formData.append('backgroundColor', colorMap[selectedColor]);
     formData.append('backgroundImageURL', selectedImage);
-
+    console.log(selectedImage);
     try {
       const responseData = await createRecipient(formData);
 
@@ -120,6 +123,7 @@ const PostPage = () => {
             selectedIndex={selectedColor}
             selectOption={selectOption}
             handleItemClick={handleItemClick}
+            handleSetImageArray=""
           />
         ) : (
           <OptionSelectContainer
@@ -127,6 +131,7 @@ const PostPage = () => {
             selectedIndex={selectedImage}
             selectOption={selectOption}
             handleItemClick={handleItemClick}
+            handleSetImageArray={handleSetImageArray}
           />
         )}
         <CreateButton onSubmit={handleSubmit} disabled={!receiveUserName}>
