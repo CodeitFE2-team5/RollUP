@@ -94,6 +94,7 @@ function MessagePage() {
         postId={id}
         loading={loading}
       />
+
       <div id="observer-element" ref={observerRef}></div>
     </>
   );
