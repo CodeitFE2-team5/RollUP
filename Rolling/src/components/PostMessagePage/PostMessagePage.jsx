@@ -19,8 +19,12 @@ function PostMessagePage() {
 
   const { id } = useParams();
 
+  const isButtonEnabled = formData.sender.trim() !== '' && formData.content.trim() !== '';
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
 
     try {
       const response = await axios.post(
@@ -40,13 +44,18 @@ function PostMessagePage() {
 
   return (
     <div className="mt-14 mb-20 mx-auto max-w-[1080px] flex flex-col">
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         <SenderName value={formData.sender} setFormData={setFormData} />
         <MessageProfileImage value={formData.profileImageURL} setFormData={setFormData} />
         <Relationships value={formData.relationship} setFormData={setFormData} />
         <EnterContent value={formData.content} setFormData={setFormData} />
         <FontChange value={formData.font} setFormData={setFormData} />
-        <PostButton></PostButton>
+        <PostButton isButtonEnabled={isButtonEnabled} onSubmit={handleSubmit}></PostButton>
       </form>
     </div>
   );
