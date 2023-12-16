@@ -1,10 +1,12 @@
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import SenderName from './SenderName';
 import MessageProfileImage from './MessageProfileImage';
 import Relationships from './Relationships';
 import EnterContent from './EnterContent';
 import FontChange from './FontChange';
 import PostButton from './postButton';
-import { useState } from 'react';
 
 function PostMessagePage() {
   const [formData, setFormData] = useState({
@@ -15,9 +17,25 @@ function PostMessagePage() {
     font: 'Noto Sans',
   });
 
-  const handleSubmit = (e) => {
+  const { id } = useParams();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('제출됨', formData);
+
+    try {
+      const response = await axios.post(
+        `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/`,
+        JSON.stringify(formData),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error('데이터를 보내는데 실패했습니다.');
+    }
   };
 
   return (

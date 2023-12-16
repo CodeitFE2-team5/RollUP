@@ -38,6 +38,7 @@ function SenderName({ setFormData }) {
         onChange={(e) => {
           handleChange(e);
           setName(e.target.value);
+          setError('');
         }}
         onBlur={handleErrorMessage}
       />
