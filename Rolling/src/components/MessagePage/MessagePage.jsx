@@ -1,8 +1,10 @@
 import axios from 'axios';
 import MessageCardContents from './MessageCardContents';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import loadingAnimation from '../../assets/loading.gif';
-import RecipientMenu from '../RecipientMenu/RecipientMenu';
+// import RecipientMenu from '../RecipientMenu/RecipientMenu';
+
+const RecipientMenu = lazy(() => import('../RecipientMenu/RecipientMenu'));
 
 function MessagePage() {
   const [recipient, setRecipient] = useState();
@@ -85,7 +87,9 @@ function MessagePage() {
 
   return (
     <>
-      <RecipientMenu recipient={recipient}/>
+      <Suspense fallback={<div className="skeleton w-11/12 h-[68px] mx-auto"></div>}>
+        <RecipientMenu recipient={recipient}/>
+      </Suspense>
       <MessageCardContents recipient={recipient} messages={messages}/>
       <div id="observer-element" ref={observerRef}></div>
       {loading && (
