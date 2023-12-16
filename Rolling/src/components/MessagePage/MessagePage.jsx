@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MessageCardContents from './MessageCardContents';
 import { useState, useEffect, useRef } from 'react';
-import loadingAnimation from '../../assets/loading.gif';
+import MessageLoading from '../MessagePage/MessageLoading';
 import RecipientMenu from '../RecipientMenu/RecipientMenu';
 
 function MessagePage() {
@@ -85,14 +85,10 @@ function MessagePage() {
 
   return (
     <>
-      <RecipientMenu recipient={recipient}/>
-      <MessageCardContents recipient={recipient} messages={messages}/>
+      <RecipientMenu recipient={recipient} />
+      <MessageCardContents recipient={recipient} messages={messages} />
       <div id="observer-element" ref={observerRef}></div>
-      {loading && (
-        <div className="flex justify-center py-5">
-          <img src={loadingAnimation} className="w-12" />
-        </div>
-      )}
+      {loading && <MessageLoading />}
     </>
   );
 }
