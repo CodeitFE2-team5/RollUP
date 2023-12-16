@@ -2,10 +2,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactionBadge from '../Common/ReactionBadge';
 import Avatar from '../Common/Avatar';
-import profile1 from '../../assets/profileImage/profile1.png';
-import profile2 from '../../assets/profileImage/profile2.jpg';
-import profile3 from '../../assets/profileImage/profile3.png';
-import profile4 from '../../assets/profileImage/profile4.png';
 
 const backgroundColor = {
   blue: 'bg-[#B1E4FF]',
@@ -14,7 +10,6 @@ const backgroundColor = {
   beige: 'bg-[#FFE2AD]',
 };
 
-const profileData = [profile1, profile2, profile3, profile4];
 
 const RollingPaperCard = ({ rollingPaper }) => {
   return(
@@ -24,7 +19,7 @@ const RollingPaperCard = ({ rollingPaper }) => {
           <div className="font-bold text-pretendard text-2xl leading-10 tracking-tight">
             To. {rollingPaper.name}
           </div>
-          <Avatar profileImages={profileData}/>
+          <Avatar recentMessages={rollingPaper.recentMessages} messageCount={rollingPaper.messageCount}/>
           <div className=" font-normal text-pretendard text-base leading-6 tracking-tight">
             <span className="font-bold text-pretendard text-base leading-6 tracking-tight">
               {rollingPaper.messageCount}
