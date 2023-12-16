@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SenderName from './SenderName';
 import MessageProfileImage from './MessageProfileImage';
@@ -18,7 +18,7 @@ function PostMessagePage() {
   });
 
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const isButtonEnabled = formData.sender.trim() !== '' && formData.content.trim() !== '';
 
   const handleSubmit = async (e) => {
@@ -36,7 +36,8 @@ function PostMessagePage() {
           },
         }
       );
-      return response.data;
+      const messageId = response.data.id;
+      navigate(`/post/${messageId}`);
     } catch (error) {
       throw new Error('데이터를 보내는데 실패했습니다.');
     }
