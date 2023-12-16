@@ -1,4 +1,9 @@
 import Select from 'react-select';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  setFormData: PropTypes.func,
+};
 
 const customStyles = {
   control: (provided, state) => ({
@@ -45,13 +50,20 @@ const customStyles = {
 };
 
 const options = [
-  { value: 'NotoSans', label: 'NotoSans' },
+  { value: 'Noto Sans', label: 'Noto Sans' },
   { value: 'Pretendard', label: 'Pretendard' },
-  { value: 'NanumHandWriting', label: 'NanumHandWriting' },
-  { value: 'NanumMyeongjo', label: 'NanumMyeongjo' },
+  { value: '나눔명조', label: '나눔명조' },
+  { value: '나눔손글씨 손편지체', label: '나눔손글씨 손편지체' },
 ];
 
-function FontChange() {
+function FontChange({ setFormData }) {
+  const handleChange = (selectedOption) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      font: selectedOption.value,
+    }));
+  };
+
   return (
     <div className="flex flex-col items-start gap-3 mt-[50px]">
       <div className="text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9">
@@ -59,8 +71,9 @@ function FontChange() {
       </div>
       <div className="w-full sm:w-[320px]">
         <Select
+          onChange={handleChange}
           options={options}
-          placeholder="NotoSans"
+          placeholder="Noto Sans"
           styles={customStyles}
           isSearchable={false}
         />
@@ -68,5 +81,7 @@ function FontChange() {
     </div>
   );
 }
+
+FontChange.propTypes = propTypes;
 
 export default FontChange;

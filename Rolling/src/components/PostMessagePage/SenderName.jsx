@@ -1,8 +1,20 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function SenderName() {
+const propTypes = {
+  setFormData: PropTypes.func,
+};
+
+function SenderName({ setFormData }) {
   const [name, setName] = useState('');
   const [error, setError] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      sender: e.target.value,
+    }));
+  };
 
   const handleErrorMessage = () => {
     if (name.trim() === '') {
@@ -23,7 +35,10 @@ function SenderName() {
         } justify-start items-center gap-2.5 inline-flex text-lg focus:outline-none focus:border-gray-700 focus:border-[1px]`}
         placeholder="이름을 입력해 주세요."
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => {
+          handleChange(e);
+          setName(e.target.value);
+        }}
         onBlur={handleErrorMessage}
       />
       {error && (
@@ -32,5 +47,7 @@ function SenderName() {
     </div>
   );
 }
+
+SenderName.propTypes = propTypes;
 
 export default SenderName;
