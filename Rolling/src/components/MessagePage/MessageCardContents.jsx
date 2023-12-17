@@ -6,10 +6,12 @@ import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { BACKGROUND_COLOR } from '../../constants/constants.js';
 import MessageLoading from '../MessagePage/MessageLoading';
 import { Link, useLocation } from 'react-router-dom';
+import PaperRemoveModal from './PaperRemoveModal.jsx';
 
 function MessageCardContents({ recipient, messages, postId, loading }) {
   const [clickedMessage, setClickedMessage] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
+  const [openMessageModal, setOpenMessageModal] = useState(false);
+  const [openRemoveModal, setOpenRemoveModal] = useState(false);
   const location = useLocation();
 
   const onClickMessage = (id) => {
@@ -19,13 +21,25 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
   };
 
   const handleOpenModal = () => {
-    setOpenModal(true);
+    setOpenMessageModal(true);
     document.body.style.overflow = 'hidden';
   };
 
   const handleCloseModal = () => {
-    setOpenModal(false);
+    setOpenMessageModal(false);
     document.body.style = '';
+  };
+
+  const handleRemovePost = () => {
+    setOpenRemoveModal(true);
+  };
+
+  const handleConfirmRemove = () => {
+    setOpenRemoveModal(false);
+  };
+
+  const handleCancelRemove = () => {
+    setOpenRemoveModal(false);
   };
   return (
     <>
@@ -41,9 +55,20 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
             </button>
           </Link>
         ) : (
-          <button className="hover:bg-purple-700 w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7">
+          <button
+            onClick={handleRemovePost}
+            className="hover:bg-purple-700 w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7"
+          >
             삭제하기
           </button>
+        )}
+
+        {openRemoveModal && (
+          <PaperRemoveModal
+            recipient={recipient}
+            handleConfirmRemove={handleConfirmRemove}
+            handleCancelRemove={handleCancelRemove}
+          />
         )}
 
         <div className="lg:grid lg:grid-cols-[repeat(3,minmax(0,24rem))] md:grid md:grid-cols-[repeat(2,minmax(0,24rem))] grid grid-cols-[repeat(1,minmax(0,24rem))] justify-center gap-4">
@@ -53,20 +78,20 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
             </button>
           </div>
 
-          {messages?.map((message) =>
-            !location.pathname.includes('edit') ? (
-              <MessageCard key={message.id} message={message} onClickMessage={onClickMessage} />
-            ) : (
-              <MessageCard
-                key={message.id}
-                message={message}
-                onClickMessage={onClickMessage}
-                showTrashIcon={true}
-              />
-            )
-          ) ?? null}
+          {!location.pathname.includes('edit')
+            ? messages?.map((message) => (
+                <MessageCard key={message.id} message={message} onClickMessage={onClickMessage} />
+              ))
+            : messages?.map((message) => (
+                <MessageCard
+                  key={message.id}
+                  message={message}
+                  onClickMessage={onClickMessage}
+                  showTrashIcon={true}
+                />
+              ))}
 
-          {openModal && (
+          {openMessageModal && (
             <>
               <MessageCardModal message={clickedMessage} handleCloseModal={handleCloseModal} />
               <div
@@ -87,7 +112,7 @@ MessageCardContents.propTypes = {
   recipient: PropTypes.object,
   messages: PropTypes.array,
   loading: PropTypes.bool,
-  postId: PropTypes.number,
+  postId: PropTypes.string,
 };
 
 export default MessageCardContents;
