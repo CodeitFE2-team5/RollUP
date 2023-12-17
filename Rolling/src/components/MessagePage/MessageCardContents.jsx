@@ -14,7 +14,7 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
   const [openRemoveModal, setOpenRemoveModal] = useState(false);
   const location = useLocation();
 
-  const onClickMessage = (id) => {
+  const handleClickMessage = (id) => {
     const message = messages.find((message) => message.id === id);
     setClickedMessage(message);
     handleOpenModal();
@@ -69,13 +69,17 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
 
           {!location.pathname.includes('edit')
             ? messages?.map((message) => (
-                <MessageCard key={message.id} message={message} onClickMessage={onClickMessage} />
+                <MessageCard
+                  key={message.id}
+                  message={message}
+                  handleClickMessage={handleClickMessage}
+                />
               ))
             : messages?.map((message) => (
                 <MessageCard
                   key={message.id}
                   message={message}
-                  onClickMessage={onClickMessage}
+                  handleClickMessage={handleClickMessage}
                   showTrashIcon={true}
                 />
               ))}
