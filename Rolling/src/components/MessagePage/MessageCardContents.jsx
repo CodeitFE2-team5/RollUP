@@ -92,13 +92,7 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
               ))}
 
           {openMessageModal && (
-            <>
-              <MessageCardModal message={clickedMessage} handleCloseModal={handleCloseModal} />
-              <div
-                onClick={handleCloseModal}
-                className="fixed bg-[black] opacity-[60%] inset-0"
-              ></div>
-            </>
+            <MessageCardModal message={clickedMessage} handleCloseModal={handleCloseModal} />
           )}
         </div>
       </div>
