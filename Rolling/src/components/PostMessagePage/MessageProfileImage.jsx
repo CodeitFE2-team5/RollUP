@@ -21,7 +21,7 @@ function MessageProfileImage({ setFormData }) {
     'https://i.ibb.co/n7dYm0y/profileimg4.jpg',
   ]);
   const [preview, setPreview] = useState();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState('');
 
   const maxImages = 15;
@@ -67,11 +67,11 @@ function MessageProfileImage({ setFormData }) {
   };
 
   const openModal = () => {
-    setModalIsOpen(true);
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setModalIsOpen(false);
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -96,13 +96,13 @@ function MessageProfileImage({ setFormData }) {
             프로필 이미지를 선택해주세요!
           </div>
 
-          <div className="flex w-full h-14 relative justify-start">
+          <div className="flex w-full h-14 overflow-x-auto relative justify-start gap-1 flex-wrap">
             <div className="gap-1 flex flex-wrap">
               <label htmlFor="AddProfileImage" className="cursor-pointer" onClick={openModal}>
                 <BsFillPlusCircleFill className="w-14 h-14 fill-gray-400" />
               </label>
               <Modal
-                isOpen={modalIsOpen}
+                isOpen={isModalOpen}
                 onRequestClose={closeModal}
                 shouldCloseOnOverlayClick={true}
                 contentLabel="AddProfileImageModal"

@@ -25,7 +25,7 @@ function SenderName({ setFormData }) {
   };
 
   return (
-    <div className="w-full h-24 flex-col justify-start items-start gap-3 inline-flex mx-auto">
+    <div className="w-full h-24 flex-col justify-start items-start gap-3 inline-flex mx-auto ">
       <div className="text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9 ">
         From.
       </div>
