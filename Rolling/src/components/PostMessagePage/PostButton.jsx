@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   onSubmit: PropTypes.func,
-  isButtonEnabled: PropTypes.func,
+  isButtonEnabled: PropTypes.bool,
 };
 
 function PostButton({ isButtonEnabled, onSubmit }) {
