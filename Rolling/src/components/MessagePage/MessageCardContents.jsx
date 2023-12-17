@@ -37,7 +37,7 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
   return (
     <>
       <div
-        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-screen min-h-screen ${
+        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen ${
           BACKGROUND_COLOR[recipient?.backgroundColor]
         } pt-28 pb-60 pl-6 pr-[34px]`}
       >
@@ -50,7 +50,7 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
         ) : (
           <button
             onClick={handleRemovePaper}
-            className="hover:bg-purple-700 w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7"
+            className="sm:w-full sm:fixed sm:left-0 sm:bottom-6 hover:bg-purple-700 lg:static lg:w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7"
           >
             삭제하기
           </button>
