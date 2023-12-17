@@ -30,17 +30,10 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
     document.body.style = '';
   };
 
-  const handleRemovePost = () => {
+  const handleRemovePaper = () => {
     setOpenRemoveModal(true);
   };
 
-  const handleConfirmRemove = () => {
-    setOpenRemoveModal(false);
-  };
-
-  const handleCancelRemove = () => {
-    setOpenRemoveModal(false);
-  };
   return (
     <>
       <div
@@ -56,7 +49,7 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
           </Link>
         ) : (
           <button
-            onClick={handleRemovePost}
+            onClick={handleRemovePaper}
             className="hover:bg-purple-700 w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7"
           >
             삭제하기
@@ -64,11 +57,7 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
         )}
 
         {openRemoveModal && (
-          <PaperRemoveModal
-            recipient={recipient}
-            handleConfirmRemove={handleConfirmRemove}
-            handleCancelRemove={handleCancelRemove}
-          />
+          <PaperRemoveModal recipient={recipient} setOpenRemoveModal={setOpenRemoveModal} />
         )}
 
         <div className="lg:grid lg:grid-cols-[repeat(3,minmax(0,24rem))] md:grid md:grid-cols-[repeat(2,minmax(0,24rem))] grid grid-cols-[repeat(1,minmax(0,24rem))] justify-center gap-4">
