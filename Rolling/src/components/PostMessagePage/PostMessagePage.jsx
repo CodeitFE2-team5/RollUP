@@ -6,7 +6,7 @@ import MessageProfileImage from './MessageProfileImage';
 import Relationships from './Relationships';
 import EnterContent from './EnterContent';
 import FontChange from './FontChange';
-import PostButton from './postButton';
+import PostButton from './PostButton';
 
 function PostMessagePage() {
   const [formData, setFormData] = useState({
@@ -44,7 +44,7 @@ function PostMessagePage() {
   };
 
   return (
-    <div className="mt-14 mb-20 mx-4 lg:mx-auto max-w-screen-lg flex flex-col">
+    <div className="mt-14 mb-20 mx-4 xl:mx-auto max-w-[1080px] flex flex-col">
       <form
         onSubmit={(e) => {
           e.preventDefault();
