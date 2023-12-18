@@ -50,6 +50,7 @@ const PostPage = () => {
   };
   const handleItemClick = (option, value) => {
     setSelectOption(option);
+
     option === 'color' ? setSelectedColor(value) : (setSelectedImage(value), setChecked(false));
   };
   const handleSetImageArray = (value) => {
