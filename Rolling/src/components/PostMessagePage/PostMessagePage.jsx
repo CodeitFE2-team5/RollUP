@@ -29,7 +29,12 @@ function PostMessagePage() {
     try {
       await axios.post(
         `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/`,
-        JSON.stringify(formData)
+        JSON.stringify(formData),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
       navigate(`/post/${id}`);
     } catch (error) {
