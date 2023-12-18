@@ -1,8 +1,7 @@
 import axios from 'axios';
 import MessageCardContents from './MessageCardContents';
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
-import loadingAnimation from '../../assets/loading.gif';
-// import RecipientMenu from '../RecipientMenu/RecipientMenu';
+import { useParams } from 'react-router-dom';
 
 const RecipientMenu = lazy(() => import('../RecipientMenu/RecipientMenu'));
 
@@ -12,12 +11,14 @@ function MessagePage() {
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const { id } = useParams();
   const observerRef = useRef(null);
   const LIMIT = 10;
 
   const getRollingRecipient = async () => {
     try {
-      const response = await axios.get('https://rolling-api.vercel.app/2-5/recipients/836/');
+      const response = await axios.get(`https://rolling-api.vercel.app/2-5/recipients/${id}/`);
       const results = await response.data;
       setRecipient(results);
     } catch (error) {
@@ -30,7 +31,7 @@ function MessagePage() {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://rolling-api.vercel.app/2-5/recipients/836/messages/?limit=${LIMIT}&offset=${offset}`
+          `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
         );
         const { next, results } = await response.data;
 
@@ -90,13 +91,13 @@ function MessagePage() {
       <Suspense fallback={<div className="skeleton w-11/12 h-[68px] mx-auto"></div>}>
         <RecipientMenu recipient={recipient}/>
       </Suspense>
-      <MessageCardContents recipient={recipient} messages={messages}/>
+      <MessageCardContents
+        recipient={recipient}
+        messages={messages}
+        postId={id}
+        loading={loading}
+      />
       <div id="observer-element" ref={observerRef}></div>
-      {loading && (
-        <div className="flex justify-center py-5">
-          <img src={loadingAnimation} className="w-12" />
-        </div>
-      )}
     </>
   );
 }
