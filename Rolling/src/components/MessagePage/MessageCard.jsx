@@ -1,57 +1,109 @@
 import PropTypes from 'prop-types';
 import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants';
 import { LiaTrashAltSolid } from 'react-icons/lia';
-import { formatDate } from '../../utils/formatDate';
+import formatDate from '../../utils/formatDate';
+import axios from 'axios';
+import { useState } from 'react';
+import ConfirmModal from '../Common/ConfirmModal';
 
-MessageCard.propTypes = {
-  message: PropTypes.object.isRequired,
-  showTrashIcon: PropTypes.bool.isRequired,
-};
+function MessageCard({ message, handleClickMessage, showTrashIcon = false }) {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showCompleteModal, setShowCompleteModal] = useState(false);
 
-function MessageCard({ message, showTrashIcon }) {
+  const getMessageId = () => {
+    handleClickMessage(message.id);
+  };
+
+  const handleDismissModal = () => {
+    setShowConfirmModal(false);
+    setShowCompleteModal(false);
+  };
+
+  const handleMessageRemove = async () => {
+    try {
+      await axios.delete(`https://rolling-api.vercel.app/2-5/messages/${message.id}/`);
+      setShowConfirmModal(false);
+      setShowCompleteModal(true);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
-    <div
-      className="relative w-full max-w-96 h-[280px] px-6 py-7 shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white"
-      key={message.id}
-    >
-      <div className="flex justify-between items-center pb-4 border-b border-b-[#eee]">
-        <div className="flex">
-          <img
-            className="w-14 h-14 rounded-[100px] border border-[#eee]"
-            src={message.profileImageURL}
-            alt="프로필 이미지"
-          />
-          <div className="ms-5">
-            <p className={`mb-2 ${MESSAGE_FONT['message.font']}`}>
-              From. <b>{message.sender}</b>
-            </p>
-            <span
-              className={`rounded px-2 py-[2px] text-sm ${
-                RELATIONSHIP_TAG_COLOR[message.relationship]
-              }`}
-            >
-              {message.relationship}
-            </span>
+    <>
+      <div
+        className="flex flex-col gap-5 max-w-sm h-[280px] px-6 py-7 shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white"
+        key={message.id}
+      >
+        <div className="flex justify-between items-center border-b border-b-[#eee]">
+          <div className="flex">
+            <img
+              className="w-14 h-14 rounded-[100px] border border-[#eee]"
+              src={message.profileImageURL}
+              alt="프로필 이미지"
+            />
+            <div className="ms-5">
+              <p className={`${MESSAGE_FONT['message.font']}`}>
+                From. <b>{message.sender}</b>
+              </p>
+              <span
+                className={`rounded px-2 py-[2px] text-sm ${
+                  RELATIONSHIP_TAG_COLOR[message.relationship]
+                }`}
+              >
+                {message.relationship}
+              </span>
+            </div>
           </div>
+          {showTrashIcon && (
+            <button
+              onClick={() => {
+                setShowConfirmModal(true);
+              }}
+              className="border border-[#CCC] p-2 rounded-md "
+            >
+              <LiaTrashAltSolid />
+            </button>
+          )}
         </div>
-        {showTrashIcon && (
-          <button className="border border-[#CCC] p-2 rounded-md ">
-            <LiaTrashAltSolid />
-          </button>
-        )}
+        <div className="h-28 line-clamp-4 cursor-pointer" onClick={getMessageId}>
+          <p className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}>
+            {message.content}
+          </p>
+        </div>
+        <p className="bottom-[30px] text-[#999] text-xs">{formatDate(message.createdAt)}</p>
       </div>
-      <div className="mt-3">
-        <p
-          className={`overflow-hidden text-[#4A4A4A] text-ellipsis whitespace-nowrap text-lg leading-7 ${
-            MESSAGE_FONT[message.font]
-          }`}
-        >
-          {message.content}
-        </p>
-      </div>
-      <p className="absolute bottom-[30px] text-[#999] text-xs">{formatDate(message.createdAt)}</p>
-    </div>
+
+      {showConfirmModal && (
+        <ConfirmModal
+          title="해당 메세지를 삭제하시겠습니까?"
+          onConfirm={handleMessageRemove}
+          onCancel={handleDismissModal}
+        />
+      )}
+
+      {showCompleteModal && (
+        <ConfirmModal
+          title="삭제가 완료되었습니다."
+          onConfirm={() => {
+            setShowCompleteModal(false);
+            window.location.reload();
+          }}
+          onCancel={() => {
+            setShowCompleteModal(false);
+            window.location.reload();
+          }}
+          showCancelButton={false}
+        />
+      )}
+    </>
   );
 }
+
+MessageCard.propTypes = {
+  message: PropTypes.object,
+  handleClickMessage: PropTypes.func,
+  showTrashIcon: PropTypes.bool,
+};
 
 export default MessageCard;

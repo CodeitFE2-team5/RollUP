@@ -98,7 +98,7 @@
   --white: #fff;
   --black: #000;
   --Error: #dc3a3a;
-  --Surface-1: #f6f8ff;
+  --Surface: #f6f8ff;
 
   --purple-100: #f8f0ff;
   --purple-200: #ecd9ff;
@@ -139,4 +139,22 @@
 
 .rounded-4xl {
   border-radius: 32px;
+}
+
+/*ScrollBar Design */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
