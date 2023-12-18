@@ -3,9 +3,9 @@ import img02 from '../../assets/landing-img02.svg';
 
 function Article() {
   return (
-    <div className="mt-16 mb-16 w-ful">
-      <div className="flex justify-between gap-[30px] mx-auto mb-[30px] py-[60px] pl-[60px] w-[1100px] h-[324px] rounded-[16px] bg-slate-50">
-        <div className="flex-col justify-start items-start gap-4 inline-flex ">
+    <div className="mt-16 mb-16 mx-6">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-[30px] mb-[30px] py-[60px] px-[24px] max-w-[1100px] rounded-[16px] bg-[var(--Surface)] mx-auto">
+        <div className="lg:w-1/2 flex-col items-start gap-4 inline-flex lg:ml-[30px]">
           <div className="px-3 py-1.5 bg-purple-600 rounded-3xl flex-col justify-center items-center gap-2.5 flex">
             <div className="text-white text-sm font-bold font-['Pretendard'] leading-tight">
               Point. 01
@@ -22,12 +22,12 @@ function Article() {
             </div>
           </div>
         </div>
-        <img src={img01} />
+        <img className="" src={img01} />
       </div>
 
-      <div className="flex items-center py-15 mx-auto w-[1100px] h-[324px] rounded-[16px] bg-slate-50">
-        <img src={img02} />
-        <div className="left-[720px] flex-col justify-start items-start gap-4 inline-flex">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-[30px] py-[60px] px-[24px] max-w-[1100px] rounded-[16px] bg-[var(--Surface)] mx-auto">
+        <img className="hidden lg:block" src={img02} />
+        <div className="lg:order-2 lg:left-[720px] lg:w-1/2 flex-col items-start gap-4 inline-flex lg:ml-[30px]">
           <div className="px-3 py-1.5 bg-purple-600 rounded-3xl flex-col justify-center items-center gap-2.5 flex">
             <div className="text-white text-sm font-bold font-['Pretendard'] leading-tight">
               Point. 02
@@ -44,6 +44,7 @@ function Article() {
             </div>
           </div>
         </div>
+        <img className="lg:hidden w-full mt-[30px]" src={img02} />
       </div>
     </div>
   );
