@@ -63,9 +63,11 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
         <div className="lg:grid lg:grid-cols-[repeat(3,minmax(0,24rem))] md:grid md:grid-cols-[repeat(2,minmax(0,24rem))] grid grid-cols-[repeat(1,minmax(0,24rem))] justify-center gap-4">
           {!location.pathname.includes('edit') && (
             <div className="flex justify-center items-center max-w-sm h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
-              <button className="flex items-start gap-2.5 p-4">
-                <BsFillPlusCircleFill className="w-14 h-14 fill-gray-500 grid-cols" />
-              </button>
+              <Link to={`/post/${postId}/message`}>
+                <button className="flex items-start gap-2.5 p-4">
+                  <BsFillPlusCircleFill className="w-14 h-14 fill-gray-500 grid-cols" />
+                </button>
+              </Link>
             </div>
           )}
 
