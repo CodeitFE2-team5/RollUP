@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import PropTypes from 'prop-types';
 
-function EnterContent() {
+const propTypes = {
+  setFormData: PropTypes.func,
+};
+
+function EnterContent({ setFormData }) {
   const [value, setValue] = useState('');
 
   const modules = {
@@ -10,10 +15,19 @@ function EnterContent() {
       container: [
         [{ header: [1, 2, 3, 4, 5, false] }],
         ['bold', 'italic', 'underline', 'strike'],
+        [{ color: [] }, { background: [] }],
         [{ align: [] }],
         [{ list: 'ordered' }, { list: 'bullet' }],
       ],
     },
+  };
+
+  const handleChange = (content) => {
+    setValue(content);
+    setFormData((prevData) => ({
+      ...prevData,
+      content: content,
+    }));
   };
 
   return (
@@ -23,13 +37,15 @@ function EnterContent() {
       </div>
       <ReactQuill
         theme="snow"
-        className="w-full h-[300px] mb-[50px]"
+        className="w-full h-[300px] mb-[50px] "
         modules={modules}
         value={value}
-        onChange={setValue}
+        onChange={handleChange}
       />
     </div>
   );
 }
+
+EnterContent.propTypes = propTypes;
 
 export default EnterContent;
