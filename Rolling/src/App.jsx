@@ -15,6 +15,7 @@ function App() {
         <Route path="/list" element={<RollingPaperListPage />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/:id" element={<MessagePage />} />
+        <Route path="/post/:id/edit" element={<MessagePage />} />
         <Route path="/post/:id/message" element={<PostMessagePage />} />
       </Routes>
     </BrowserRouter>
