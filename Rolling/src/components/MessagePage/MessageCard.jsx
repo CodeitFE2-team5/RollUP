@@ -5,6 +5,7 @@ import formatDate from '../../utils/formatDate';
 import axios from 'axios';
 import { useState } from 'react';
 import ConfirmModal from '../Common/ConfirmModal';
+import DOMPurify from 'dompurify';
 
 function MessageCard({ message, handleClickMessage, showTrashIcon = false }) {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -67,9 +68,10 @@ function MessageCard({ message, handleClickMessage, showTrashIcon = false }) {
           )}
         </div>
         <div className="h-28 line-clamp-4 cursor-pointer" onClick={getMessageId}>
-          <p className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}>
-            {message.content}
-          </p>
+          <p
+            className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.content) }}
+          />
         </div>
         <p className="bottom-[30px] text-[#999] text-xs">{formatDate(message.createdAt)}</p>
       </div>
