@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants';
 import formatDate from '../../utils/formatDate';
+import DOMPurify from 'dompurify';
 
 function MessageCardModal({ message, handleCloseModal }) {
   return (
@@ -30,7 +31,10 @@ function MessageCardModal({ message, handleCloseModal }) {
         </div>
 
         <div className="mt-3 h-60 overflow-y-auto">
-          <span className="text-lg text-[#5A5A5A]">{message.content}</span>
+          <span
+            className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.content) }}
+          />
         </div>
 
         <div className="mt-5 text-center">

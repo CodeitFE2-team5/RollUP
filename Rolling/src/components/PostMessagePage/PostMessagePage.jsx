@@ -27,17 +27,11 @@ function PostMessagePage() {
     }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/`,
-        JSON.stringify(formData),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        JSON.stringify(formData)
       );
-      const messageId = response.data.id;
-      navigate(`/post/${messageId}`);
+      navigate(`/post/${id}`);
     } catch (error) {
       throw new Error('데이터를 보내는데 실패했습니다.');
     }
