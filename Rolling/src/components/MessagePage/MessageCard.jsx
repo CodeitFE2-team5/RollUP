@@ -3,35 +3,19 @@ import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants'
 import { LiaTrashAltSolid } from 'react-icons/lia';
 import { IoReload } from 'react-icons/io5';
 import formatDate from '../../utils/formatDate';
-import axios from 'axios';
 import { useState } from 'react';
-import ConfirmModal from '../Common/ConfirmModal';
 import DOMPurify from 'dompurify';
 
-function MessageCard({ message, handleClickMessage, handleDeleteMessage, showTrashIcon = false }) {
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [showCompleteModal, setShowCompleteModal] = useState(false);
+function MessageCard({
+  message,
+  clickedMessageModal,
+  getClickedMessageIds,
+  showTrashIcon = false,
+}) {
   const [markedForDeletion, setMarkedForDeletion] = useState(false);
 
-  const getMessageId = () => {
-    handleClickMessage(message.id);
-  };
-
-  const handleDismissModal = () => {
-    setShowConfirmModal(false);
-    setShowCompleteModal(false);
-  };
-
-  const handleMessageRemove = () => {
-    setShowConfirmModal(false);
-    setMarkedForDeletion(true);
-    // try {
-    //   await axios.delete(`https://rolling-api.vercel.app/2-5/messages/${message.id}/`);
-    //   setShowConfirmModal(false);
-    //   setShowCompleteModal(true);
-    // } catch (error) {
-    //   alert(error);
-    // }
+  const getClickedMessageId = () => {
+    clickedMessageModal(message.id);
   };
 
   return (
@@ -65,8 +49,8 @@ function MessageCard({ message, handleClickMessage, handleDeleteMessage, showTra
           {showTrashIcon && !markedForDeletion && (
             <button
               onClick={() => {
-                handleDeleteMessage(message.id);
-                setShowConfirmModal(true);
+                getClickedMessageIds(message.id);
+                setMarkedForDeletion(true);
               }}
               className="border border-[#CCC] p-2 rounded-md "
             >
@@ -76,6 +60,7 @@ function MessageCard({ message, handleClickMessage, handleDeleteMessage, showTra
           {markedForDeletion && (
             <button
               onClick={() => {
+                getClickedMessageIds(message.id);
                 setMarkedForDeletion(false);
               }}
               className="border border-[#CCC] p-2 rounded-md "
@@ -84,7 +69,7 @@ function MessageCard({ message, handleClickMessage, handleDeleteMessage, showTra
             </button>
           )}
         </div>
-        <div className="h-28 line-clamp-4 cursor-pointer" onClick={getMessageId}>
+        <div className="h-28 line-clamp-4 cursor-pointer" onClick={getClickedMessageId}>
           <p
             className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.content) }}
@@ -92,37 +77,14 @@ function MessageCard({ message, handleClickMessage, handleDeleteMessage, showTra
         </div>
         <p className="bottom-[30px] text-[#999] text-xs">{formatDate(message.createdAt)}</p>
       </div>
-
-      {showConfirmModal && (
-        <ConfirmModal
-          title="해당 메세지를 삭제하시겠습니까?"
-          onConfirm={handleMessageRemove}
-          onCancel={handleDismissModal}
-        />
-      )}
-
-      {showCompleteModal && (
-        <ConfirmModal
-          title="삭제가 완료되었습니다."
-          onConfirm={() => {
-            setShowCompleteModal(false);
-            window.location.reload();
-          }}
-          onCancel={() => {
-            setShowCompleteModal(false);
-            window.location.reload();
-          }}
-          showCancelButton={false}
-        />
-      )}
     </>
   );
 }
 
 MessageCard.propTypes = {
   message: PropTypes.object,
-  handleClickMessage: PropTypes.func,
-  handleDeleteMessage: PropTypes.func,
+  clickedMessageModal: PropTypes.func,
+  getClickedMessageIds: PropTypes.func,
   showTrashIcon: PropTypes.bool,
 };
 
