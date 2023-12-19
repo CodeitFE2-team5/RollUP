@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MessageCard from './MessageCard';
 import MessageCardModal from './MessageCardModal.jsx';
@@ -12,6 +12,8 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
   const [clickedMessage, setClickedMessage] = useState([]);
   const [openMessageModal, setOpenMessageModal] = useState(false);
   const [openRemoveModal, setOpenRemoveModal] = useState(false);
+  const [clickedMessageIds, setClickedMessageIds] = useState([]);
+
   const location = useLocation();
 
   const handleClickMessage = (id) => {
@@ -20,6 +22,23 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
     handleOpenModal();
   };
 
+  const handleDeleteMessage = (clickedMessageId) => {
+    setClickedMessageIds((prevSet) => {
+      const updatedSet = new Set(prevSet);
+      if (updatedSet.has(clickedMessageId)) {
+        updatedSet.delete(clickedMessageId);
+      } else {
+        updatedSet.add(clickedMessageId);
+      }
+
+      const updatedArray = Array.from(updatedSet);
+      return updatedArray;
+    });
+  };
+
+  useEffect(() => {
+    console.log(clickedMessageIds);
+  }, [clickedMessageIds]);
   const handleOpenModal = () => {
     setOpenMessageModal(true);
     document.body.style.overflow = 'hidden';
@@ -48,12 +67,18 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
             </button>
           </Link>
         ) : (
-          <button
-            onClick={handleRemovePaper}
-            className="sm:w-full sm:fixed sm:left-0 sm:bottom-6 hover:bg-purple-700 lg:static lg:w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7"
-          >
-            삭제하기
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={handleRemovePaper}
+              className="hover:bg-orange-700 w-44 px-6 py-3.5 bg-orange-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7"
+            >
+              페이지 삭제하기
+            </button>
+
+            <button className="sm:w-full sm:fixed sm:left-0 sm:bottom-6 hover:bg-purple-700 lg:static lg:w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7">
+              저장하기
+            </button>
+          </div>
         )}
 
         {openRemoveModal && (
@@ -84,6 +109,7 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
                   key={message.id}
                   message={message}
                   handleClickMessage={handleClickMessage}
+                  handleDeleteMessage={handleDeleteMessage}
                   showTrashIcon={true}
                 />
               ))}

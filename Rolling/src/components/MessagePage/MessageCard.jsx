@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
 import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants';
 import { LiaTrashAltSolid } from 'react-icons/lia';
+import { IoReload } from 'react-icons/io5';
 import formatDate from '../../utils/formatDate';
 import axios from 'axios';
 import { useState } from 'react';
 import ConfirmModal from '../Common/ConfirmModal';
 import DOMPurify from 'dompurify';
 
-function MessageCard({ message, handleClickMessage, showTrashIcon = false }) {
+function MessageCard({ message, handleClickMessage, handleDeleteMessage, showTrashIcon = false }) {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [markedForDeletion, setMarkedForDeletion] = useState(false);
 
   const getMessageId = () => {
     handleClickMessage(message.id);
@@ -20,21 +22,25 @@ function MessageCard({ message, handleClickMessage, showTrashIcon = false }) {
     setShowCompleteModal(false);
   };
 
-  const handleMessageRemove = async () => {
-    try {
-      await axios.delete(`https://rolling-api.vercel.app/2-5/messages/${message.id}/`);
-      setShowConfirmModal(false);
-      setShowCompleteModal(true);
-    } catch (error) {
-      alert(error);
-    }
+  const handleMessageRemove = () => {
+    setShowConfirmModal(false);
+    setMarkedForDeletion(true);
+    // try {
+    //   await axios.delete(`https://rolling-api.vercel.app/2-5/messages/${message.id}/`);
+    //   setShowConfirmModal(false);
+    //   setShowCompleteModal(true);
+    // } catch (error) {
+    //   alert(error);
+    // }
   };
 
   return (
     <>
       <div
-        className="flex flex-col gap-5 max-w-sm h-[280px] px-6 py-7 shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white"
-        key={message.id}
+        className={`flex flex-col gap-5 max-w-sm h-[280px] px-6 py-7 shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white ${
+          markedForDeletion ? 'opacity-70' : 0
+        }
+        key={message.id}`}
       >
         <div className="flex justify-between items-center border-b border-b-[#eee]">
           <div className="flex">
@@ -56,14 +62,25 @@ function MessageCard({ message, handleClickMessage, showTrashIcon = false }) {
               </span>
             </div>
           </div>
-          {showTrashIcon && (
+          {showTrashIcon && !markedForDeletion && (
             <button
               onClick={() => {
+                handleDeleteMessage(message.id);
                 setShowConfirmModal(true);
               }}
               className="border border-[#CCC] p-2 rounded-md "
             >
-              <LiaTrashAltSolid />
+              {markedForDeletion ? <IoReload /> : <LiaTrashAltSolid />}
+            </button>
+          )}
+          {markedForDeletion && (
+            <button
+              onClick={() => {
+                setMarkedForDeletion(false);
+              }}
+              className="border border-[#CCC] p-2 rounded-md "
+            >
+              <IoReload />
             </button>
           )}
         </div>
@@ -105,6 +122,7 @@ function MessageCard({ message, handleClickMessage, showTrashIcon = false }) {
 MessageCard.propTypes = {
   message: PropTypes.object,
   handleClickMessage: PropTypes.func,
+  handleDeleteMessage: PropTypes.func,
   showTrashIcon: PropTypes.bool,
 };
 
