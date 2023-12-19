@@ -12,7 +12,6 @@ export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => 
   const handleChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      console.log(selectedFile);
       const objectUrl = URL.createObjectURL(selectedFile);
       handleItemClick('image', objectUrl);
       handleSetImageArray(objectUrl);

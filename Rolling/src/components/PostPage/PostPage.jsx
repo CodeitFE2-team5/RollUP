@@ -55,7 +55,6 @@ const PostPage = () => {
   };
   const handleSetImageArray = (value) => {
     setImages((prev) => [...prev, value]);
-    console.log;
   };
   const handleNameChange = (e) => {
     const inputValue = e.target.value;
@@ -66,13 +65,13 @@ const PostPage = () => {
     setModalOpen(bool);
 
     value !== null
-      ? (setImages((prev) => [...prev, value]), setSelectedImage(value))
+      ? (setImages((prev) => [...prev, value]), setSelectedImage(value), setChecked(false))
       : setSelectedImage(selectedImage);
   };
 
   const handleCheckboxChange = () => {
     setChecked(!isChecked);
-    setSelectedImage('image', '');
+    setSelectedImage('');
   };
 
   const handleSubmit = async (e) => {
@@ -139,7 +138,7 @@ const PostPage = () => {
           </div>
 
           {selectOption === 'image' && (
-            <div className="flex gap-1 w-[270px]   text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
+            <div className="flex gap-1 w-[270px]   text-center mb-11  text-lg font-Pretendard font-bold rounded-md ">
               <NoSelectBackgroundCheck
                 handleCheckboxChange={handleCheckboxChange}
                 isChecked={isChecked}

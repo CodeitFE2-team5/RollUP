@@ -24,8 +24,9 @@ export const UrlModal = ({ handleModalChange }) => {
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
-    setUrlInputValue(inputValue);
-    setIsValidUrl(validateUrlFormat(inputValue));
+    inputValue
+      ? (setUrlInputValue(inputValue), setIsValidUrl(validateUrlFormat(inputValue)))
+      : setIsValidUrl(false);
   };
 
   return (
@@ -52,23 +53,30 @@ export const UrlModal = ({ handleModalChange }) => {
               placeholder="URL을 입력해주세요"
               value={urlInputValue}
               onChange={handleInputChange}
+              onBlur={handleInputChange}
             />
-            {!isValidUrl && (
+            {isValidUrl === false && (
               <p className="text-red-500 text-sm mt-1">
                 올바른 URL 형식이 아닙니다. <br /> http:// 또는 https:// 를 포함해 주세요.
               </p>
             )}
           </div>
         </div>
-        <div className="text-center mt-2">
+        <div className="flex gap-2 justify-center">
           <button
             onClick={handleUrlSubmit}
-            disabled={!isValidUrl}
+            disabled={urlInputValue === ''}
             className={`py-2 px-6  text-xl text-white rounded-xl ${
-              isValidUrl ? 'bg-purple-500' : 'bg-gray-300'
+              urlInputValue !== '' && isValidUrl === true ? 'bg-purple-500' : 'bg-gray-300'
             }`}
           >
             등록하기
+          </button>
+          <button
+            onClick={() => handleModalChange(false, null)}
+            className={`py-2 px-6  text-xl text-white rounded-xl bg-purple-500 hover:bg-orange-300 hover:text-black`}
+          >
+            취소하기
           </button>
         </div>
       </div>
