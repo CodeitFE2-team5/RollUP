@@ -8,15 +8,16 @@ import EnterContent from './EnterContent';
 import FontChange from './FontChange';
 import PostButton from './PostButton';
 
-function PostMessagePage() {
-  const [formData, setFormData] = useState({
-    sender: '',
-    profileImageURL: 'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg',
-    relationship: '지인',
-    content: '',
-    font: 'Noto Sans',
-  });
+const PostMessagesAPIData = {
+  sender: '',
+  profileImageURL: 'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg',
+  relationship: '지인',
+  content: '',
+  font: 'Noto Sans',
+};
 
+function PostMessagePage() {
+  const [formData, setFormData] = useState(PostMessagesAPIData);
   const { id } = useParams();
   const navigate = useNavigate();
   const isButtonEnabled = formData.sender.trim() !== '' && formData.content.trim() !== '';
