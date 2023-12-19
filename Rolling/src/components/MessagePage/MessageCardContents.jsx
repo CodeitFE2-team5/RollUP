@@ -37,9 +37,9 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
   return (
     <>
       <div
-        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen ${
-          BACKGROUND_COLOR[recipient?.backgroundColor]
-        } pt-28 pb-60 pl-6 pr-[34px]`}
+        style={{ backgroundImage: `url(${recipient?.backgroundImageURL})` }}
+        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen pt-28 pb-60 pl-6 pr-[34px] bg-cover 
+        ${BACKGROUND_COLOR[recipient?.backgroundColor]}`}
       >
         {!location.pathname.includes('edit') ? (
           <Link to={`/post/${postId}/edit`}>
