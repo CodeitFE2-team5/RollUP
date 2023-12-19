@@ -19,8 +19,8 @@ const ShareMenu = () => {
 
   return(
     <>
-      <div className="flex flex-col py-2.5 px-px border border-gray-300 rounded-lg absolute top-11 right-0">
-        <button className="py-3 px-4">카카오톡 공유</button>
+      <div className="flex flex-col py-2.5 px-px border border-gray-300 rounded-lg absolute top-11 right-0 z-10 bg-white">
+        <button className="py-3 px-4 hover:bg-gray-100">카카오톡 공유</button>
         <button className="py-3 px-4 hover:bg-gray-100" onClick={() => handleShareUrl(location.pathname)}>URL 공유</button>
       </div>
       {isShareSuccess && <ToastModal />}

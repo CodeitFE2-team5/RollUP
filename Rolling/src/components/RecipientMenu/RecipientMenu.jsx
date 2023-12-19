@@ -1,16 +1,11 @@
 import Avatar from "../Common/Avatar";
-import profile1 from '../../assets/profileImage/profile1.png';
-import profile2 from '../../assets/profileImage/profile2.jpg';
-import profile3 from '../../assets/profileImage/profile3.png';
-import profile4 from '../../assets/profileImage/profile4.png';
 import ReactionContainer from "./ReactionContainer";
 import { IoShareOutline } from "react-icons/io5";
 import { useState } from "react";
 import ShareMenu from "./ShareMenu";
+import PropTypes from 'prop-types';
 
-const profileData = [profile1, profile2, profile3, profile4];
-
-const RecipientMenu = () => {
+const RecipientMenu = ({ recipient }) => {
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
   
   const handleClickShareButton = () => {
@@ -18,24 +13,40 @@ const RecipientMenu = () => {
   };
 
   return(
-    <nav className="w-screen relative top-[65px]">
-      <div className="mx-auto flex gap-64 w-fit relative">
-        <div className="recipent font-bold text-3xl font-pre">To. Ashely Kim</div>
-        <div className="flex items-center gap-7 justify-center">
-          <div className="flex gap-2.5">
-            <Avatar profiles={profileData}/>
-            <div className="text-lg text-gray-900 font-pre">23명이 작성했어요!</div>
+    <nav className="max-w-full relative py-[13px]">
+      <div className="flex min-w-[360px] md:min-w-[768px] md:max-w-[1248px] relative flex-col md:flex-row md:justify-between mx-auto md:px-6 xl:px-24">
+        <div className="px-5 py-3 text-lg font-bold flex justify-center md:block md:px-0 md:py-0 md:text-3xl font-[pretendard]">
+          <p className="mx-0 my-0 px-0 py-0 min-w-[320px] md:min-w-[227px]">
+            {`To. ${recipient?.name}`}
+          </p>
+        </div>
+        <div className="flex items-center md:gap-7 justify-center py-2 px-5 md:px-0 md:py-0 md:justify-center">
+          <div className="hidden lg:flex gap-2.5">
+            <Avatar recentMessages={recipient?.recentMessages} messageCount={recipient?.messageCount}/>
+            <div className="text-lg text-gray-900 font-pre">{`${recipient?.messageCount}명이 작성했어요!`}</div>
           </div>
-          <div className="w-px h-7 bg-gray-200" />
-          <ReactionContainer />
-          <div className="w-px h-7 bg-gray-200" />
-          <button className="px-4 py-2 border border-gray-300 rounded-md" onClick={handleClickShareButton}><IoShareOutline className="w-6 h-6"/></button>
-          {shareMenuOpen && <ShareMenu />}
+          <div className="hidden lg:flex w-px h-7 bg-gray-200" />
+          <div className="flex gap-[13px] justify-center items-center">
+            <ReactionContainer topReactions={recipient?.topReactions} recipientId={recipient?.id}/>
+            <div className="w-px h-7 bg-gray-200" />
+            <button className="px-2 py-1.5 border border-gray-300 rounded-md md:px-4" onClick={handleClickShareButton}><IoShareOutline className="w-6 h-6"/></button>
+            {shareMenuOpen && <ShareMenu />}
+          </div>
         </div>
       </div>
     </nav>
   )
 };
+
+RecipientMenu.propTypes = {
+  recipient: PropTypes.shape({
+    name: PropTypes.string,
+    messageCount: PropTypes.number,
+    topReactions: PropTypes.array,
+    id: PropTypes.number,
+    recentMessages: PropTypes.array
+  })
+}
 
 export default RecipientMenu;
 

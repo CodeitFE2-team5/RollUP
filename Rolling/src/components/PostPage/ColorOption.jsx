@@ -1,21 +1,27 @@
-import React from 'react';
-import { BsFillPlusCircleFill } from 'react-icons/bs';
+import PropTypes from 'prop-types';
+import { IoCheckmarkCircle } from 'react-icons/io5';
 
-const ColorOption = ({ color, isSelected, handleColorClick }) => {
+const propTypes = {
+  color: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  handleItemClick: PropTypes.func.isRequired,
+};
+
+const ColorOption = ({ color, isSelected, handleItemClick }) => {
   return (
-    <div
-      onClick={() => handleColorClick('color', color)}
-      className={`relative w-full h-[238px] cursor-pointer rounded-lg border border-solid ${color} ${
-        isSelected ? 'border-transparent' : ''
-      }`}
-    >
-      {isSelected && (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <BsFillPlusCircleFill className="w-14 h-14 text-gray-500" />
-        </div>
-      )}
+    <div className={`rounded-2xl  `}>
+      <div
+        onClick={() => handleItemClick('color', color)}
+        className={`relative w-[156px] h-[156px] rounded-2xl cursor-pointer ${color} sm:w-[168px] sm:h-[168px] `}
+      >
+        {isSelected && (
+          <div className="absolute top-0 left-0 min-w-full h-full bg-gray-400 opacity-50 rounded-2xl">
+            <IoCheckmarkCircle className="absolute w-12 h-12 top-[34%] left-[36%] sm:w-[55px] sm:h-[55px] md:w-[55px] md:h-[55px]" />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
-
+ColorOption.propTypes = propTypes;
 export default ColorOption;

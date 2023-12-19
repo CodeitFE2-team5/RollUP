@@ -1,9 +1,9 @@
 import axios from 'axios';
 import MessageCardContents from './MessageCardContents';
-import { useState, useEffect, useRef } from 'react';
-import loadingAnimation from '../../assets/loading.gif';
-import RecipientMenu from '../RecipientMenu/RecipientMenu';
-import { useParams } from 'react-router';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useParams } from 'react-router-dom';
+
+const RecipientMenu = lazy(() => import('../RecipientMenu/RecipientMenu'));
 
 function MessagePage() {
   const [recipient, setRecipient] = useState();
@@ -11,15 +11,14 @@ function MessagePage() {
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(null);
   const [loading, setLoading] = useState(false);
-  const observerRef = useRef(null);
-  const params = useParams();
-  const { id } = params;
 
+  const { id } = useParams();
+  const observerRef = useRef(null);
   const LIMIT = 10;
 
   const getRollingRecipient = async () => {
     try {
-      const response = await axios.get('https://rolling-api.vercel.app/2-5/recipients/836/');
+      const response = await axios.get(`https://rolling-api.vercel.app/2-5/recipients/${id}/`);
       const results = await response.data;
       setRecipient(results);
     } catch (error) {
@@ -28,11 +27,11 @@ function MessagePage() {
   };
 
   useEffect(() => {
-    const getRollingData = async () => {
+    const getRollingMessages = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://rolling-api.vercel.app/2-5/recipients/836/messages/?limit=${LIMIT}&offset=${offset}`
+          `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
         );
         const { next, results } = await response.data;
 
@@ -48,11 +47,10 @@ function MessagePage() {
         setLoading(false);
       }
     };
-
-    getRollingData();
+    getRollingMessages();
   }, [offset]);
 
-  const handleLoadMore = () => {
+  const loadMoreMessages = () => {
     setOffset((prevOffset) => prevOffset + LIMIT);
   };
 
@@ -70,34 +68,36 @@ function MessagePage() {
     const handleObserver = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && hasNext) {
-          handleLoadMore();
+          loadMoreMessages();
         }
       });
     };
 
-    observerRef.current = new IntersectionObserver(handleObserver, options);
+    const observer = new IntersectionObserver(handleObserver, options);
 
-    if (observerRef.current) {
-      observerRef.current.observe(document.getElementById('observer-element'));
+    if (observer) {
+      observer.observe(observerRef.current);
     }
 
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
+      if (observer) {
+        observer.disconnect();
       }
     };
   }, [hasNext]);
 
   return (
     <>
-      <RecipientMenu />
-      <MessageCardContents recipient={recipient} messages={messages} loading={loading} />
-      <div id="observer-element" style={{ height: '1px' }}></div>
-      {loading && (
-        <div className="flex justify-center py-5">
-          <img src={loadingAnimation} className="w-[50px]" />
-        </div>
-      )}
+      <Suspense fallback={<div className="skeleton w-11/12 h-[68px] mx-auto"></div>}>
+        <RecipientMenu recipient={recipient} />
+      </Suspense>
+      <MessageCardContents
+        recipient={recipient}
+        messages={messages}
+        postId={id}
+        loading={loading}
+      />
+      <div id="observer-element" ref={observerRef}></div>
     </>
   );
 }
