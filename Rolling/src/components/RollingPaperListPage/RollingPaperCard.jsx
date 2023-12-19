@@ -20,10 +20,10 @@ const RollingPaperCard = ({ rollingPaper }) => {
 
   return(
     <Link to={`/post/${rollingPaper.id}`}>
-      <div  className={`w-[275px] h-[260px] rounded-2xl border-solid border-2 pt-[30px] pb-5 px-6 shadow-md ${BACKGROUND_COLOR[rollingPaper.backgroundColor]} 
+      <div  className={`w-[216px] h-[232px] md:w-[275px] md:h-[260px] rounded-2xl border-solid border-2 pt-[30px] pb-5 px-6 shadow-md ${BACKGROUND_COLOR[rollingPaper.backgroundColor]} 
         ${rollingPaper?.backgroundImageURL ? 'bg-cover text-white object-cover' : 'bg-no-repeat bg-right-bottom'}`} style={{ backgroundImage: `url(${background})` }}>
-        <div className="flex flex-col gap-3 mb-7">
-          <div className="font-bold text-pretendard text-2xl leading-10 tracking-tight">
+        <div className="flex flex-col gap-3 mb-[33px]">
+          <div className="text-lg font-bold text-pretendard leading-7 md:text-2xl md:leading-9 tracking-tight">
             To. {rollingPaper.name}
           </div>
           <Avatar recentMessages={rollingPaper.recentMessages} messageCount={rollingPaper.messageCount}/>
@@ -34,8 +34,11 @@ const RollingPaperCard = ({ rollingPaper }) => {
             명이 작성했어요
           </div>
         </div>
-        <div className="flex items-center  border-t border-black/[0.12] gap-3 pt-4">
-          {rollingPaper.topReactions.map((reaction) => <ReactionBadge key={reaction.id} reaction={reaction}/>)}
+        <div className='flex flex-col gap-4 justify-center items-center'>
+          <div className='w-[162px] md:w-[227px] h-px bg-black/[0.12]' />
+          <div className="flex items-center gap-1 md:gap-3">
+            {rollingPaper.topReactions.map((reaction) => <ReactionBadge key={reaction.id} reaction={reaction}/>)}
+          </div>
         </div>
       </div>
     </Link>
