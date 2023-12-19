@@ -9,8 +9,8 @@ const RollingPaperList = ({ title, rollingPaperList }) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   
   return(
-    <div className="w-full">
-      <div className=" max-w-[1160px] mx-auto flex flex-col gap-4 sm:w-fit">
+    <div className="w-full overflow-scroll scrollbar-hide">
+      <div className="min-w-[904px] max-w-[910px] md:max-w-[1160px] mx-auto flex flex-col gap-4 sm:w-fit">
         <div className="font-pre text-2xl font-bold tracking-[-0.24px]">{title}</div>
         <ItemsCarousel
           requestToChangeActive={(value) => setActiveItemIndex(value)}
