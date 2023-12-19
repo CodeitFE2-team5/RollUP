@@ -21,7 +21,7 @@ const RollingPaperCard = ({ rollingPaper }) => {
   return(
     <Link to={`/post/${rollingPaper.id}`}>
       <div  className={`w-[275px] h-[260px] rounded-2xl border-solid border-2 pt-[30px] pb-5 px-6 shadow-md ${BACKGROUND_COLOR[rollingPaper.backgroundColor]} 
-        ${rollingPaper?.backgroundImageURL ? 'bg-cover text-white' : 'bg-no-repeat bg-right-bottom'}`} style={{ backgroundImage: `url(${background})` }}>
+        ${rollingPaper?.backgroundImageURL ? 'bg-cover text-white object-cover' : 'bg-no-repeat bg-right-bottom'}`} style={{ backgroundImage: `url(${background})` }}>
         <div className="flex flex-col gap-3 mb-7">
           <div className="font-bold text-pretendard text-2xl leading-10 tracking-tight">
             To. {rollingPaper.name}
