@@ -12,7 +12,7 @@ const RollingPaperListPage = () => {
 
   return (
     <Suspense fallback={<RollingPaperListSkeleton />}>
-      <div className='pt-[50px] flex flex-col gap-[50px]'>
+      <div className='pt-[40px] pl-5 md:pt-[50px] flex flex-col gap-[50px]'>
         <RollingPaperList title={'인기 롤링 페이퍼 10 🔥'} rollingPaperList={likeSortRollingPaper}/>
         <RollingPaperList title={'최근에 만든 롤링 페이퍼 10 ⭐️️'} rollingPaperList={createdSortRollingPaper}/>
         <Button to="/post">나도 만들어보기</Button>
