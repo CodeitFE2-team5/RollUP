@@ -8,7 +8,7 @@ const propTypes = {
   setFormData: PropTypes.func,
 };
 
-const DEFAULT_PROFILE_IMAGES = ['https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg'];
+const DEFAULT_PROFILE_IMAGES = 'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg';
 
 const PROVIDED_PROFILE_IMAGES = [
   'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg',
