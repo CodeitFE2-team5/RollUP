@@ -1,6 +1,7 @@
 import plus from '../../assets/plus.svg';
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
+import { uploadImageIBB } from '../../api';
 const propTypes = {
   selectedIndex: PropTypes.string,
   handleItemClick: PropTypes.func.isRequired,
@@ -9,12 +10,14 @@ const propTypes = {
 export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => {
   const inputRef = useRef();
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      const objectUrl = URL.createObjectURL(selectedFile);
-      handleItemClick('image', objectUrl);
-      handleSetImageArray(objectUrl);
+      const imageUrl = await uploadImageIBB(selectedFile);
+      if (imageUrl) {
+        handleItemClick('image', imageUrl);
+        handleSetImageArray(imageUrl);
+      }
     }
   };
 
@@ -39,7 +42,7 @@ export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => 
       <div>
         <input
           type="file"
-          accept="image/png, image/jpeg"
+          accept="image/png, image/jpeg, image/gif"
           onChange={handleChange}
           ref={inputRef}
           style={{ display: 'none' }}

@@ -6,7 +6,7 @@ import Subject from './Subject';
 import { CreateButton } from './CreateButton';
 import { UserNameInput } from './UserNameInput';
 import { ToggleButton } from './ToggleButton';
-import { createRecipient } from '../../api';
+import { createRecipient, getBackgroundList } from '../../api';
 import OptionSelectContainer from './OptionSelectContainer';
 import { UrlModal } from './UrlModal';
 import NoSelectBackgroundCheck from './NoBackgroundCheck';
@@ -31,27 +31,27 @@ const PostPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isChecked, setChecked] = useState(false);
 
-  const imageUrls = [
-    'https://cdn.pixabay.com/photo/2017/11/07/20/43/christmas-tree-2928142_1280.jpg',
-    'https://cdn.pixabay.com/photo/2018/12/18/21/52/new-years-eve-3883137_1280.png',
-    'https://cdn.pixabay.com/photo/2018/11/09/19/57/christmas-3805334_1280.jpg',
-    'https://cdn.pixabay.com/photo/2012/04/13/01/23/moon-31665_1280.png',
-  ];
-
   const fetchData = async () => {
     try {
+      const { imageUrls } = await getBackgroundList();
+
       setImages(imageUrls);
       if (imageUrls.length > 0) {
         setSelectedImage(imageUrls[0]);
       }
     } catch (error) {
-      console.error(error);
+      console.error('Error fetching background list:', error);
     }
   };
   const handleItemClick = (option, value) => {
     setSelectOption(option);
 
-    option === 'color' ? setSelectedColor(value) : (setSelectedImage(value), setChecked(false));
+    if (option === 'color') {
+      setSelectedColor(value);
+    } else {
+      setSelectedImage(value);
+      setChecked(false);
+    }
   };
   const handleSetImageArray = (value) => {
     setImages((prev) => [...prev, value]);
@@ -59,14 +59,22 @@ const PostPage = () => {
   const handleNameChange = (e) => {
     const inputValue = e.target.value;
     setReceiveUserName(inputValue);
-    inputValue !== '' ? setNameInputEmpty(true) : setNameInputEmpty(false);
+    if (inputValue !== '') {
+      setNameInputEmpty(true);
+    } else {
+      setNameInputEmpty(false);
+    }
   };
   const handleModalChange = (bool, value) => {
     setModalOpen(bool);
 
-    value !== null
-      ? (setImages((prev) => [...prev, value]), setSelectedImage(value), setChecked(false))
-      : setSelectedImage(selectedImage);
+    if (value !== null) {
+      setImages((prev) => [...prev, value]);
+      setSelectedImage(value);
+      setChecked(false);
+    } else {
+      setSelectedImage(selectedImage);
+    }
   };
 
   const handleCheckboxChange = () => {
@@ -74,37 +82,47 @@ const PostPage = () => {
     setSelectedImage('');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (selectedColor === '') {
-      return alert('색상은 필수선택 사항입니다.');
-    }
-    const formData = new FormData();
-    formData.append('team', '2-5');
-    formData.append('name', receiveUserName);
-
-    formData.append('backgroundColor', colorMap[selectedColor]);
-    {
-      selectedImage && formData.append('backgroundImageURL', selectedImage);
-    }
+  const handleResponse = async (responseData) => {
     try {
-      const responseData = await createRecipient(formData);
-
       if (responseData.id) {
         navigate(`/post/${responseData.id}`);
       } else {
-        console.error('Invalid id in responseData:', responseData);
+        console.error('responseData에 유효한 id가 없습니다:', responseData);
       }
     } catch (error) {
-      console.error('Error creating recipient:', error);
+      console.error('응답 처리 중 오류 발생:', error);
     }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (selectedColor === '') {
+      return alert('색상은 필수 선택 항목입니다.');
+    }
+
+    const formData = new FormData();
+    formData.append('team', '2-5');
+    formData.append('name', receiveUserName);
+    formData.append('backgroundColor', colorMap[selectedColor]);
+
+    if (selectedImage) {
+      formData.append('backgroundImageURL', selectedImage);
+    }
+
+    try {
+      const responseData = await createRecipient(formData);
+      handleResponse(responseData);
+    } catch (error) {
+      console.error('수령인 생성 중 오류 발생:', error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <div className="m-full px-5 ">
+    <div className="m-full px-5 overflow-hidden">
       <form
         onSubmit={handleSubmit}
         className="w-[320px] mx-auto mt-[57px] flex flex-col box-border sm:w-[720px] "
@@ -153,7 +171,7 @@ const PostPage = () => {
           )}
         </div>
 
-        {selectOption === 'color' ? (
+        {images.length > 0 && selectOption === 'color' ? (
           <OptionSelectContainer
             optionArray={colors}
             selectedList={selectedColor}
