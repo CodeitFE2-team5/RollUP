@@ -16,7 +16,7 @@ function PostButton({ isButtonEnabled, onSubmit }) {
     <div className="mt-[50px]">
       <div
         className={`flex w-720 p-4 justify-center items-center gap-10 rounded-2xl ${
-          isButtonEnabled ? 'bg-purple-600' : 'bg-red-500'
+          isButtonEnabled ? 'bg-purple-600' : 'bg-purple-600'
         }`}
       >
         <button
