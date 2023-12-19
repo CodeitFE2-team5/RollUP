@@ -9,14 +9,14 @@ const propTypes = {
 
 const ColorOption = ({ color, isSelected, handleItemClick }) => {
   return (
-    <div className={`overflow-hidden rounded-2xl  `}>
+    <div className={`rounded-2xl  `}>
       <div
         onClick={() => handleItemClick('color', color)}
-        className={`relative min-w-[154px] h-[154px] rounded-2xl cursor-pointer ${color} md:w-[168px] md:h-[168px] `}
+        className={`relative w-[156px] h-[156px] rounded-2xl cursor-pointer ${color} sm:w-[168px] sm:h-[168px] `}
       >
         {isSelected && (
           <div className="absolute top-0 left-0 min-w-full h-full bg-gray-400 opacity-50 rounded-2xl">
-            <IoCheckmarkCircle className="absolute w-12 h-12 top-[34%] left-[36%] " />
+            <IoCheckmarkCircle className="absolute w-12 h-12 top-[34%] left-[36%] sm:w-[55px] sm:h-[55px] md:w-[55px] md:h-[55px]" />
           </div>
         )}
       </div>
