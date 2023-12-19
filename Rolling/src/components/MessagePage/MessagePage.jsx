@@ -89,7 +89,7 @@ function MessagePage() {
   return (
     <>
       <Suspense fallback={<div className="skeleton w-11/12 h-[68px] mx-auto"></div>}>
-        <RecipientMenu recipient={recipient}/>
+        <RecipientMenu recipient={recipient} />
       </Suspense>
       <MessageCardContents
         recipient={recipient}
