@@ -2,21 +2,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactionBadge from '../Common/ReactionBadge';
 import Avatar from '../Common/Avatar';
-import patternPurple from '../../assets/pattern_01.svg';
-import patternBeige from '../../assets/pattern_02.svg';
-import patternBlue from '../../assets/pattern_03.svg';
-import patternGreen from '../../assets/pattern_04.svg';
-import { BACKGROUND_COLOR } from '../../constants/constants';
+import { BACKGROUND_COLOR, BACKGROUND_PATTERN } from '../../constants/constants';
 
-const backgroundPattern = {
-  blue: patternBlue,
-  green: patternGreen,
-  purple: patternPurple,
-  beige: patternBeige,
-}
 
 const RollingPaperCard = ({ rollingPaper }) => {
-  const background = rollingPaper?.backgroundImageURL ? rollingPaper.backgroundImageURL : backgroundPattern[rollingPaper.backgroundColor];
+  const background = rollingPaper?.backgroundImageURL ? rollingPaper.backgroundImageURL : BACKGROUND_PATTERN[rollingPaper.backgroundColor];
 
   return(
     <Link to={`/post/${rollingPaper.id}`}>
