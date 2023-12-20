@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { postFormDataToApi } from './PostMessageAPI';
 import SenderName from './SenderName';
 import MessageProfileImage from './MessageProfileImage';
 import Relationships from './Relationships';
 import EnterContent from './EnterContent';
 import FontChange from './FontChange';
 import PostButton from './PostButton';
+import getURL from '../../utils/getURL';
+import { postData } from '../../api/api';
 
 const PostMessagesAPIData = {
   sender: '',
@@ -21,10 +22,11 @@ function PostMessagePage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const isButtonEnabled = formData.sender.trim() !== '' && formData.content.trim() !== '';
+  const postURL = getURL(id, 'messages', 'POST');
 
   const handleSubmit = async () => {
     try {
-      await postFormDataToApi(id, formData);
+      await postData(postURL, formData);
       navigate(`/post/${id}`);
     } catch (error) {
       throw new Error('데이터를 보내는데 실패했습니다.');
