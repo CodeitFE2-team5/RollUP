@@ -51,11 +51,11 @@ export async function uploadImageIBB(file) {
       console.log('Uploaded Image URL:', data.data.url);
       return data.data.url;
     } else {
-      console.error('Failed to upload image');
+      console.error('업로드실패');
       return null;
     }
   } catch (error) {
-    console.error('Error uploading image:', error);
+    console.error('업로드실패:', error);
     return null;
   }
 }

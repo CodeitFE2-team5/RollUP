@@ -141,7 +141,7 @@ const PostPage = () => {
           description="컬러를 선택하거나, 이미지를 선택할 수 있습니다"
         />
         <div className="flex justify-between">
-          <div className="w-[220px] flex  bg-gray-200 text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
+          <div className="w-[240px] flex  bg-gray-200 text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
             <ToggleButton
               onClick={() => handleItemClick('color', selectedColor)}
               isActive={selectOption === 'color'}
@@ -156,16 +156,18 @@ const PostPage = () => {
           </div>
 
           {selectOption === 'image' && (
-            <div className="flex gap-1 w-[270px]   text-center mb-11  text-lg font-Pretendard font-bold rounded-md ">
+            <div className="flex flex-col gap-1 w-[210px]  text-center mb-11  text-lg font-Pretendard font-bold rounded-md sm:flex-row sm:w-[260px]">
               <NoSelectBackgroundCheck
                 handleCheckboxChange={handleCheckboxChange}
                 isChecked={isChecked}
               />
-              <div
-                className=" p-[7px] px-[16px] border-2 border-gray-200 cursor-pointer rounded-md transition-transform transform hover:scale-110"
-                onClick={() => setModalOpen(true)}
-              >
-                URL추가
+              <div className="border-2 border-gray-200 rounded-lg overflow-hidden">
+                <div
+                  className=" p-[7px] px-[16px] cursor-pointer rounded-md transition-transform transform hover:scale-110"
+                  onClick={() => setModalOpen(true)}
+                >
+                  URL추가
+                </div>
               </div>
             </div>
           )}
