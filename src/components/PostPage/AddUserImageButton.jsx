@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { uploadImageIBB } from '../../api';
 import loadingImage from '../../assets/loading.gif';
+
 const propTypes = {
   selectedIndex: PropTypes.string,
   handleItemClick: PropTypes.func.isRequired,
@@ -40,7 +41,7 @@ export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => 
         >
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <img src={loadingImage} alt="로딩이미지" className="w-[20%] h-[20%] bg-white" />
+              <img src={loadingImage} alt="로딩이미지" className="w-[20%] h-[20%]" />
             </div>
           )}
           {!isLoading && (

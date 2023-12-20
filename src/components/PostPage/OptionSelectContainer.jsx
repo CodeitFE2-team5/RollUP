@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import ImageOption from './ImageOption';
 import ColorOption from './ColorOption';
 import { AddUserImageButton } from './AddUserImageButton';
-// import loadingImage from '../../assets/loading.gif';
+
 const propTypes = {
   optionArray: PropTypes.array.isRequired,
   selectedList: PropTypes.string,
