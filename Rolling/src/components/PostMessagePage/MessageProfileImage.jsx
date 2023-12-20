@@ -91,7 +91,7 @@ function MessageProfileImage({ setFormData }) {
           className="w-[90px] h-[90px] rounded-full "
           src={preview}
           alt="프로필 이미지 미리보기"
-        ></img>
+        />
         <div className="flex flex-col items-start gap-2">
           <div className="text-neutral-600 text-base font-normal font-['Pretendard'] leading-relaxed">
             프로필 이미지를 선택해주세요!
