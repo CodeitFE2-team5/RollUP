@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { postFormDataToApi } from './PostMessageAPI';
 import SenderName from './SenderName';
 import MessageProfileImage from './MessageProfileImage';
 import Relationships from './Relationships';
@@ -24,15 +24,7 @@ function PostMessagePage() {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(
-        `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/`,
-        JSON.stringify(formData),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      await postFormDataToApi(id, formData);
       navigate(`/post/${id}`);
     } catch (error) {
       throw new Error('데이터를 보내는데 실패했습니다.');
