@@ -10,6 +10,7 @@ import { createRecipient, getBackgroundList } from '../../api';
 import OptionSelectContainer from './OptionSelectContainer';
 import { UrlModal } from './UrlModal';
 import NoSelectBackgroundCheck from './NoBackgroundCheck';
+import { UrlAppendButton } from './UrlAppendButton';
 
 const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
 const colorMap = {
@@ -26,8 +27,7 @@ const PostPage = () => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedImage, setSelectedImage] = useState('');
   const [images, setImages] = useState([]);
-  const [receiveUserName, setReceiveUserName] = useState('');
-  const [nameInputEmpty, setNameInputEmpty] = useState(true);
+  const [userName, setUserName] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [isChecked, setChecked] = useState(false);
 
@@ -54,22 +54,16 @@ const PostPage = () => {
     }
   };
   const handleSetImageArray = (value) => {
-    setImages((prev) => [...prev, value]);
+    setImages((prev) => [value, ...prev]);
   };
-  const handleNameChange = (e) => {
-    const inputValue = e.target.value;
-    setReceiveUserName(inputValue);
-    if (inputValue !== '') {
-      setNameInputEmpty(true);
-    } else {
-      setNameInputEmpty(false);
-    }
+  const handleNameChange = (value) => {
+    setUserName(value);
   };
   const handleModalChange = (bool, value) => {
     setModalOpen(bool);
 
     if (value !== null) {
-      setImages((prev) => [...prev, value]);
+      setImages((prev) => [value, ...prev]);
       setSelectedImage(value);
       setChecked(false);
     } else {
@@ -101,8 +95,8 @@ const PostPage = () => {
     }
 
     const formData = new FormData();
-    formData.append('team', '2-5');
-    formData.append('name', receiveUserName);
+
+    formData.append('name', userName);
     formData.append('backgroundColor', colorMap[selectedColor]);
 
     if (selectedImage) {
@@ -127,13 +121,9 @@ const PostPage = () => {
         onSubmit={handleSubmit}
         className="w-[320px] mx-auto mt-[57px] flex flex-col box-border sm:w-[720px] "
       >
-        <div className="flex flex-col  gap-3 mb-[50px] ">
+        <div className="flex flex-col  gap-3 mb-[34px] ">
           <Subject subject="To." description="" />
-          <UserNameInput
-            value={receiveUserName}
-            onChange={handleNameChange}
-            nameInputEmpty={nameInputEmpty}
-          />
+          <UserNameInput onChange={handleNameChange} />
         </div>
 
         <Subject
@@ -161,14 +151,7 @@ const PostPage = () => {
                 handleCheckboxChange={handleCheckboxChange}
                 isChecked={isChecked}
               />
-              <div className="border-2 border-gray-200 rounded-lg overflow-hidden">
-                <div
-                  className=" p-[7px] px-[16px] cursor-pointer rounded-md transition-transform transform hover:scale-110"
-                  onClick={() => setModalOpen(true)}
-                >
-                  URL추가
-                </div>
-              </div>
+              <UrlAppendButton onclick={() => setModalOpen(true)} />
             </div>
           )}
         </div>
@@ -190,9 +173,7 @@ const PostPage = () => {
             handleSetImageArray={handleSetImageArray}
           />
         )}
-        <CreateButton onSubmit={handleSubmit} disabled={!receiveUserName}>
-          생성하기
-        </CreateButton>
+        <CreateButton onSubmit={handleSubmit} disabled={!userName} />
       </form>
       <div>{modalOpen && <UrlModal handleModalChange={handleModalChange} />}</div>
     </div>

@@ -15,14 +15,14 @@ export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => 
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       try {
-        setIsLoading(true); // API 요청 시작 시 로딩 상태 변경
+        setIsLoading(true);
         const imageUrl = await uploadImageIBB(selectedFile);
         if (imageUrl) {
           handleItemClick('image', imageUrl);
           handleSetImageArray(imageUrl);
         }
       } finally {
-        setIsLoading(false); // API 요청 종료 시 로딩 상태 변경
+        setIsLoading(false);
       }
     }
   };
@@ -39,7 +39,6 @@ export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => 
         >
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center">
-              {/* 로딩 중에 표시될 로딩 UI를 추가하세요 */}
               <span>Loading...</span>
             </div>
           )}

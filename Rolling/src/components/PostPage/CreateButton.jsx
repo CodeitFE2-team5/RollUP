@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 const propTypes = {
-  children: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
 };
-export const CreateButton = ({ children, onSubmit, disabled }) => {
+export const CreateButton = ({ onSubmit, disabled }) => {
   return (
     <button
       type="submit"
@@ -13,7 +12,7 @@ export const CreateButton = ({ children, onSubmit, disabled }) => {
       className={`min-w-full  px-[24px] py-[14px] my-[69px] text-center font-Pretendard font-bold text-white text-18 rounded-xl tracking-tighter
       ${disabled ? 'bg-gray-500' : 'bg-purple-500'}`}
     >
-      {children}
+      생성하기
     </button>
   );
 };
