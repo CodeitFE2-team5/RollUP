@@ -1,29 +1,44 @@
-import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
-
-const LIMIT = 10;
-const RECIPIENT_API = `https://rolling-api.vercel.app/2-5/recipients/?limit=${LIMIT}&offset=0`;
+import getURL from "../utils/getURL";
+import { LIMIT } from "../constants/constants";
+import { getData } from "../api/api";
 
 export const useRollingPaperList = (sort = '') => {
   const [rollingPaperList, setRollingPaperList] = useState([]);
-  const [url, setUrl] = useState(`${RECIPIENT_API}&sort=${sort}`);
-  const [error, setError] = useState();
+  const [url, setUrl] = useState(getURL('', '', 'GET', LIMIT, 0, sort));
 
   const getRollingPaperList = useCallback(async() => {
-    try{
-      const response = await axios.get(url);
-      const { next, results } = await response.data;
-      if(next) setUrl(next);
-      setRollingPaperList((prev) => [...prev, ...results]);
-    } catch(error) {
-      alert(error);
-      setError(error);
-    }
+    const { previous, next, results } = await getData(url);
+    
+    if(!previous) setRollingPaperList(results);
+    else setRollingPaperList((prev) => [...prev, ...results]);
+    
+    if(next) setUrl(next);
   }, [url]);
 
   useEffect(() => {
     getRollingPaperList();
   }, [getRollingPaperList])
 
-  return [rollingPaperList, error];
+  return [rollingPaperList];
 };
+
+export const useReactions = (id) => {
+  const [reactions, setReactions] = useState([]);
+  const [url, setUrl] = useState(getURL(id, 'reactions'));
+
+  const getReactions = useCallback(async() => {
+    const { previous, next, results } = await getData(url);
+    
+    if(!previous) setReactions(results);
+    else setReactions((prev) => [...prev, ...results]);
+    
+    if(next) setUrl(next);
+  }, [url])
+
+  useEffect(() => {
+    getReactions();
+  }, [getReactions])
+
+  return reactions;
+}

@@ -13,7 +13,7 @@ const ShareMenu = () => {
     } catch (error) {
       alert(error);
     } finally {
-      setTimeout(() => setIsShareSuccess(false), 2000);
+      setTimeout(() => setIsShareSuccess(false), 5000);
     }
   };
 

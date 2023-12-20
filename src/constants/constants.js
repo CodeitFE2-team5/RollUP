@@ -19,3 +19,6 @@ export const MESSAGE_FONT = {
   '나눔손글씨 손편지체': 'font-NanumHandWriting',
 };
 
+export const API_URL = 'https://rolling-api.vercel.app/2-5/recipients';
+
+export const LIMIT = 8;
