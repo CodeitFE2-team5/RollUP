@@ -6,11 +6,10 @@ import MessageCardModal from './MessageCardModal.jsx';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { BACKGROUND_COLOR } from '../../constants/constants.js';
 import { Link, useLocation } from 'react-router-dom';
-import MessageLoading from '../MessagePage/MessageLoading';
 import MessagePageRemove from './MessagePageRemove.jsx';
 import ConfirmModal from '../Common/ConfirmModal';
 
-function MessageCardContents({ recipient, messages, postId, loading }) {
+function MessageCardContents({ recipient, messages, postId }) {
   const [clickedMessage, setClickedMessage] = useState([]);
   const [openMessageModal, setOpenMessageModal] = useState(false);
   const [openRemoveModal, setOpenRemoveModal] = useState(false);
@@ -162,8 +161,6 @@ function MessageCardContents({ recipient, messages, postId, loading }) {
           )}
         </div>
       </div>
-
-      {loading && <MessageLoading />}
     </>
   );
 }
