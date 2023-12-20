@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ConfirmModal from '../Common/ConfirmModal';
 
-function PaperRemoveModal({ recipient, setOpenRemoveModal }) {
+function MessagePageRemove({ recipient, setOpenRemoveModal }) {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const navigate = useNavigate();
 
@@ -52,9 +52,9 @@ function PaperRemoveModal({ recipient, setOpenRemoveModal }) {
   );
 }
 
-PaperRemoveModal.propTypes = {
+MessagePageRemove.propTypes = {
   recipient: PropTypes.object,
   setOpenRemoveModal: PropTypes.func,
 };
 
-export default PaperRemoveModal;
+export default MessagePageRemove;
