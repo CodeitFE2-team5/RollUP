@@ -4,7 +4,7 @@ import { BACKGROUND_COLOR } from '../../constants/constants.js';
 import MessageButtons from './MessageButtons.jsx';
 import MessageCardLists from './MessageCardLists.jsx';
 
-function MessageCardBody({ recipient, messages, postId }) {
+function MessageCardBody({ recipient, messages, postId, loading }) {
   const [clickedMessageIds, setClickedMessageIds] = useState([]);
 
   const getClickedMessageIds = (clickedMessageId) => {
@@ -25,7 +25,7 @@ function MessageCardBody({ recipient, messages, postId }) {
     <>
       <div
         style={{ backgroundImage: `url(${recipient?.backgroundImageURL})` }}
-        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen pt-28 pb-60 pl-6 pr-[34px] bg-cover 
+        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen pt-16 pb-60 pl-6 pr-[34px] bg-cover 
         ${BACKGROUND_COLOR[recipient?.backgroundColor]}`}
       >
         <MessageButtons
@@ -39,6 +39,7 @@ function MessageCardBody({ recipient, messages, postId }) {
           postId={postId}
           messages={messages}
           getClickedMessageIds={getClickedMessageIds}
+          loading={loading}
         />
       </div>
     </>

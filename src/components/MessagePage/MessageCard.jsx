@@ -27,7 +27,7 @@ function MessageCard({
         key={message.id}`}
       >
         <div className="flex justify-between items-center border-b border-b-[#eee]">
-          <div className="flex">
+          <div className="flex mb-4">
             <img
               className="w-14 h-14 rounded-[100px] border border-[#eee]"
               src={message.profileImageURL}

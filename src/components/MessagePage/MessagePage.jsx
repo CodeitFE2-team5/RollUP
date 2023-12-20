@@ -27,33 +27,34 @@ function MessagePage() {
     }
   };
 
-  useEffect(() => {
-    const getRollingMessages = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
-        );
-        const { next, results } = await response.data;
+  const getRollingMessages = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
+      );
+      const { next, results } = await response.data;
 
-        if (offset === 0) {
-          setMessages(results);
-        } else {
-          setMessages((prev) => [...prev, ...results]);
-        }
-        setHasNext(next);
-      } catch (error) {
-        alert(error);
-      } finally {
-        setLoading(false);
+      if (offset === 0) {
+        setMessages(results);
+      } else {
+        setMessages((prev) => [...prev, ...results]);
       }
-    };
-    getRollingMessages();
-  }, [offset]);
+      setHasNext(next);
+    } catch (error) {
+      alert(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const loadMoreMessages = () => {
     setOffset((prevOffset) => prevOffset + LIMIT);
   };
+
+  useEffect(() => {
+    getRollingMessages();
+  }, [offset]);
 
   useEffect(() => {
     getRollingRecipient();
@@ -76,14 +77,10 @@ function MessagePage() {
 
     const observer = new IntersectionObserver(handleObserver, options);
 
-    if (observer) {
-      observer.observe(observerRef.current);
-    }
+    if (observer) observer.observe(observerRef.current);
 
     return () => {
-      if (observer) {
-        observer.disconnect();
-      }
+      if (observer) observer.disconnect();
     };
   }, [hasNext]);
 
@@ -92,7 +89,8 @@ function MessagePage() {
       <Suspense fallback={<div className="skeleton w-11/12 h-[68px] mx-auto"></div>}>
         <RecipientMenu recipient={recipient} />
       </Suspense>
-      <MessageCardBody recipient={recipient} messages={messages} postId={id} />
+
+      <MessageCardBody recipient={recipient} messages={messages} postId={id} loading={loading} />
 
       <div ref={observerRef}></div>
       {loading && <MessageLoading />}
