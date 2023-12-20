@@ -10,7 +10,6 @@ function MessagePage() {
   const [messages, setMessages] = useState([]);
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
   const observerRef = useRef(null);
@@ -29,7 +28,6 @@ function MessagePage() {
   useEffect(() => {
     const getRollingMessages = async () => {
       try {
-        setLoading(true);
         const response = await axios.get(
           `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
         );
@@ -43,8 +41,6 @@ function MessagePage() {
         setHasNext(next);
       } catch (error) {
         alert(error);
-      } finally {
-        setLoading(false);
       }
     };
     getRollingMessages();
@@ -91,12 +87,7 @@ function MessagePage() {
       <Suspense fallback={<div className="skeleton w-11/12 h-[68px] mx-auto"></div>}>
         <RecipientMenu recipient={recipient} />
       </Suspense>
-      <MessageCardContents
-        recipient={recipient}
-        messages={messages}
-        postId={id}
-        loading={loading}
-      />
+      <MessageCardContents recipient={recipient} messages={messages} postId={id} />
       <div id="observer-element" ref={observerRef}></div>
     </>
   );
