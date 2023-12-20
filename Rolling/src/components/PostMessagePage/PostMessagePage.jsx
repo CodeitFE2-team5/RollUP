@@ -22,11 +22,7 @@ function PostMessagePage() {
   const navigate = useNavigate();
   const isButtonEnabled = formData.sender.trim() !== '' && formData.content.trim() !== '';
 
-  const handleSubmit = async (e) => {
-    if (e) {
-      e.preventDefault();
-    }
-
+  const handleSubmit = async () => {
     try {
       await axios.post(
         `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/`,
@@ -56,7 +52,7 @@ function PostMessagePage() {
         <Relationships value={formData.relationship} setFormData={setFormData} />
         <EnterContent value={formData.content} setFormData={setFormData} />
         <FontChange value={formData.font} setFormData={setFormData} />
-        <PostButton isButtonEnabled={isButtonEnabled} onSubmit={handleSubmit}></PostButton>
+        <PostButton isButtonEnabled={isButtonEnabled} onSubmit={handleSubmit} />
       </form>
     </div>
   );

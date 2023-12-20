@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   error: PropTypes.string,
-  selectedImage: PropTypes.array,
+  selectedImage: PropTypes.string,
   setError: PropTypes.func,
   handleAddImage: PropTypes.func,
   isModalOpen: PropTypes.bool,
