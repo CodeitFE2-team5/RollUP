@@ -5,9 +5,10 @@ import MessageCard from './MessageCard';
 import MessageCardModal from './MessageCardModal.jsx';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { BACKGROUND_COLOR } from '../../constants/constants.js';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MessagePageRemove from './MessagePageRemove.jsx';
 import ConfirmModal from '../Common/ConfirmModal';
+import MessageButtons from './MessageButtons.jsx';
 
 function MessageCardContents({ recipient, messages, postId }) {
   const [clickedMessage, setClickedMessage] = useState([]);
@@ -16,8 +17,6 @@ function MessageCardContents({ recipient, messages, postId }) {
   const [clickedMessageIds, setClickedMessageIds] = useState([]);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
-
-  const location = useLocation();
 
   const clickedMessageModal = (id) => {
     const message = messages.find((message) => message.id === id);
@@ -76,7 +75,13 @@ function MessageCardContents({ recipient, messages, postId }) {
         className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen pt-28 pb-60 pl-6 pr-[34px] bg-cover 
         ${BACKGROUND_COLOR[recipient?.backgroundColor]}`}
       >
-        {!location.pathname.includes('edit') ? (
+        <MessageButtons
+          postId={postId}
+          removeMessagePape={removeMessagePape}
+          showConfirmModal={() => setShowConfirmModal(true)}
+          disabled={clickedMessageIds.length}
+        />
+        {/* {!location.pathname.includes('edit') ? (
           <Link to={`/post/${postId}/edit`}>
             <button className="hover:bg-purple-700 w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7">
               편집하기
@@ -101,7 +106,7 @@ function MessageCardContents({ recipient, messages, postId }) {
               저장하기
             </button>
           </div>
-        )}
+        )} */}
 
         {openRemoveModal && (
           <MessagePageRemove recipient={recipient} setOpenRemoveModal={setOpenRemoveModal} />
