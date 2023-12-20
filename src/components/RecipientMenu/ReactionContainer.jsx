@@ -5,37 +5,29 @@ import { useEffect, useState, useCallback } from "react";
 import EmojiPicker from 'emoji-picker-react';
 import AdditionalReactionContainer from "./AdditionalReactionContainer";
 import PropTypes from 'prop-types';
-import axios from "axios";
 import { useParams } from "react-router";
+import getURL from "../../utils/getURL";
+import { getData, postData } from "../../api/api";
 
-const LIMIT = 8;
 
 const ReactionContainer = ({ recipientId }) => {
   const [additionalReactionOpen, setAdditionalReactionOpen] = useState(false);
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
   const { id } = useParams();
-  const RECIPIENT_API = `https://rolling-api.vercel.app/2-5/recipients/${id}/reactions/?limit=${LIMIT}&offset=0`;
   
   const [reactions, setReactions] = useState([]);
-  const [url, setUrl] = useState(RECIPIENT_API);
+  const [url, setUrl] = useState(getURL(id, 'reactions'));
+  
+  const postURL = getURL(id, 'reactions', 'POST');
 
   const getReactions = useCallback(async() => {
-    try{
-      const response = await axios.get(url);
-      const { next, results } = await response.data;
-      if(next) setUrl(next);
-      setReactions((prev) => {
-        const uniqueResults = results.filter(newItem => !prev.some(item => item.id === newItem.id));
-        return [...prev, ...uniqueResults];
-      });
-    } catch(error) {
-      alert(error);
-    }
+    const { previous, next, results } = await getData(url);
+    
+    if(!previous) setReactions(results);
+    else setReactions((prev) => [...prev, ...results]);
+    
+    if(next) setUrl(next);
   }, [url])
-
-  useEffect(() => {
-    getReactions();
-  }, [getReactions, url])
 
   const handleClickAdditionalReaction = () => {
     setAdditionalReactionOpen(!additionalReactionOpen);
@@ -56,21 +48,13 @@ const ReactionContainer = ({ recipientId }) => {
         return reaction;
       }).sort((a, b) => b.count - a.count);
     })
-    postReaction(value);
+    postData(postURL, {emoji: value, type: 'increase'});
     setEmojiPickerOpen(!emojiPickerOpen);
   }
-
-  const postReaction = async(emoji) => {
-    const url = `https://rolling-api.vercel.app/2-5/recipients/${id}/reactions/`
-    try{
-      await axios.post(url, {
-        emoji: emoji,
-        type: 'increase'
-      })
-    } catch(error) {
-      alert(error);
-    }
-  };
+  
+  useEffect(() => {
+    getReactions();
+  }, [getReactions])
 
   return(
     <div className="flex md:gap-2 relative">
@@ -91,7 +75,6 @@ const ReactionContainer = ({ recipientId }) => {
 };
 
 ReactionContainer.propTypes = {
-  topReactions: PropTypes.array,
   recipientId: PropTypes.number
 }
 

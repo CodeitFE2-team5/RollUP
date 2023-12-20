@@ -1,41 +1,32 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import SenderName from './SenderName';
 import MessageProfileImage from './MessageProfileImage';
 import Relationships from './Relationships';
 import EnterContent from './EnterContent';
 import FontChange from './FontChange';
 import PostButton from './PostButton';
+import getURL from '../../utils/getURL';
+import { postData } from '../../api/api';
+
+const PostMessagesAPIData = {
+  sender: '',
+  profileImageURL: 'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg',
+  relationship: '지인',
+  content: '',
+  font: 'Noto Sans',
+};
 
 function PostMessagePage() {
-  const [formData, setFormData] = useState({
-    sender: '',
-    profileImageURL: 'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg',
-    relationship: '지인',
-    content: '',
-    font: 'Noto Sans',
-  });
-
+  const [formData, setFormData] = useState(PostMessagesAPIData);
   const { id } = useParams();
   const navigate = useNavigate();
   const isButtonEnabled = formData.sender.trim() !== '' && formData.content.trim() !== '';
+  const postURL = getURL(id, 'messages', 'POST');
 
-  const handleSubmit = async (e) => {
-    if (e) {
-      e.preventDefault();
-    }
-
+  const handleSubmit = async () => {
     try {
-      await axios.post(
-        `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/`,
-        JSON.stringify(formData),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      await postData(postURL, formData);
       navigate(`/post/${id}`);
     } catch (error) {
       throw new Error('데이터를 보내는데 실패했습니다.');
@@ -55,7 +46,7 @@ function PostMessagePage() {
         <Relationships value={formData.relationship} setFormData={setFormData} />
         <EnterContent value={formData.content} setFormData={setFormData} />
         <FontChange value={formData.font} setFormData={setFormData} />
-        <PostButton isButtonEnabled={isButtonEnabled} onSubmit={handleSubmit}></PostButton>
+        <PostButton isButtonEnabled={isButtonEnabled} onSubmit={handleSubmit} />
       </form>
     </div>
   );

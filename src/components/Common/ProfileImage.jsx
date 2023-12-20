@@ -1,21 +1,9 @@
 import PropTypes from 'prop-types';
-
-const leftValue = {
-  0 : 'absolute left-0',
-  1 : 'absolute left-4',
-  2 : 'absolute left-8',
-  default: ''
-}
-
-const sizeValue = {
-  28: 'w-7',
-  56: 'w-14',
-  80: 'w-20' 
-}
+import { LEFT_VALUE, SIZE_VALUE } from '../../constants/constants';
 
 const ProfileImage = ({ index='default', profileImage, size }) => {
   return(
-    <div key={index} className={`avatar avatar-${index} rounded-full absolute ${leftValue[index]} ${sizeValue[size]}`}>
+    <div key={index} className={`avatar avatar-${index} rounded-full absolute ${LEFT_VALUE[index]} ${SIZE_VALUE[size]}`}>
       <img src={profileImage} alt="프로필" className=" rounded-full border"/>
     </div>
   )
