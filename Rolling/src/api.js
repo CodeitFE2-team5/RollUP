@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 //Codeit에서 제공하는 기본 background이미지
 export async function getBackgroundList() {
   const URL = 'https://rolling-api.vercel.app/background-images/';
@@ -15,6 +16,7 @@ export async function getBackgroundList() {
     throw error;
   }
 }
+
 //recipients post요청
 export async function createRecipient(formData) {
   const url = 'https://rolling-api.vercel.app/2-5/recipients/';
@@ -32,6 +34,7 @@ export async function createRecipient(formData) {
     throw error;
   }
 }
+
 //IBB사이트 포스트 요청기능 이미지 업로드후 업로드한 이미지 url받아오기
 export async function uploadImageIBB(file) {
   const formData = new FormData();

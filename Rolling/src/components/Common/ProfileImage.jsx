@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 
 const leftValue = {
-  0 : 'left-0',
-  1 : 'left-4',
-  2 : 'left-8'
+  0 : 'absolute left-0',
+  1 : 'absolute left-4',
+  2 : 'absolute left-8',
+  default: ''
 }
 
 const sizeValue = {
@@ -12,7 +13,7 @@ const sizeValue = {
   80: 'w-20' 
 }
 
-const ProfileImage = ({ index, profileImage, size }) => {
+const ProfileImage = ({ index='default', profileImage, size }) => {
   return(
     <div key={index} className={`avatar avatar-${index} rounded-full absolute ${leftValue[index]} ${sizeValue[size]}`}>
       <img src={profileImage} alt="프로필" className=" rounded-full border"/>
@@ -21,7 +22,7 @@ const ProfileImage = ({ index, profileImage, size }) => {
 };
 
 ProfileImage.propTypes = {
-  index: PropTypes.number,
+  index: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   profileImage: PropTypes.string,
   size: PropTypes.number
 }
