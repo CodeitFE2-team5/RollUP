@@ -1,8 +1,38 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import MessagePageRemove from './MessagePageRemove';
+import ConfirmModal from '../Common/ConfirmModal';
+import axios from 'axios';
 
-function MessageButtons({ postId, removeMessagePape, showConfirmModal, disabled }) {
+function MessageButtons({ postId, recipient, disabled, clickedMessageIds, setClickedMessageIds }) {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [openRemoveModal, setOpenRemoveModal] = useState(false);
   const location = useLocation();
+
+  const removeMessagePape = () => {
+    setOpenRemoveModal(true);
+  };
+
+  const handleDismissModal = () => {
+    setShowConfirmModal(false);
+    setShowCompleteModal(false);
+  };
+
+  const handleRemoveMessage = async () => {
+    try {
+      clickedMessageIds.map(async (messageId) => {
+        await axios.delete(`https://rolling-api.vercel.app/2-5/messages/${messageId}/`);
+      });
+
+      setClickedMessageIds([]);
+      setShowConfirmModal(false);
+      setShowCompleteModal(true);
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
     <>
@@ -22,7 +52,7 @@ function MessageButtons({ postId, removeMessagePape, showConfirmModal, disabled 
           </button>
 
           <button
-            onClick={showConfirmModal}
+            onClick={() => setShowConfirmModal(true)}
             className={`${
               !disabled ? 'cursor-not-allowed' : ''
             } sm:w-full sm:fixed sm:left-0 sm:bottom-6 hover:bg-purple-700 lg:static lg:w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7`}
@@ -32,15 +62,43 @@ function MessageButtons({ postId, removeMessagePape, showConfirmModal, disabled 
           </button>
         </div>
       )}
+
+      {openRemoveModal && (
+        <MessagePageRemove recipient={recipient} setOpenRemoveModal={setOpenRemoveModal} />
+      )}
+
+      {showConfirmModal && (
+        <ConfirmModal
+          title="선택한 메세지들을 삭제하고 저장하시겠습니까?"
+          onConfirm={handleRemoveMessage}
+          onCancel={handleDismissModal}
+        />
+      )}
+
+      {showCompleteModal && (
+        <ConfirmModal
+          title="삭제가 완료되었습니다."
+          onConfirm={() => {
+            setShowCompleteModal(false);
+            window.location.reload();
+          }}
+          onCancel={() => {
+            setShowCompleteModal(false);
+            window.location.reload();
+          }}
+          showCancelButton={false}
+        />
+      )}
     </>
   );
 }
 
 MessageButtons.propTypes = {
   postId: PropTypes.node,
-  removeMessagePape: PropTypes.func,
-  showConfirmModal: PropTypes.func,
+  recipient: PropTypes.object,
   disabled: PropTypes.node,
+  clickedMessageIds: PropTypes.array,
+  setClickedMessageIds: PropTypes.func,
 };
 
 export default MessageButtons;

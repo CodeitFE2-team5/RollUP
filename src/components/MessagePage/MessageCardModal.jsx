@@ -6,7 +6,7 @@ import DOMPurify from 'dompurify';
 function MessageCardModal({ message, handleCloseModal }) {
   return (
     <>
-      <div className="flex flex-col gap-4 fixed -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4 z-[9999] w-[600px] h-[476px] p-10 rounded-2xl bg-white">
+      <div className="sm:w-full flex flex-col gap-4 fixed -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4 z-[9999] md:w-[600px] h-[476px] p-10 rounded-2xl bg-white">
         <div className="flex justify-between items-center h-14 border-b border-b-[#eee] h-">
           <div className="flex">
             <img
