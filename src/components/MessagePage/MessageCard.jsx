@@ -34,7 +34,7 @@ function MessageCard({
               alt="프로필 이미지"
             />
             <div className="ms-5">
-              <p className={`${MESSAGE_FONT['message.font']}`}>
+              <p className={`${MESSAGE_FONT[message.font]}`}>
                 From. <b>{message.sender}</b>
               </p>
               <span

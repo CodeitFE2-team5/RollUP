@@ -5,7 +5,7 @@ import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { useState } from 'react';
 import MessageCardModal from './MessageCardModal';
 
-function MessageCardLists({ postId, messages, getClickedMessageIds, loading }) {
+function MessageCardLists({ postId, messages, getClickedMessageIds, initialSkeletonLoading }) {
   const [clickedMessage, setClickedMessage] = useState([]);
   const [openMessageModal, setOpenMessageModal] = useState(false);
 
@@ -24,7 +24,7 @@ function MessageCardLists({ postId, messages, getClickedMessageIds, loading }) {
 
   return (
     <div className="lg:grid lg:grid-cols-[repeat(3,minmax(0,24rem))] md:grid md:grid-cols-[repeat(2,minmax(0,24rem))] grid grid-cols-[repeat(1,minmax(0,24rem))] justify-center gap-4 relative">
-      {loading && <div className="skeleton absolute w-full h-auto inset-0"></div>}
+      {initialSkeletonLoading && <div className="skeleton absolute w-full h-auto inset-0"></div>}
       {!location.pathname.includes('edit') && (
         <div className="flex justify-center items-center max-w-sm h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
           <Link to={`/post/${postId}/message`}>
@@ -65,7 +65,7 @@ MessageCardLists.propTypes = {
   messages: PropTypes.array,
   clickedMessageModal: PropTypes.func,
   getClickedMessageIds: PropTypes.func,
-  loading: PropTypes.bool,
+  initialSkeletonLoading: PropTypes.bool,
 };
 
 export default MessageCardLists;

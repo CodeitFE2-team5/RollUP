@@ -1,8 +1,9 @@
-import axios from 'axios';
-import MessageCardBody from './MessageCardBody';
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import MessageCardBody from './MessageCardBody';
 import MessageLoading from './MessageLoading';
+import { rollingMessagesApi, rollingRecipientApi } from './MessageApi';
+import { LIMIT } from '../../constants/constants';
 
 const RecipientMenu = lazy(() => import('../RecipientMenu/RecipientMenu'));
 
@@ -11,17 +12,16 @@ function MessagePage() {
   const [messages, setMessages] = useState([]);
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [initialSkeletonLoading, setInitialSkeletonLoading] = useState(true);
 
   const { id } = useParams();
   const observerRef = useRef(null);
-  const LIMIT = 10;
 
   const getRollingRecipient = async () => {
     try {
-      const response = await axios.get(`https://rolling-api.vercel.app/2-5/recipients/${id}/`);
-      const results = await response.data;
-      setRecipient(results);
+      const recipientData = await rollingRecipientApi(id);
+      setRecipient(recipientData);
     } catch (error) {
       alert(error);
     }
@@ -29,14 +29,12 @@ function MessagePage() {
 
   const getRollingMessages = async () => {
     try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
-      );
-      const { next, results } = await response.data;
+      setScrollLoading(true);
+      const { next, results } = await rollingMessagesApi(id, offset);
 
       if (offset === 0) {
         setMessages(results);
+        setInitialSkeletonLoading(false);
       } else {
         setMessages((prev) => [...prev, ...results]);
       }
@@ -44,7 +42,7 @@ function MessagePage() {
     } catch (error) {
       alert(error);
     } finally {
-      setLoading(false);
+      setScrollLoading(false);
     }
   };
 
@@ -90,10 +88,15 @@ function MessagePage() {
         <RecipientMenu recipient={recipient} />
       </Suspense>
 
-      <MessageCardBody recipient={recipient} messages={messages} postId={id} loading={loading} />
+      <MessageCardBody
+        recipient={recipient}
+        messages={messages}
+        postId={id}
+        initialSkeletonLoading={initialSkeletonLoading}
+      />
 
       <div ref={observerRef}></div>
-      {loading && <MessageLoading />}
+      {scrollLoading && <MessageLoading />}
     </>
   );
 }

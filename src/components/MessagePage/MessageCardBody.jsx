@@ -4,7 +4,7 @@ import { BACKGROUND_COLOR } from '../../constants/constants.js';
 import MessageButtons from './MessageButtons.jsx';
 import MessageCardLists from './MessageCardLists.jsx';
 
-function MessageCardBody({ recipient, messages, postId, loading }) {
+function MessageCardBody({ recipient, messages, postId, initialSkeletonLoading }) {
   const [clickedMessageIds, setClickedMessageIds] = useState([]);
 
   const getClickedMessageIds = (clickedMessageId) => {
@@ -39,7 +39,7 @@ function MessageCardBody({ recipient, messages, postId, loading }) {
           postId={postId}
           messages={messages}
           getClickedMessageIds={getClickedMessageIds}
-          loading={loading}
+          initialSkeletonLoading={initialSkeletonLoading}
         />
       </div>
     </>
@@ -49,7 +49,7 @@ function MessageCardBody({ recipient, messages, postId, loading }) {
 MessageCardBody.propTypes = {
   recipient: PropTypes.object,
   messages: PropTypes.array,
-  loading: PropTypes.bool,
+  initialSkeletonLoading: PropTypes.bool,
   postId: PropTypes.string,
 };
 

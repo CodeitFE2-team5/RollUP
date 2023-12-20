@@ -15,7 +15,7 @@ function MessageCardModal({ message, handleCloseModal }) {
               alt="프로필 이미지"
             />
             <div className="ms-5">
-              <p className={`mb-2 ${MESSAGE_FONT['message.font']}`}>
+              <p className={`mb-2 ${MESSAGE_FONT[message.font]}`}>
                 From. <b>{message.sender}</b>
               </p>
               <span
