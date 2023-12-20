@@ -15,13 +15,11 @@ function PostButton({ isButtonEnabled, onSubmit }) {
   return (
     <div className="mt-[50px]">
       <div
-        className={`flex w-720 p-4 justify-center items-center gap-10 rounded-2xl ${
-          isButtonEnabled ? 'bg-purple-600' : 'bg-purple-600'
-        }`}
+        className={'flex w-720 p-4 justify-center items-center gap-10 rounded-2xl bg-purple-600'}
       >
         <button
           type="button"
-          disabled={!isButtonEnabled || !onSubmit}
+          disabled={!isButtonEnabled}
           className="w-full text-white text-center font-Pretendard font-bold text-lg leading-7"
           onClick={handleClick}
         >
