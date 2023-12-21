@@ -2,10 +2,21 @@
 <img style="width: 500px; height: 200px;" src="https://github.com/CodeitFE2-team5/Rolling/assets/139199039/afe67a11-8251-42bf-a279-552e4e0f1fcc" alt="Image Description">
 <br/>
 <br/>
+
+ > 코드잇 스프린트-프론트엔드 2기 PART2 - 5팀 <br/>
+ > 개발기간: 2023. 12. 09 ~ 2023. 12. 22 <br/>
+ 
 - 배포 URL : https://momonga.netlify.app/
 
 <br/>
 <br/>
+
+
+### 💁🏻‍♀️💁🏻‍♂️ 프로젝트 소개
+- Rolling은 누구나 쉽게 롤링 페이퍼를 만들고, 작성할 수 있는 웹 플랫폼입니다.
+- [ 롤링 페이퍼 만들기 ] 버튼을 눌러 롤링 페이퍼를 직접 만들 수 있습니다.
+- 롤링 페이퍼에 메세지를 직접 작성하거나 삭제할 수 있습니다.
+
 <br/>
 <br/>
 
@@ -16,15 +27,13 @@
 
 <br/>
 <br/>
-<br/>
-<br/>
 
 ### 🖥️ TECH STACK
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=Vite&logoColor=white"/>
  <img src="https://img.shields.io/badge/tailwindcss-white?logo=tailwindcss"/>
  <img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=GitHub&logoColor=white"/>
  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=flat&logo=Netlify&logoColor=white"/>
-<br/>
-<br/>
+
+
 <br/>
 <br/>
