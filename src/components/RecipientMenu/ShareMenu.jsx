@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ToastModal from './ToastModal';
-import logo from '../../assets/logo.svg';
 
 const { Kakao } = window;
 
@@ -30,7 +29,7 @@ const ShareMenu = ({onChange}) => {
       content: {
         title: 'Rolling Paper',
         description: '나만의 롤링페이퍼',
-        imageUrl:logo,
+        imageUrl:'https://www.urbanbrush.net/web/wp-content/uploads/edd/2022/11/urbanbrush-20221108214712319041.jpg',
         link: {
           mobileWebUrl: location.pathname,
           webUrl: location.pathname,
