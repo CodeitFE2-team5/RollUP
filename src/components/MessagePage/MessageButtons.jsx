@@ -43,7 +43,7 @@ function MessageButtons({ postId, recipient, disabled, clickedMessageIds, setCli
           </button>
         </Link>
       ) : (
-        <div className="justify-end flex gap-3">
+        <div className="flex justify-end gap-3">
           <button
             onClick={removeMessagePape}
             className="hover:bg-orange-700 w-44 px-6 py-3.5 bg-orange-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7"
