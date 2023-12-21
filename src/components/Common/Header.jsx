@@ -3,7 +3,7 @@ import logo from '../../assets/logo.svg';
 
 function Header() {
   const location = useLocation();
-  const isVisiblePage = location.pathname === '/' || location.pathname === '/list';
+  const isVisiblePage = location.pathname === '/' || location.pathname === '/list' || location.pathname === '/list/all';
 
   return (
     <div className={`${isVisiblePage ? 'flex' : 'hidden'} md:flex items-center justify-between flex-shrink-0 py-2 px-4 xl:px-24 max-w-screen-xl mx-auto h-16 border-b-[1px] border-zinc-100`}>

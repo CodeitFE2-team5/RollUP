@@ -1,16 +1,18 @@
-import { Link } from 'react-router-dom';
-import { FaArrowRight } from "react-icons/fa";
+import { useState } from "react";
 
-const CardSearchForm = () => {
+const CardSearchForm = ({ onChange }) => {
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleInputValueChange = (e) => {
+    setSearchValue(e.target.value);
+    onChange(e.target.value);
+  };
+
   return(
-    <div className='max-w-[1160px] mx-auto'>
-      <form className='flex justify-between items-center mt-6 px-6 mx-auto gap-5'>
-        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-3xl" />
-        <Link to={'/list/all'}>
-          <button className='mx-auto flex justify-end items-center'><FaArrowRight />전체보기</button>
-        </Link>
-      </form>
-    </div>
+    <form className='mt-10 px-6 mx-auto max-w-3xl relative'>
+      <input type="text" placeholder="롤링페이퍼를 찾아보세요." onChange={handleInputValueChange} className="bg-[url('/Users/82105/Documents/GitHub/Rolling/src/assets/searchIcon.svg')] bg-no-repeat bg-[left_8px_top_14px] indent-8 border rounded-lg border-purple-600 w-full mx-auto max-w-3xl h-12 focus:outline-none focus:border-2" />
+      <button type="submit" className="h-10 w-20 bg-purple-600 text-white rounded-lg absolute top-1 right-7">검색하기</button>
+    </form>
   )
 };
 
