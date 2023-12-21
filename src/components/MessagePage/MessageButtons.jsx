@@ -43,7 +43,7 @@ function MessageButtons({ postId, recipient, disabled, clickedMessageIds, setCli
           </button>
         </Link>
       ) : (
-        <div className="flex gap-3">
+        <div className="justify-end flex gap-3">
           <button
             onClick={removeMessagePape}
             className="hover:bg-orange-700 w-44 px-6 py-3.5 bg-orange-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7"
@@ -55,7 +55,7 @@ function MessageButtons({ postId, recipient, disabled, clickedMessageIds, setCli
             onClick={() => setShowConfirmModal(true)}
             className={`${
               !disabled ? 'cursor-not-allowed' : ''
-            } sm:w-full sm:fixed sm:left-0 sm:bottom-6 hover:bg-purple-700 lg:static lg:w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7 z-10`}
+            } sm:fixed sm:bottom-6 sm:w-[calc(100%_-_2.8rem)] sm:max-w-[24rem] md:max-w-[49rem] hover:bg-purple-700 lg:static lg:w-32 px-6 py-3.5 bg-purple-600 rounded-xl justify-center items-center gap-2.5 inline-flex text-center text-white text-lg font-bold font-['Pretendard'] leading-7 z-10`}
             disabled={!disabled}
           >
             저장하기

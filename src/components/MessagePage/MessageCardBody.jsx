@@ -25,7 +25,7 @@ function MessageCardBody({ recipient, messages, postId, initialSkeletonLoading }
     <>
       <div
         style={{ backgroundImage: `url(${recipient?.backgroundImageURL})` }}
-        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen pt-16 pb-60 pl-6 pr-[34px] bg-cover 
+        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen pt-16 pb-60 px-6 pr bg-cover 
         ${BACKGROUND_COLOR[recipient?.backgroundColor]}`}
       >
         <MessageButtons
