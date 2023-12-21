@@ -9,7 +9,7 @@
 <br/>
 <br/>
 
-## 👯Participants
+### 👯Participants
 |이해빈       |김재환       |손오름       |임주민       |
 |-----------|-----------|-----------|-----------|
 |![profileimg1](https://github.com/CodeitFE2-team5/Rolling/assets/139199039/af2630bc-11b9-452b-a8f3-9aa56ee22dc2)<br/>[@lhv0829](https://github.com/lhv0829)   | ![profileimg2](https://github.com/CodeitFE2-team5/Rolling/assets/139199039/36dba325-3807-4923-8e2f-9aa8058715d4)<br/>[@BBoBBoM](https://github.com/BBoBBoM)  | ![profileimg3](https://github.com/CodeitFE2-team5/Rolling/assets/139199039/05666643-a1fe-4028-ada1-e4c5369e4bd8)<br/>[@mrhandsup](https://github.com/mrhandsup)   | ![profileimg4](https://github.com/CodeitFE2-team5/Rolling/assets/139199039/f79e8bb8-d0bc-4e27-bb4f-847ee9174bde)<br/>[@imkrmin](https://github.com/imkrmin)   |
@@ -19,7 +19,7 @@
 <br/>
 <br/>
 
-## 🖥️ TECH STACK
+### 🖥️ TECH STACK
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=Vite&logoColor=white"/>
  <img src="https://img.shields.io/badge/tailwindcss-white?logo=tailwindcss"/>
  <img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=GitHub&logoColor=white"/>
