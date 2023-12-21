@@ -42,7 +42,7 @@ export async function uploadImageIBB(file) {
 
   try {
     const response = await fetch(
-      'https://api.imgbb.com/1/upload?expiration=518400&key=95d8f7e8290e8ffef56546465f96b389',
+      'https://api.imgbb.com/1/upload?key=95d8f7e8290e8ffef56546465f96b389',
       {
         method: 'POST',
         body: formData,
