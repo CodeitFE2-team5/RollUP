@@ -1,5 +1,3 @@
-// -769px이상 / 태블릿은 768px-361px / 모바일은 360px-
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Subject from './Subject';
@@ -12,8 +10,9 @@ import NoSelectBackgroundCheck from './NoBackgroundCheck';
 import { UrlAppendButton } from './UrlAppendButton';
 import getURL from '../../utils/getURL';
 import { getData, postData } from '../../api/api';
+import { BACKGROUND_COLOR } from '../../constants/constants';
 
-const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
+const colors = Object.values(BACKGROUND_COLOR);
 const colorMap = {
   'bg-[#ECD9FF]': 'purple',
   'bg-[#D0F5C3]': 'green',
