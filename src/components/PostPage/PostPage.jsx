@@ -11,8 +11,9 @@ import OptionSelectContainer from './OptionSelectContainer';
 import { UrlModal } from './UrlModal';
 import NoSelectBackgroundCheck from './NoBackgroundCheck';
 import { UrlAppendButton } from './UrlAppendButton';
+import { BACKGROUND_COLOR } from '../../constants/constants';
 
-const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
+const colors = Object.values(BACKGROUND_COLOR);
 const colorMap = {
   'bg-[#ECD9FF]': 'purple',
   'bg-[#D0F5C3]': 'green',
