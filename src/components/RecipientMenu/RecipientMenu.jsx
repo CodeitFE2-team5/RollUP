@@ -31,7 +31,7 @@ const RecipientMenu = ({ recipient }) => {
             <div className="w-px h-7 bg-gray-200" />
             <div className="relative">
               <button className="px-2 py-1.5 border border-gray-300 rounded-md md:px-4" onClick={handleClickShareButton}><IoShareOutline className="w-6 h-6"/></button>
-              {shareMenuOpen && <ShareMenu />}
+              {shareMenuOpen && <ShareMenu onChange={handleClickShareButton}/>}
             </div>
           </div>
         </div>

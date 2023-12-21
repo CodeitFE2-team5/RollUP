@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ToastModal from './ToastModal';
+import logo from '../../assets/logo.svg';
 
 const { Kakao } = window;
 
-const ShareMenu = () => {
+const ShareMenu = ({onChange}) => {
   const [isShareSuccess, setIsShareSuccess] = useState(false);
   const location = useLocation();
 
@@ -15,18 +16,21 @@ const ShareMenu = () => {
     } catch (error) {
       alert(error);
     } finally {
-      setTimeout(() => setIsShareSuccess(false), 60000);
+      setTimeout(() =>{ 
+        setIsShareSuccess(false)
+        onChange();
+      }, 5000);
     }
   };
 
   const shareKakao = () => {
+    onChange();
     Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
         title: 'Rolling Paper',
         description: '나만의 롤링페이퍼',
-        imageUrl:
-          'https://private-user-images.githubusercontent.com/139199039/292135098-afe67a11-8251-42bf-a279-552e4e0f1fcc.svg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNjUxOTgsIm5iZiI6MTcwMzE2NDg5OCwicGF0aCI6Ii8xMzkxOTkwMzkvMjkyMTM1MDk4LWFmZTY3YTExLTgyNTEtNDJiZi1hMjc5LTU1MmU0ZTBmMWZjYy5zdmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjIxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIyMVQxMzIxMzhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03MTc1ZDQ5MDg2MjJiYTI1ZjE1ZDIyYTI0MWE5OGZlYjQxMjNiNzkxNjY2OGNlY2IzODQ3NGEwM2ZiMDc3NmQwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.2PipUobf7ko1-1ybLyKDrMaJjDgY1ViWDvOFklmpmZo',
+        imageUrl:logo,
         link: {
           mobileWebUrl: location.pathname,
           webUrl: location.pathname,
