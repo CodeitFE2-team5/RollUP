@@ -62,14 +62,16 @@ const ReactionContainer = ({ recipientId }) => {
         <div className="flex items-center justify-center gap-2">
           {reactions?.slice(0,3).map((reaction) => <ReactionBadge key={reaction.emoji} reaction={reaction} />)}
         </div>
-        <button className="py-1.5 px-1.5" onClick={handleClickAdditionalReaction}><IoIosArrowDown className="w-6 h-6"/></button>
       </div>
+      {reactions.length > 3 &&
+        <button className="py-1.5 px-1.5" onClick={handleClickAdditionalReaction}><IoIosArrowDown className="w-6 h-6"/></button>
+      }
       <button className="flex justify-center items-center py-1.5 px-2 md:px-4 gap-1 border rounded-md border-gray-300" onClick={handleClickAddButton}>
         <LuSmilePlus className="w-6 h-6"/>
         <p className="hidden text-base md:flex">추가</p>
       </button>
       {additionalReactionOpen && <AdditionalReactionContainer recipientId={recipientId}/>}
-      {emojiPickerOpen && <div className="absolute top-11 left-4 z-10"><EmojiPicker onEmojiClick={(value) => handleAddReaction(value.emoji)} width={307} height={393}/></div>}
+      {emojiPickerOpen && <div className="absolute top-11 right-0 z-10"><EmojiPicker onEmojiClick={(value) => handleAddReaction(value.emoji)} width={307} height={393}/></div>}
     </div>
   )
 };

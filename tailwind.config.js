@@ -6,9 +6,9 @@ export default {
     screens: {
       sm: '480px',
       md: '768px',
-      lg: '1025px',
+      lg: '1200px',
       xl: '1280px',
-      xl2: '1360px',
+      xl2: '1460px',
     },
     extend: {
       fontFamily: {

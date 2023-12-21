@@ -176,3 +176,4 @@ MessageCardContents.propTypes = {
 };
 
 export default MessageCardContents;
+

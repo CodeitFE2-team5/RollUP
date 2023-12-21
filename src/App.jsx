@@ -5,6 +5,7 @@ import RollingPaperListPage from './components/RollingPaperListPage/RollingPaper
 import MessagePage from './components/MessagePage/MessagePage';
 import PostPage from './components/PostPage/PostPage';
 import PostMessagePage from './components/PostMessagePage/PostMessagePage';
+import RollingPaperAllPage from './components/RollingPaperListPage/RollingPaperAllPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/list" element={<RollingPaperListPage />} />
+        <Route path="/list/all" element={<RollingPaperAllPage />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/:id" element={<MessagePage />} />
         <Route path="/post/:id/edit" element={<MessagePage />} />

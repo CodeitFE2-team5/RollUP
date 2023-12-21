@@ -1,8 +1,11 @@
-import axios from 'axios';
-import MessageCardContents from './MessageCardContents';
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import MessageCardBody from './MessageCardBody';
 import MessageLoading from './MessageLoading';
+import { LIMIT } from '../../constants/constants';
+import getURL from '../../utils/getURL';
+import { getData } from '../../api/api';
+import ScrollToTop from '../Common/ScrollToTop';
 
 const RecipientMenu = lazy(() => import('../RecipientMenu/RecipientMenu'));
 
@@ -11,49 +14,49 @@ function MessagePage() {
   const [messages, setMessages] = useState([]);
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [scrollLoading, setScrollLoading] = useState(false);
+  const [initialSkeletonLoading, setInitialSkeletonLoading] = useState(true);
 
   const { id } = useParams();
   const observerRef = useRef(null);
-  const LIMIT = 10;
 
   const getRollingRecipient = async () => {
+    const url = getURL(id);
     try {
-      const response = await axios.get(`https://rolling-api.vercel.app/2-5/recipients/${id}/`);
-      const results = await response.data;
-      setRecipient(results);
+      const recipientData = await getData(url);
+      setRecipient(recipientData);
     } catch (error) {
       alert(error);
     }
   };
 
-  useEffect(() => {
-    const getRollingMessages = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `https://rolling-api.vercel.app/2-5/recipients/${id}/messages/?limit=${LIMIT}&offset=${offset}`
-        );
-        const { next, results } = await response.data;
+  const getRollingMessages = async () => {
+    const url = getURL(id, 'messages', 'GET', LIMIT, offset);
+    try {
+      setScrollLoading(true);
+      const { next, results } = await getData(url);
 
-        if (offset === 0) {
-          setMessages(results);
-        } else {
-          setMessages((prev) => [...prev, ...results]);
-        }
-        setHasNext(next);
-      } catch (error) {
-        alert(error);
-      } finally {
-        setLoading(false);
+      if (offset === 0) {
+        setMessages(results);
+        setInitialSkeletonLoading(false);
+      } else {
+        setMessages((prev) => [...prev, ...results]);
       }
-    };
-    getRollingMessages();
-  }, [offset]);
+      setHasNext(next);
+    } catch (error) {
+      alert(error);
+    } finally {
+      setScrollLoading(false);
+    }
+  };
 
   const loadMoreMessages = () => {
     setOffset((prevOffset) => prevOffset + LIMIT);
   };
+
+  useEffect(() => {
+    getRollingMessages();
+  }, [offset]);
 
   useEffect(() => {
     getRollingRecipient();
@@ -76,26 +79,29 @@ function MessagePage() {
 
     const observer = new IntersectionObserver(handleObserver, options);
 
-    if (observer) {
-      observer.observe(observerRef.current);
-    }
+    if (observer) observer.observe(observerRef.current);
 
     return () => {
-      if (observer) {
-        observer.disconnect();
-      }
+      if (observer) observer.disconnect();
     };
   }, [hasNext]);
 
   return (
     <>
+      <ScrollToTop />
       <Suspense fallback={<div className="skeleton w-11/12 h-[68px] mx-auto"></div>}>
         <RecipientMenu recipient={recipient} />
       </Suspense>
-      <MessageCardContents recipient={recipient} messages={messages} postId={id} />
+
+      <MessageCardBody
+        recipient={recipient}
+        messages={messages}
+        postId={id}
+        initialSkeletonLoading={initialSkeletonLoading}
+      />
 
       <div ref={observerRef}></div>
-      {loading && <MessageLoading />}
+      {scrollLoading && <MessageLoading />}
     </>
   );
 }
