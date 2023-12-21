@@ -6,11 +6,12 @@ import Subject from './Subject';
 import { CreateButton } from './CreateButton';
 import { UserNameInput } from './UserNameInput';
 import { ToggleButton } from './ToggleButton';
-import { createRecipient, getBackgroundList } from '../../api';
 import OptionSelectContainer from './OptionSelectContainer';
 import { UrlModal } from './UrlModal';
 import NoSelectBackgroundCheck from './NoBackgroundCheck';
 import { UrlAppendButton } from './UrlAppendButton';
+import getURL from '../../utils/getURL';
+import { getData, postData } from '../../api/api';
 
 const colors = [`bg-[#ECD9FF]`, `bg-[#D0F5C3]`, `bg-[#B1E4FF]`, `bg-[#FFE2AD]`];
 const colorMap = {
@@ -31,14 +32,13 @@ const PostPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isChecked, setChecked] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      const { imageUrls } = await getBackgroundList();
+  const [initialImageSet, setInitialImageSet] = useState(false);
 
+  const getBackgroundList = async () => {
+    const url = 'https://rolling-api.vercel.app/background-images/'
+    try {
+      const { imageUrls } = await getData(url);
       setImages(imageUrls);
-      if (imageUrls.length > 0) {
-        setSelectedImage(imageUrls[0]);
-      }
     } catch (error) {
       console.error('Error fetching background list:', error);
     }
@@ -52,7 +52,12 @@ const PostPage = () => {
       setSelectedImage(value);
       setChecked(false);
     }
+    if (option === 'image' && !initialImageSet) {
+      setSelectedImage(images[0]);
+      setInitialImageSet(true);
+    }
   };
+
   const handleSetImageArray = (value) => {
     setImages((prev) => [value, ...prev]);
   };
@@ -90,6 +95,7 @@ const PostPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const url = getURL('', '', 'POST');
     if (selectedColor === '') {
       return alert('색상은 필수 선택 항목입니다.');
     }
@@ -104,7 +110,7 @@ const PostPage = () => {
     }
 
     try {
-      const responseData = await createRecipient(formData);
+      const responseData = await postData(url,formData);
       handleResponse(responseData);
     } catch (error) {
       console.error('수령인 생성 중 오류 발생:', error);
@@ -112,7 +118,7 @@ const PostPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    getBackgroundList();
   }, []);
 
   return (

@@ -2,8 +2,10 @@ import loadingAnimation from '../../assets/loading.gif';
 
 function MessageLoading() {
   return (
-    <div className="flex justify-center py-5">
-      <img src={loadingAnimation} className="w-12" />
+    <div className="fixed w-full z-50 left-0 bottom-2">
+      <div className="flex justify-center items-center h-full">
+        <img src={loadingAnimation} className="w-16" />
+      </div>
     </div>
   );
 }
