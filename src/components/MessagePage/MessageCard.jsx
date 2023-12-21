@@ -27,14 +27,14 @@ function MessageCard({
         key={message.id}`}
       >
         <div className="flex justify-between items-center border-b border-b-[#eee]">
-          <div className="flex">
+          <div className="flex mb-4">
             <img
               className="w-14 h-14 rounded-[100px] border border-[#eee]"
               src={message.profileImageURL}
               alt="프로필 이미지"
             />
             <div className="ms-5">
-              <p className={`${MESSAGE_FONT['message.font']}`}>
+              <p className={`${MESSAGE_FONT[message.font]}`}>
                 From. <b>{message.sender}</b>
               </p>
               <span

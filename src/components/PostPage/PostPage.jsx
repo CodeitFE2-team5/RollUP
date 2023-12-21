@@ -31,14 +31,12 @@ const PostPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isChecked, setChecked] = useState(false);
 
+  const [initialImageSet, setInitialImageSet] = useState(false);
+
   const fetchData = async () => {
     try {
       const { imageUrls } = await getBackgroundList();
-
       setImages(imageUrls);
-      if (imageUrls.length > 0) {
-        setSelectedImage(imageUrls[0]);
-      }
     } catch (error) {
       console.error('Error fetching background list:', error);
     }
@@ -52,7 +50,12 @@ const PostPage = () => {
       setSelectedImage(value);
       setChecked(false);
     }
+    if (option === 'image' && !initialImageSet) {
+      setSelectedImage(images[0]);
+      setInitialImageSet(true);
+    }
   };
+
   const handleSetImageArray = (value) => {
     setImages((prev) => [value, ...prev]);
   };
