@@ -7,7 +7,6 @@ export const postData = async(url, data) => {
         'Content-Type': 'application/json',
       },
     });
-    console.log(response.data);
     return response.data;
   } catch(error) {
     alert(error);
@@ -18,6 +17,14 @@ export const getData = async(url) => {
   try{
     const response = await axios.get(url);
     return response.data;
+  } catch(error) {
+    alert(error);
+  }
+};
+
+export const deleteData = async(url) => {
+  try{
+    await axios.delete(url);
   } catch(error) {
     alert(error);
   }

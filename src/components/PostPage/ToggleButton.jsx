@@ -6,7 +6,7 @@ const propTypes = {
   content: PropTypes.string.isRequired,
 };
 
-export const ToggleButton = ({ onClick, isActive, content }) => {
+const ToggleButton = ({ onClick, isActive, content }) => {
   return (
     <div
       onClick={onClick}
@@ -20,3 +20,5 @@ export const ToggleButton = ({ onClick, isActive, content }) => {
 };
 
 ToggleButton.propTypes = propTypes;
+
+export default ToggleButton;

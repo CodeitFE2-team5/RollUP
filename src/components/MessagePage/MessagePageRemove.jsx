@@ -1,8 +1,9 @@
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ConfirmModal from '../Common/ConfirmModal';
+import ConfirmModal from './ConfirmModal';
+import getURL from '../../utils/getURL';
+import { deleteData } from '../../api/api';
 
 function MessagePageRemove({ recipient, setOpenRemoveModal }) {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -13,8 +14,9 @@ function MessagePageRemove({ recipient, setOpenRemoveModal }) {
   };
 
   const handlePaperRemove = async () => {
+    const url = getURL(recipient.id, '', 'DELETE');
     try {
-      await axios.delete(`https://rolling-api.vercel.app/2-5/recipients/${recipient.id}/`);
+      await deleteData(url);
       setShowConfirmModal(true);
     } catch (error) {
       alert(error);

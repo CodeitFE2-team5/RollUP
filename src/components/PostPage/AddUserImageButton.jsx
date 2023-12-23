@@ -9,7 +9,8 @@ const propTypes = {
   handleItemClick: PropTypes.func.isRequired,
   handleSetImageArray: PropTypes.func.isRequired,
 };
-export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => {
+
+const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => {
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef();
 
@@ -32,6 +33,7 @@ export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => 
   const handleFileSelectClick = () => {
     inputRef.current.click();
   };
+
   return (
     <div>
       <div className={`overflow-hidden rounded-2xl `}>
@@ -66,4 +68,7 @@ export const AddUserImageButton = ({ handleItemClick, handleSetImageArray }) => 
     </div>
   );
 };
+
 AddUserImageButton.propTypes = propTypes;
+
+export default AddUserImageButton;

@@ -1,9 +1,11 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, lazy, Suspense } from "react";
 import CardSearchForm from "./CardSearchForm";
-import RollingPaperCardContents from "./RollingPaperContent";
+// import RollingPaperCardContents from "./RollingPaperContent";
 import getURL from "../../utils/getURL";
 import { getData } from "../../api/api";
 import { LIMIT } from "../../constants/constants";
+
+const RollingPaperCardContents = lazy(() => import('./RollingPaperContent'));
 
 const RollingPaperAllPage = () => {
   const [rollingPaperList, setRollingPaperList] = useState();
@@ -34,13 +36,6 @@ const RollingPaperAllPage = () => {
     setValue(searchValue);
   }
 
-  const filterRollingPapers = (rollingPapers, searchValue) => {
-    if(searchValue === '') return rollingPapers;
-    const regex = new RegExp(searchValue, 'i');
-    const filteredRollingPapers = rollingPapers?.filter((rollingPaper) => regex.test(rollingPaper.name)); // title에 검색어가 포함된 롤링페이퍼 필터링
-    return filteredRollingPapers;
-  };
-
   useEffect(() => {
     setUrl(getURL('', '', 'GET', LIMIT, 0, sort));
   },[sort])
@@ -61,11 +56,20 @@ const RollingPaperAllPage = () => {
         <button className={`border border-purple-600 py-2 px-2 rounded-md ${sort === '' ? 'bg-purple-600 text-white font-semibold' : ''}`} onClick={handleOrderButtonClick}>최신순</button>
         <button className={`border border-purple-600 py-2 px-2 rounded-md ${sort === 'like' ? 'bg-purple-600 text-white font-semibold' : ''}`} onClick={handleOrderButtonClick}>인기순</button>
       </div>
-      <div className='py-[40px] pl-5 md:py-[50px] flex flex-col'>
-        <RollingPaperCardContents rollingPaperList={filteredRollingPaperList || rollingPaperList} />
-      </div>
+      <Suspense fallback={<div className="py-[40px] pl-5 md:py-[50px] flex flex-col h-[60vh] w-[70vw]"></div>}>
+        <div className='py-[40px] pl-5 md:py-[50px] flex flex-col'>
+          <RollingPaperCardContents rollingPaperList={filteredRollingPaperList || rollingPaperList} />
+        </div>
+      </Suspense>
     </div>
   )
+};
+
+const filterRollingPapers = (rollingPapers, searchValue) => {
+  if(searchValue === '') return rollingPapers;
+  const regex = new RegExp(searchValue, 'i');
+  const filteredRollingPapers = rollingPapers?.filter((rollingPaper) => regex.test(rollingPaper.name));
+  return filteredRollingPapers;
 };
 
 export default RollingPaperAllPage;

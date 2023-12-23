@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { MESSAGE_FONT, RELATIONSHIP_TAG_COLOR } from '../../constants/constants';
 import formatDate from '../../utils/formatDate';
-import DOMPurify from 'dompurify';
+import RelationshipTag from './RelationshipTag';
+import MessageContent from './MessageContent';
 
 function MessageCardModal({ message, handleCloseModal }) {
   return (
@@ -18,25 +19,14 @@ function MessageCardModal({ message, handleCloseModal }) {
               <p className={`mb-2 ${MESSAGE_FONT[message.font]}`}>
                 From. <b>{message.sender}</b>
               </p>
-              <span
-                className={`rounded px-2 py-[2px] text-sm ${
-                  RELATIONSHIP_TAG_COLOR[message.relationship]
-                }`}
-              >
-                {message.relationship}
-              </span>
+              <RelationshipTag color={RELATIONSHIP_TAG_COLOR[message.relationship]}>{message.relationship}</RelationshipTag>
             </div>
           </div>
           <div className="text-sm text-[#999] leading-5">{formatDate(message.createdAt)}</div>
         </div>
-
         <div className="mt-3 h-60 overflow-y-auto">
-          <span
-            className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.content) }}
-          />
+          <MessageContent font={MESSAGE_FONT[message.font]} content={message.content}/>
         </div>
-
         <div className="mt-5 text-center">
           <button
             onClick={handleCloseModal}

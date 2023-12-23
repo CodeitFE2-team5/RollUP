@@ -6,7 +6,7 @@ const propTypes = {
   to: PropTypes.string.isRequired,
 };
 
-function Button({ children, to }) {
+function LinkButton({ children, to }) {
   return (
     <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2">
       <Link to={to}>
@@ -18,6 +18,6 @@ function Button({ children, to }) {
   );
 }
 
-Button.propTypes = propTypes;
+LinkButton.propTypes = propTypes;
 
-export default Button;
+export default LinkButton;

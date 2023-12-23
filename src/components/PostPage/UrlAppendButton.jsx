@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+
 const propTypes = {
   onclick: PropTypes.func.isRequired,
 };
-export const UrlAppendButton = ({ onclick }) => {
+
+const UrlAppendButton = ({ onclick }) => {
   return (
     <div className="border-2 border-gray-200 rounded-lg overflow-hidden">
       <div
@@ -14,4 +16,7 @@ export const UrlAppendButton = ({ onclick }) => {
     </div>
   );
 };
+
 UrlAppendButton.propTypes = propTypes;
+
+export default UrlAppendButton;

@@ -5,7 +5,6 @@ function ConfirmModal({ title, onConfirm, onCancel, showCancelButton = true }) {
     <>
       <div className="flex flex-col justify-end gap-9 p-8 bg-white fixed -translate-x-2/4 -translate-y-2/4 left-2/4 w-96 h-56 rounded-3xl top-2/4 z-20">
         <p className="text-center text-xl font-bold">{title}</p>
-
         <div className="flex justify-center gap-5">
           <button
             onClick={onConfirm}

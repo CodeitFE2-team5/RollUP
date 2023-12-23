@@ -1,5 +1,7 @@
 import img01 from '../../assets/landing-img01.svg';
 import img02 from '../../assets/landing-img02.svg';
+import Description from '../Common/Description';
+import Subject from '../Common/Subject';
 
 function Article() {
   return (
@@ -12,14 +14,8 @@ function Article() {
             </div>
           </div>
           <div className="flex-col justify-start items-start gap-2 flex">
-            <div className="text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9">
-              누구나 손쉽게, 온라인
-              <br />
-              롤링 페이퍼를 만들 수 있어요
-            </div>
-            <div className="text-neutral-600 text-lg font-normal font-['Pretendard'] leading-7">
-              로그인 없이 자유롭게 만들어요.
-            </div>
+            <Subject>누구나 손쉽게, 온라인<br/>롤링 페이퍼를 만들 수 있어요</Subject>
+            <Description>로그인 없이 자유롭게 만들어요.</Description>
           </div>
         </div>
         <img className="" src={img01} />
@@ -34,14 +30,8 @@ function Article() {
             </div>
           </div>
           <div className="flex-col justify-start items-start gap-2 flex">
-            <div className="text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9">
-              서로에게 이모지로 감정을
-              <br />
-              표현해보세요
-            </div>
-            <div className="text-neutral-600 text-lg font-normal font-['Pretendard'] leading-7">
-              롤링 페이퍼에 이모지를 추가할 수 있어요.
-            </div>
+            <Subject>서로이게 이모지로 감정을<br/>표현해보세요</Subject>
+            <Description>롤링 페이퍼에 이모지를 추가할 수 있어요.</Description>
           </div>
         </div>
         <img className="lg:hidden w-full mt-[30px]" src={img02} />

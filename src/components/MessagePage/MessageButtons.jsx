@@ -2,8 +2,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import MessagePageRemove from './MessagePageRemove';
-import ConfirmModal from '../Common/ConfirmModal';
-import axios from 'axios';
+import ConfirmModal from './ConfirmModal';
+import { API_MESSAGE_URL } from '../../constants/constants';
+import { deleteData } from '../../api/api';
 
 function MessageButtons({ postId, recipient, disabled, clickedMessageIds, setClickedMessageIds }) {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -22,9 +23,7 @@ function MessageButtons({ postId, recipient, disabled, clickedMessageIds, setCli
 
   const handleRemoveMessage = async () => {
     try {
-      clickedMessageIds.map(async (messageId) => {
-        await axios.delete(`https://rolling-api.vercel.app/2-5/messages/${messageId}/`);
-      });
+      clickedMessageIds.map((messageId) => deleteData(`${API_MESSAGE_URL}/${messageId}/`));
 
       setClickedMessageIds([]);
       setShowConfirmModal(false);

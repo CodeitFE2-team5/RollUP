@@ -31,7 +31,9 @@ export const MESSAGE_FONT = {
   '나눔손글씨 손편지체': 'font-NanumHandWriting',
 };
 
-export const API_URL = 'https://rolling-api.vercel.app/2-5/recipients';
+export const API_RECIPIENT_URL = 'https://rolling-api.vercel.app/2-5/recipients';
+
+export const API_MESSAGE_URL = 'https://rolling-api.vercel.app/2-5/messages';
 
 export const LIMIT = 8;
 
@@ -51,3 +53,13 @@ export const SIZE_VALUE = {
   56: 'w-14',
   80: 'w-20' 
 }
+
+export const DEFAULT_PROFILE_IMAGES = 'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg';
+
+export const PROVIDED_PROFILE_IMAGES = [
+  'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg',
+  'https://i.ibb.co/SBhkRPX/profileimg1.jpg',
+  'https://i.ibb.co/pX1t3bR/profileimg2.jpg',
+  'https://i.ibb.co/m6MMJN5/profileimg3.jpg',
+  'https://i.ibb.co/n7dYm0y/profileimg4.jpg',
+];

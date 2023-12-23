@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ImageOption from './ImageOption';
 import ColorOption from './ColorOption';
-import { AddUserImageButton } from './AddUserImageButton';
+import AddUserImageButton from './AddUserImageButton';
 
 const propTypes = {
   optionArray: PropTypes.array.isRequired,
@@ -11,13 +11,8 @@ const propTypes = {
 
   selectOption: PropTypes.string,
 };
-const OptionSelectContainer = ({
-  optionArray,
-  selectedList,
-  selectOption,
-  handleItemClick,
-  handleSetImageArray,
-}) => {
+
+const OptionSelectContainer = ({ optionArray, selectedList, selectOption, handleItemClick, handleSetImageArray }) => {
   if (optionArray.length === 0) {
     return <div>Loading...</div>;
   }
@@ -49,5 +44,7 @@ const OptionSelectContainer = ({
     </div>
   );
 };
+
 OptionSelectContainer.propTypes = propTypes;
+
 export default OptionSelectContainer;

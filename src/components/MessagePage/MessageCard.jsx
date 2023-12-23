@@ -4,7 +4,8 @@ import { LiaTrashAltSolid } from 'react-icons/lia';
 import { IoReload } from 'react-icons/io5';
 import formatDate from '../../utils/formatDate';
 import { useState } from 'react';
-import DOMPurify from 'dompurify';
+import RelationshipTag from './RelationshipTag';
+import MessageContent from './MessageContent';
 
 function MessageCard({
   message,
@@ -41,16 +42,10 @@ function MessageCard({
               >
                 From. <b>{message.sender}</b>
               </p>
-              <span
-                className={`rounded px-2 py-[2px] text-sm ${
-                  RELATIONSHIP_TAG_COLOR[message.relationship]
-                }`}
-              >
-                {message.relationship}
-              </span>
+              <RelationshipTag color={RELATIONSHIP_TAG_COLOR[message.relationship]}>{message.relationship}</RelationshipTag>
             </div>
           </div>
-          {showTrashIcon && !markedForDeletion && (
+          {(showTrashIcon && !markedForDeletion) && (
             <button
               onClick={() => {
                 getClickedMessageIds(message.id);
@@ -74,10 +69,7 @@ function MessageCard({
           )}
         </div>
         <div className="h-28 line-clamp-4 cursor-pointer" onClick={getClickedMessageId}>
-          <p
-            className={`text-[#4A4A4A] text-lg leading-7 ${MESSAGE_FONT[message.font]}`}
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.content) }}
-          />
+          <MessageContent font={MESSAGE_FONT[message.font]} content={message.content}/>
         </div>
         <p className="bottom-[30px] text-[#999] text-xs">{formatDate(message.createdAt)}</p>
       </div>

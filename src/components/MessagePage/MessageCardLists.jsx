@@ -26,13 +26,7 @@ function MessageCardLists({ postId, messages, getClickedMessageIds, initialSkele
     <div className="lg:grid lg:grid-cols-[repeat(3,minmax(0,24rem))] md:grid md:grid-cols-[repeat(2,minmax(0,24rem))] grid grid-cols-[repeat(1,minmax(0,24rem))] justify-center gap-4 relative">
       {initialSkeletonLoading && <div className="skeleton absolute w-full h-auto inset-0"></div>}
       {!location.pathname.includes('edit') && (
-        <div className="flex justify-center items-center max-w-sm h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
-          <Link to={`/post/${postId}/message`}>
-            <button className="flex items-start gap-2.5 p-4">
-              <BsFillPlusCircleFill className="w-14 h-14 fill-gray-500 grid-cols" />
-            </button>
-          </Link>
-        </div>
+        <PlusButton id={postId} />
       )}
 
       {!location.pathname.includes('edit')
@@ -60,6 +54,18 @@ function MessageCardLists({ postId, messages, getClickedMessageIds, initialSkele
   );
 }
 
+const PlusButton = ({id}) => {
+  return(
+    <div className="flex justify-center items-center max-w-sm h-[280px] shadow-[0px_2px_12px_0px_rgba(0,0,0,0.08)] rounded-2xl bg-white">
+      <Link to={`/post/${id}/message`}>
+        <button className="flex items-start gap-2.5 p-4">
+          <BsFillPlusCircleFill className="w-14 h-14 fill-gray-500 grid-cols" />
+        </button>
+      </Link>
+    </div>
+  )
+};
+
 MessageCardLists.propTypes = {
   postId: PropTypes.node,
   messages: PropTypes.array,
@@ -67,5 +73,9 @@ MessageCardLists.propTypes = {
   getClickedMessageIds: PropTypes.func,
   initialSkeletonLoading: PropTypes.bool,
 };
+
+PlusButton.propTypes = {
+  id:PropTypes.node
+}
 
 export default MessageCardLists;

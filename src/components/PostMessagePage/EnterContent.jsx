@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import PropTypes from 'prop-types';
+import Subject from '../Common/Subject';
 
 const propTypes = {
   setFormData: PropTypes.func,
@@ -31,10 +32,8 @@ function EnterContent({ setFormData }) {
   };
 
   return (
-    <div className="flex flex-col items-start gap-3 mt-[50px]">
-      <div className="text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9">
-        내용을 입력해 주세요
-      </div>
+    <div className="flex flex-col items-start gap-3">
+      <Subject>내용을 입력해주세요</Subject>
       <ReactQuill
         theme="snow"
         className="w-full h-[300px] mb-[50px] "

@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import validateUrlFormat from '../../utils/validateUrlFormat';
 
 const propTypes = {
   handleModalChange: PropTypes.func.isRequired,
 };
 
-export const UrlModal = ({ handleModalChange }) => {
+const UrlModal = ({ handleModalChange }) => {
   const [urlInputValue, setUrlInputValue] = useState('');
   const [isValidUrl, setIsValidUrl] = useState(true);
   const modalBackground = useRef();
@@ -14,12 +15,6 @@ export const UrlModal = ({ handleModalChange }) => {
     if (isValidUrl) {
       handleModalChange(false, urlInputValue);
     }
-  };
-
-  const validateUrlFormat = (inputValue) => {
-    const urlCheckRule =
-      /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
-    return urlCheckRule.test(inputValue);
   };
 
   const handleInputChange = (e) => {
@@ -78,3 +73,5 @@ export const UrlModal = ({ handleModalChange }) => {
 };
 
 UrlModal.propTypes = propTypes;
+
+export default UrlModal;
