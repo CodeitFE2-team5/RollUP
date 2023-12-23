@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Subject from './Subject';
+import Subject from '../Common/Subject';
 import PostButton from '../Common/PostButton';
 import ToggleButton from './ToggleButton';
 import OptionSelectContainer from './OptionSelectContainer';
