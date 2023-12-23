@@ -14,7 +14,7 @@ function NoSelectBackgroundCheck({ isChecked, handleCheckboxChange }) {
         }`}
       >
         배경화면 없애기
-      </div>{' '}
+      </div>
     </div>
   );
 }

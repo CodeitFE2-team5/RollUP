@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import ToastModal from './ToastModal';
+import PropTypes from 'prop-types';
 
 const { Kakao } = window;
 
@@ -61,6 +61,10 @@ const ShareMenu = ({onChange}) => {
       {isShareSuccess && <ToastModal />}
     </>
   )
+};
+
+ShareMenu.propTypes = {
+  onChange:PropTypes.func
 };
 
 export default ShareMenu;

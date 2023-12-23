@@ -13,7 +13,7 @@ function PostButton({ isButtonEnabled, onSubmit }) {
   };
 
   return (
-    <div className="mt-[50px]">
+    <div>
       <div
         className={'flex w-720 p-4 justify-center items-center gap-10 rounded-2xl bg-purple-600'}
       >

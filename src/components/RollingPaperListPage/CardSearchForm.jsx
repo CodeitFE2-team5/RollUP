@@ -1,10 +1,7 @@
-import { useState } from "react";
+import PropTypes from 'prop-types';
 
 const CardSearchForm = ({ onChange }) => {
-  const [searchValue, setSearchValue] = useState('');
-
   const handleInputValueChange = (e) => {
-    setSearchValue(e.target.value);
     onChange(e.target.value);
   };
 
@@ -15,5 +12,9 @@ const CardSearchForm = ({ onChange }) => {
     </form>
   )
 };
+
+CardSearchForm.propTypes = {
+  onChange:PropTypes.func
+}
 
 export default CardSearchForm;

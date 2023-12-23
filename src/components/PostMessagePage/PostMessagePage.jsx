@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import SenderName from './SenderName';
+import NameInput from '../Common/NameInput';
 import MessageProfileImage from './MessageProfileImage';
 import Relationships from './Relationships';
 import EnterContent from './EnterContent';
@@ -8,6 +8,7 @@ import FontChange from './FontChange';
 import PostButton from './PostButton';
 import getURL from '../../utils/getURL';
 import { postData } from '../../api/api';
+import Subject from '../Common/Subject';
 
 const PostMessagesAPIData = {
   sender: '',
@@ -33,15 +34,26 @@ function PostMessagePage() {
     }
   };
 
+  const handleChangeName = (value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      sender: value,
+    }));
+  };
+
   return (
-    <div className="mt-14 mb-20 mx-4 xl:mx-auto max-w-[1080px] flex flex-col">
+    <div className="mt-14 mb-20 mx-4 xl:mx-auto max-w-[1080px]">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
         }}
+        className='flex flex-col gap-[50px]'
       >
-        <SenderName value={formData.sender} setFormData={setFormData} />
+        <div className='flex flex-col gap-2'>
+          <Subject>From.</Subject>
+          <NameInput value={formData.sender} onChange={handleChangeName} />
+        </div>
         <MessageProfileImage value={formData.profileImageURL} setFormData={setFormData} />
         <Relationships value={formData.relationship} setFormData={setFormData} />
         <EnterContent value={formData.content} setFormData={setFormData} />

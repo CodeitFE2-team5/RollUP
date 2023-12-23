@@ -1,4 +1,4 @@
-import Button from '../Common/Button';
+import LinkButton from '../Common/LinkButton';
 import { useRollingPaperList } from '../../hooks/hooks';
 import { Suspense, lazy } from 'react';
 import RollingPaperListSkeleton from './RollingPaperListSkeleton';
@@ -22,7 +22,7 @@ const RollingPaperListPage = () => {
         <div className='py-[40px] pl-5 md:py-[50px] flex flex-col gap-[50px]'>
           <RollingPaperList title={'인기 롤링 페이퍼 🔥'} rollingPaperList={likeSortRollingPaper}/>
           <RollingPaperList title={'최근에 만든 롤링 페이퍼 ⭐️️'} rollingPaperList={createdSortRollingPaper}/>
-          <Button to="/post">나도 만들어보기</Button>
+          <LinkButton to="/post">나도 만들어보기</LinkButton>
         </div>
       </Suspense>
     </div>

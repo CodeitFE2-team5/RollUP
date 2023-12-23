@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Subject from './Subject';
+import Subject from '../Common/Subject';
 import { CreateButton } from './CreateButton';
-import { UserNameInput } from './UserNameInput';
-import { ToggleButton } from './ToggleButton';
+import ToggleButton from './ToggleButton';
 import OptionSelectContainer from './OptionSelectContainer';
-import { UrlModal } from './UrlModal';
+import UrlModal from './UrlModal';
 import NoSelectBackgroundCheck from './NoBackgroundCheck';
-import { UrlAppendButton } from './UrlAppendButton';
+import UrlAppendButton from './UrlAppendButton';
 import getURL from '../../utils/getURL';
 import { getData, postData } from '../../api/api';
 import { BACKGROUND_COLOR } from '../../constants/constants';
+import Description from '../Common/Description';
+import NameInput from '../Common/NameInput';
 
 const colors = Object.values(BACKGROUND_COLOR);
 const colorMap = {
@@ -127,15 +128,15 @@ const PostPage = () => {
         className="w-[320px] mx-auto mt-[57px] flex flex-col box-border sm:w-[720px] "
       >
         <div className="flex flex-col  gap-3 mb-[34px] ">
-          <Subject subject="To." description="" />
-          <UserNameInput onChange={handleNameChange} />
+          <Subject>To.</Subject>
+          <NameInput onChange={handleNameChange} />
         </div>
 
-        <Subject
-          subject="배경화면을 선택해 주세요."
-          description="컬러를 선택하거나, 이미지를 선택할 수 있습니다"
-        />
-        <div className="flex justify-between">
+        <div className="flex flex-col">
+          <Subject>배경화면을 선택해 주세요.</Subject>
+          <Description>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</Description>
+        </div>
+        <div className="flex justify-between mt-6">
           <div className="w-[240px] flex  bg-gray-200 text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
             <ToggleButton
               onClick={() => handleItemClick('color', selectedColor)}

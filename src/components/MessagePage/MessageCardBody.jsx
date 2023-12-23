@@ -22,27 +22,25 @@ function MessageCardBody({ recipient, messages, postId, initialSkeletonLoading }
   };
 
   return (
-    <>
-      <div
-        style={{ backgroundImage: `url(${recipient?.backgroundImageURL})` }}
-        className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen pt-16 pb-60 pl-6 pr-[34px] bg-cover 
-        ${BACKGROUND_COLOR[recipient?.backgroundColor]}`}
-      >
-        <MessageButtons
-          postId={postId}
-          recipient={recipient}
-          disabled={clickedMessageIds.length}
-          clickedMessageIds={clickedMessageIds}
-          setClickedMessageIds={setClickedMessageIds}
-        />
-        <MessageCardLists
-          postId={postId}
-          messages={messages}
-          getClickedMessageIds={getClickedMessageIds}
-          initialSkeletonLoading={initialSkeletonLoading}
-        />
-      </div>
-    </>
+    <div
+      style={{ backgroundImage: `url(${recipient?.backgroundImageURL})` }}
+      className={`flex flex-wrap content-center flex-col items-end gap-3.5 w-full min-h-screen pt-16 pb-60 pl-6 pr-[34px] bg-cover 
+      ${BACKGROUND_COLOR[recipient?.backgroundColor]}`}
+    >
+      <MessageButtons
+        postId={postId}
+        recipient={recipient}
+        disabled={clickedMessageIds.length}
+        clickedMessageIds={clickedMessageIds}
+        setClickedMessageIds={setClickedMessageIds}
+      />
+      <MessageCardLists
+        postId={postId}
+        messages={messages}
+        getClickedMessageIds={getClickedMessageIds}
+        initialSkeletonLoading={initialSkeletonLoading}
+      />
+    </div>
   );
 }
 

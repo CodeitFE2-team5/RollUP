@@ -3,20 +3,13 @@ import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { FaCircleCheck } from 'react-icons/fa6';
 import PropTypes from 'prop-types';
 import AddProfileImageModal from './AddProfileImageModal';
+import Subject from '../Common/Subject';
+import Description from '../Common/Description';
+import { DEFAULT_PROFILE_IMAGES, PROVIDED_PROFILE_IMAGES } from '../../constants/constants';
 
 const propTypes = {
   setFormData: PropTypes.func,
 };
-
-const DEFAULT_PROFILE_IMAGES = 'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg';
-
-const PROVIDED_PROFILE_IMAGES = [
-  'https://i.ibb.co/Nx8VY0Z/no-profileimg-1.jpg',
-  'https://i.ibb.co/SBhkRPX/profileimg1.jpg',
-  'https://i.ibb.co/pX1t3bR/profileimg2.jpg',
-  'https://i.ibb.co/m6MMJN5/profileimg3.jpg',
-  'https://i.ibb.co/n7dYm0y/profileimg4.jpg',
-];
 
 const maxImages = 20;
 
@@ -58,7 +51,7 @@ function MessageProfileImage({ setFormData }) {
     setImageArray((prevImages) => [...prevImages, imageUrl]);
     setSelectedImage(imageUrl);
     handleProfileImageChange(imageUrl);
-    closeModal();
+    setIsModalOpen(!isModalOpen);
   };
 
   const handleProfileImageChange = (imageUrl) => {
@@ -68,12 +61,8 @@ function MessageProfileImage({ setFormData }) {
     }));
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   useEffect(() => {
@@ -81,10 +70,8 @@ function MessageProfileImage({ setFormData }) {
   }, [selectedImage]);
 
   return (
-    <div className="flex flex-col items-start gap-3 mt-[50px]">
-      <div className="flex text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9">
-        프로필 이미지
-      </div>
+    <div className="flex flex-col items-start gap-3">
+      <Subject>프로필 이미지</Subject>
 
       <div className="flex content-center items-center gap-8">
         <img
@@ -93,13 +80,10 @@ function MessageProfileImage({ setFormData }) {
           alt="프로필 이미지 미리보기"
         />
         <div className="flex flex-col items-start gap-2">
-          <div className="text-neutral-600 text-base font-normal font-['Pretendard'] leading-relaxed">
-            프로필 이미지를 선택해주세요!
-          </div>
-
+          <Description>프로필 이미지를 선택해주세요!</Description>
           <div className="flex w-full h-14 overflow-x-auto relative justify-start gap-1 flex-wrap">
             <div className="gap-1 flex flex-wrap">
-              <label htmlFor="AddProfileImage" className="cursor-pointer" onClick={openModal}>
+              <label htmlFor="AddProfileImage" className="cursor-pointer" onClick={(handleModal)}>
                 <BsFillPlusCircleFill className="w-14 h-14 fill-gray-400" />
               </label>
 
@@ -108,7 +92,7 @@ function MessageProfileImage({ setFormData }) {
                 setError={setError}
                 handleAddImage={handleAddImage}
                 isModalOpen={isModalOpen}
-                closeModal={closeModal}
+                closeModal={handleModal}
                 selectedImage={selectedImage}
               />
 
@@ -122,7 +106,7 @@ function MessageProfileImage({ setFormData }) {
                     } ${index >= 5 ? 'rounded-full object-cover' : ''}`}
                   />
                   {selectedImage === imageUrl && (
-                    <FaCircleCheck className="absolute m-auto transform translate-x-[25%] -translate-y-[124%] bg-white fill-gray-400 rounded-full w-[35px] h-[35px]" />
+                    <FaCircleCheck className="absolute m-auto translate-x-[29%] -translate-y-[130%] bg-white fill-gray-400 rounded-full w-[35px] h-[35px]" />
                   )}
                 </button>
               ))}

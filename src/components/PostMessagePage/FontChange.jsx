@@ -1,5 +1,6 @@
 import Select from 'react-select';
 import PropTypes from 'prop-types';
+import Subject from '../Common/Subject';
 
 const propTypes = {
   setFormData: PropTypes.func,
@@ -65,10 +66,8 @@ function FontChange({ setFormData }) {
   };
 
   return (
-    <div className="flex flex-col items-start gap-3 mt-[50px]">
-      <div className="text-neutral-900 text-2xl font-bold font-['Pretendard'] leading-9">
-        폰트 선택
-      </div>
+    <div className="flex flex-col items-start gap-3">
+      <Subject>폰트 선택</Subject>
       <div className="w-full sm:w-[320px]">
         <Select
           onChange={handleChange}

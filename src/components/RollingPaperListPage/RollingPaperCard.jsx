@@ -18,7 +18,7 @@ const RollingPaperCard = ({ rollingPaper }) => {
           </div>
           <Avatar recentMessages={rollingPaper.recentMessages} messageCount={rollingPaper.messageCount}/>
           <div className=" font-normal text-pretendard text-base leading-6 tracking-tight">
-            <span className="font-bold text-pretendard text-base leading-6 tracking-tight">
+            <span className="font-bold">
               {rollingPaper.messageCount}
             </span>
             명이 작성했어요
