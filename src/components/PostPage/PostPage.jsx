@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Subject from './Subject';
-import { CreateButton } from './CreateButton';
+import PostButton from '../Common/PostButton';
 import { UserNameInput } from './UserNameInput';
 import { ToggleButton } from './ToggleButton';
 import OptionSelectContainer from './OptionSelectContainer';
@@ -34,7 +34,7 @@ const PostPage = () => {
   const [initialImageSet, setInitialImageSet] = useState(false);
 
   const getBackgroundList = async () => {
-    const url = 'https://rolling-api.vercel.app/background-images/'
+    const url = 'https://rolling-api.vercel.app/background-images/';
     try {
       const { imageUrls } = await getData(url);
       setImages(imageUrls);
@@ -109,7 +109,7 @@ const PostPage = () => {
     }
 
     try {
-      const responseData = await postData(url,formData);
+      const responseData = await postData(url, formData);
       handleResponse(responseData);
     } catch (error) {
       console.error('수령인 생성 중 오류 발생:', error);
@@ -178,7 +178,7 @@ const PostPage = () => {
             handleSetImageArray={handleSetImageArray}
           />
         )}
-        <CreateButton onSubmit={handleSubmit} disabled={!userName} />
+        <PostButton onSubmit={handleSubmit} isButtonEnabled={userName} />
       </form>
       <div>{modalOpen && <UrlModal handleModalChange={handleModalChange} />}</div>
     </div>
