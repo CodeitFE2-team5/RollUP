@@ -5,7 +5,7 @@ import MessageProfileImage from './MessageProfileImage';
 import Relationships from './Relationships';
 import EnterContent from './EnterContent';
 import FontChange from './FontChange';
-import PostButton from './PostButton';
+import PostButton from '../Common/PostButton';
 import getURL from '../../utils/getURL';
 import { postData } from '../../api/api';
 
