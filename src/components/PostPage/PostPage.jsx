@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Subject from '../Common/Subject';
-import { CreateButton } from './CreateButton';
+import Subject from './Subject';
+import PostButton from '../Common/PostButton';
 import ToggleButton from './ToggleButton';
 import OptionSelectContainer from './OptionSelectContainer';
 import UrlModal from './UrlModal';
@@ -10,7 +10,6 @@ import UrlAppendButton from './UrlAppendButton';
 import getURL from '../../utils/getURL';
 import { getData, postData } from '../../api/api';
 import { BACKGROUND_COLOR } from '../../constants/constants';
-import Description from '../Common/Description';
 import NameInput from '../Common/NameInput';
 
 const colors = Object.values(BACKGROUND_COLOR);
@@ -35,7 +34,7 @@ const PostPage = () => {
   const [initialImageSet, setInitialImageSet] = useState(false);
 
   const getBackgroundList = async () => {
-    const url = 'https://rolling-api.vercel.app/background-images/'
+    const url = 'https://rolling-api.vercel.app/background-images/';
     try {
       const { imageUrls } = await getData(url);
       setImages(imageUrls);
@@ -110,7 +109,7 @@ const PostPage = () => {
     }
 
     try {
-      const responseData = await postData(url,formData);
+      const responseData = await postData(url, formData);
       handleResponse(responseData);
     } catch (error) {
       console.error('수령인 생성 중 오류 발생:', error);
@@ -128,15 +127,15 @@ const PostPage = () => {
         className="w-[320px] mx-auto mt-[57px] flex flex-col box-border sm:w-[720px] "
       >
         <div className="flex flex-col  gap-3 mb-[34px] ">
-          <Subject>To.</Subject>
+          <Subject subject="To." description="" />
           <NameInput onChange={handleNameChange} />
         </div>
 
-        <div className="flex flex-col">
-          <Subject>배경화면을 선택해 주세요.</Subject>
-          <Description>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</Description>
-        </div>
-        <div className="flex justify-between mt-6">
+        <Subject
+          subject="배경화면을 선택해 주세요."
+          description="컬러를 선택하거나, 이미지를 선택할 수 있습니다"
+        />
+        <div className="flex justify-between">
           <div className="w-[240px] flex  bg-gray-200 text-center mb-11  text-lg font-Pretendard font-bold rounded-md  ">
             <ToggleButton
               onClick={() => handleItemClick('color', selectedColor)}
@@ -179,7 +178,7 @@ const PostPage = () => {
             handleSetImageArray={handleSetImageArray}
           />
         )}
-        <CreateButton onSubmit={handleSubmit} disabled={!userName} />
+        <PostButton onSubmit={handleSubmit} isButtonEnabled={userName} />
       </form>
       <div>{modalOpen && <UrlModal handleModalChange={handleModalChange} />}</div>
     </div>
