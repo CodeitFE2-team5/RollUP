@@ -54,7 +54,7 @@
 
 <Strong>Collabaration tool</Strong>
 
-<img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Descode-5865F2?style=flat&logo=descode&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=white"/>
+<img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Discode-5865F2?style=flat&logo=discode&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=white"/>
 
 <br/>
 
