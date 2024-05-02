@@ -35,7 +35,7 @@
 ## 🖥️ TECH STACK
 <Strong>Language</Strong>
 
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/JAVASCTIPT-F7DF1E?style=flat&logo=JAVASCTIPT&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/JAVASCTIPT-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/>
 
 <br/>
 
